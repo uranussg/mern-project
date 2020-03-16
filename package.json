@@ -2,11 +2,11 @@
   "name": "y",
   "version": "1.0.0",
   "description": "",
-  "main": "game_room.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node game_room.js",
-    "server": "nodemon game_room.js",
-    "server:debug":"nodemon --inspect game_room.js"
+    "start": "node app.js",
+    "server": "nodemon app.js",
+    "debug": "nodemon --inspect app.js"
   },
   "repository": {
     "type": "git",

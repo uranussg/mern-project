@@ -11,7 +11,7 @@ const validateRegisterInput = require('../../validation/register')
 const validateLoginInput = require('../../validation/login')
 
 router.get("/test", (req,res) => {
-    // 
+    // debugger
     res.json({msg: "this is the user router"})
 })
 
