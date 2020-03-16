@@ -4,8 +4,9 @@
   "description": "",
   "main": "game_room.js",
   "scripts": {
-    "start": "node app.js",
-    "server": "nodemon app.js"
+    "start": "node game_room.js",
+    "server": "nodemon game_room.js",
+    "server:debug":"nodemon --inspect game_room.js"
   },
   "repository": {
     "type": "git",
