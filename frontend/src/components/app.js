@@ -7,6 +7,7 @@ import MainPage from './main/main_page';
 import LoginFormContainer from './sesssion/login_form_container';
 import SignupFormContainer from './sesssion/signup_form_container';
 import Modal from './modal/modal'
+import ProfilePageContainer from '../components/profile/profile_container';
 
 const App = () => (
   <div>
@@ -14,8 +15,9 @@ const App = () => (
     <NavBarContainer />
     <Switch>
         <AuthRoute exact path="/" component={MainPage} />
-        {/* <AuthRoute exact path="/login" component={LoginFormContainer} /> */}
-        {/* <AuthRoute exact path="/signup" component={SignupFormContainer} /> */}
+        {/* <AuthRoute exact path="/login" component={LoginFormContainer} />
+        <AuthRoute exact path="/signup" component={SignupFormContainer} /> */}
+        <AuthRoute exact path="/profile" component={ProfilePageContainer} />
     </Switch>
   </div>
 );
