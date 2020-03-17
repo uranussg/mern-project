@@ -20,11 +20,11 @@ return {
  isAuthenticated: false,
  user: undefined
 };
-case RECEIVE_USER_SIGN_IN:
-return {
- ...state,
- isSignedIn: true
-}
+// case RECEIVE_USER_SIGN_IN:
+// return {
+//  ...state,
+//  isSignedIn: true
+// }
 default:
 return state;
 }
