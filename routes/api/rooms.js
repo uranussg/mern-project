@@ -38,7 +38,10 @@ router.post('/',
 
 router.get('/:room_id', (req, res) => {
   Room.findOne({id: req.params.room_id})
-  .then(room => room.users[req.body.id] = req.body)
+  .then(room => {
+    room.users[req.body.id] = req.body
+  return room})
+  .then(room => res.json(room))
 
   
 

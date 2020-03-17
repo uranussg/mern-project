@@ -27,7 +27,7 @@ export const fetchRooms = () => dispatch => (
     .catch(err => console.log(err))
 );
 
-export const getIntoRoom = room_id => dispatch => (
+export const fetchRoom = room_id => dispatch => (
     enterRoom(room_id)
         .then(room=>dispatch(receiveRoom(room)))
         .catch(err => console.log(err))

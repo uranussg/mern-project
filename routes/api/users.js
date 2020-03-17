@@ -15,6 +15,11 @@ router.get("/test", (req,res) => {
     res.json({msg: "this is the user router"})
 })
 
+router.get("/", (req,res) => {
+  User.where("id").in(req.body.user_ids)
+  .then(users=> res.json(users))
+})
+
 router.post('/register', (req, res) => {
     // 
 

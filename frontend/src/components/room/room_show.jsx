@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
-import MessageInput from './message_input';
+// import MessageInput from './message_input';
 // import './App.css';
 
 class Room extends React.Component {
@@ -19,6 +19,8 @@ class Room extends React.Component {
   }
 
   componentDidMount() {
+      
+      this.props.fetchRoom().then(()=>this.props.fetchUsers(this.props.rooms.users))
     this.socket = io(config[process.env.NODE_ENV].endpoint);
 
     // Load the last 10 messages in the window.
@@ -43,8 +45,6 @@ class Room extends React.Component {
       content: event.target.value,
     });
   }
-
-
 
   // When the user is posting a new message.
   handleSubmit(event) {
@@ -84,6 +84,7 @@ class Room extends React.Component {
   render() {
     return (
       <div className="game-room">
+          <div className='gameroom-title'>{this.props.room.title}</div>
         <Paper id="chat" elevation={3}>
           {this.state.chat.map((el, index) => {
             return (
@@ -111,4 +112,4 @@ class Room extends React.Component {
   }
 };
 
-export default App;
+export default Room;
