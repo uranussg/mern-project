@@ -37,8 +37,8 @@ router.post('/',
 );
 
 router.get('/:room_id', (req, res) => {
-  const room = Room.findOne({id: req.params.room_id})
-  room.users[req.body.id] = req.body
+  Room.findOne({id: req.params.room_id})
+  .then(room => room.users[req.body.id] = req.body)
 
   
 
