@@ -16,7 +16,7 @@ router.get("/test", (req,res) => {
 })
 
 router.get("/", (req,res) => {
-  User.where("id").in(req.body.user_ids)
+  User.where("_id").in(req.body.user_ids)
   .then(users=> res.json(users))
 })
 
