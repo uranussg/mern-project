@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const passport = require('passport')
 
+
 const Room = require('../../models/Room');
 const validateRoomInput = require('../../validation/room');
 
@@ -27,11 +28,22 @@ router.post('/',
 
     const newRoom = new Room({
       title: req.body.title,
-      user: req.user.id
+      users: {[req.user.id]: {user_id: req.user.id,
+        username: req.user.user}}
     });
 
     newRoom.save().then(room => res.json(room));
   }
 );
 
+router.get('/:room_id', (req, res) => {
+  const room = Room.findOne({id: req.params.room_id})
+  room.users[req.body.id] = req.body
+
+  
+
+}
+)
+
+router.pos
 module.exports = router

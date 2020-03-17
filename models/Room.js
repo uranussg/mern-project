@@ -7,7 +7,10 @@ const RoomSchema = new Schema({
         type: String, 
         required: true
     },
-    // users: [User],
+    users: {
+        type: Object,
+        required: true
+    },
     date: {
         type: Date, 
         default: Date.now
