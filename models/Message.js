@@ -4,17 +4,17 @@ const User = require('./User')
 const Room = require('./Room')
 
 const MessageSchema = new Schema({
-    Body: {
+    content: {
         type: String, 
         required: true
     },
     user: {
-        type: User, 
-        required: true
+        type: Schema.Types.ObjectId, 
+        ref: 'users'
     },
     room: {
-        type: Room, 
-        required: true
+        type: Schema.Types.ObjectId, 
+        ref: 'rooms'
     },
     date: {
         type: Date, 
