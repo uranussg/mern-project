@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema 
-const User = requier('./User')
+const User = require('./User')
 const Room = require('./Room')
 
 const MessageSchema = new Schema({
@@ -22,5 +22,5 @@ const MessageSchema = new Schema({
     }
 })
 
-const User = mongoose.model('Message', MessageSchema)
+const Message = mongoose.model('Message', MessageSchema)
 module.exports = Message
