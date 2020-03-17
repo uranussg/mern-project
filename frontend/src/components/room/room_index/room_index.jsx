@@ -8,8 +8,9 @@ class RoomIndex extends Component {
 
   render() {
     return (
-      <div>
-        <ul>
+      <div className='room-index-main'>
+        <h1>All rooms</h1>
+        <ul className="rooms-container">
           {this.props.rooms.map((room) => {
             return <RoomIndexItem  key={room.id} room={room} />
           })}
