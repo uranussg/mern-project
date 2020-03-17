@@ -1,19 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const passport = require('passport')
 
 const Room = require('../../models/Room');
 const validateRoomInput = require('../../validation/room');
 
 router.get("/test", (req,res) => {
     res.json({msg: "this is the room router"})
-})
-
-router.post('/', (req, res) => {
-  const { errors, isValid } = validateRoomInput(req.body);
-  
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
 })
 
 router.get('/', (req, res) => {
@@ -26,7 +19,7 @@ router.get('/', (req, res) => {
 router.post('/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    const { errors, isValid } = validateRoomInput(req.title);
+    const { errors, isValid } = validateRoomInput(req.body);
 
     if (!isValid) {
       return res.status(400).json(errors);
