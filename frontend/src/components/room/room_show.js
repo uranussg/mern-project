@@ -91,7 +91,7 @@ class Room extends React.Component {
                 <Typography variant="caption" className="name">
                   {el.user}
                 </Typography>
-                <Typography variant="body1" className="content">
+                <Typography variant="body" className="content">
                   {el.content}
                 </Typography>
               </div>
