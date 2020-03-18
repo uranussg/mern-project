@@ -7,13 +7,12 @@ class RoomIndex extends Component {
   }
 
   render() {
-    console.log(this.props.rooms)
     return (
       <div className='room-index-main'>
         <h1>All rooms</h1>
         <ul className="rooms-container">
           {this.props.rooms.map((room) => {
-            return <RoomIndexItem  key={room.id} room={room} />
+            return <RoomIndexItem  key={room._id} room={room} />
           })}
         </ul>
       </div>
