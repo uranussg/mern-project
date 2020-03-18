@@ -37,11 +37,21 @@ router.post('/',
 );
 
 router.get('/:room_id', (req, res) => {
-  const room = Room.findOne({id: req.params.room_id})
+   Room.findById(req.params.room_id)
   .then(room => {
-    room.users[req.body.id] = req.body
-  return room})
-  room.save().then(room => res.json(room))
+    // debugger
+    // room.users.push(req.body.user_id)
+    // const newRoom = room
+    // newRoom.users.concat([`${req.body.user_id}`])
+
+    // console.log(room)
+
+    return res.json(room)
+  //   room.update()
+  // return room
+}
+  )
+
 
   
 

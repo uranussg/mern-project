@@ -32,7 +32,7 @@ class Room extends React.Component {
 
     // Update the chat if a new message in this room is broadcasted .
     this.socket.on('push', (msg) => {
-        if(msg.roomId === this.props.room_id)
+        if(msg.room_id === this.props.room_id)
      { this.setState((state) => ({
         chat: [...state.chat, msg],
       }), this.scrollToBottom)};
@@ -58,17 +58,17 @@ class Room extends React.Component {
     //   console.log('this', this.socket);
       // Send the new message to the server.
       this.socket.emit('message', {
-        user: this.props.curr_user.id,
+        user: this.props.curr_user._id,
         content: state.content,
-        room: this.props.room.id
+        room: this.props.room._id
       });
 
       // Update the chat with the user's message and remove the current message.
       return {
         chat: [...state.chat, {
-            user: this.props.curr_user.id,
+            user: this.props.curr_user._id,
             content: state.content,
-            room: this.props.room.id
+            room: this.props.room._id
         }],
         content: '',
       };
