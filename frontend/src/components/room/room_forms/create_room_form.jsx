@@ -32,7 +32,8 @@ class CreateRoomForm extends React.Component {
     e.preventDefault();
 
     let room = {
-      title: this.state.title
+      title: this.state.title,
+      user_id: this.props.user.id
     };
 
     this.props.buildRoom(room);
