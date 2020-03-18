@@ -6,8 +6,7 @@ import RoomIndex from './room_index';
 const mapStateToProps = (state) => {
   return {
     users: state.users,
-    // rooms: Object.values(state.rooms)
-    rooms: [{title: "room1"}, {title: "room2"}]
+    rooms: Object.values(state.rooms.all)
   };
 };
 
