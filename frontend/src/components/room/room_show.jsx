@@ -20,6 +20,18 @@ class Room extends React.Component {
     this.handleSubmit =this.handleSubmit.bind(this)
   }
 
+  componentDidUpdate(prevProps) {
+    if (JSON.stringify(this.props.room.users) !== JSON.stringify(prevProps.room.users) )
+    {
+      this.setState({users:this.props.users})}
+    
+
+    if (this.props.match.params.roomId !== prevProps.room._id ) {
+      this.props.fetchRoom(this.props.match.params.roomId, {user_id: this.props.curr_user.id})
+    }
+
+  }
+
   componentDidMount() {
       
       this.props.fetchRoom(this.props.match.params.roomId, {user_id: this.props.curr_user.id})
@@ -43,10 +55,21 @@ class Room extends React.Component {
     });
     // // Update the chat if a new message in this room is broadcasted .
     this.socket.on('push', (msg) => {
-        if(msg.room_id === this.props.room_id)
-     { this.setState((state) => ({
-        chat: [...state.chat, msg],
-      }), this.scrollToBottom)};
+
+        if(msg.room === this.props.room)
+     { 
+      if(!this.props.users[msg.user]){
+        this.props.fetchUser(msg.user).then(()=>this.setState((state) => ({
+          chat: [...state.chat, msg],
+        }), this.scrollToBottom))
+      }
+        else {
+          this.setState((state) => ({
+            chat: [...state.chat, msg],
+          }), this.scrollToBottom)
+        }
+      
+    };
     });
 
   }
