@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import "./navbar.css"
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class NavBar extends React.Component {
         );
       } else {
         return (
-            <div>
+            <div className="auth-div">
                 {/* <Link to={'/signup'}>Signup</Link>
                 <Link to={'/login'}>Login</Link> */}
                 <button onClick={() => this.props.openModal('login')}>Login</button>
@@ -35,7 +36,7 @@ class NavBar extends React.Component {
 
   render() {
       return (
-        <div>
+        <div className="navbar-div">
             <h1>The Game Room</h1>
             { this.getLinks() }
         </div>
