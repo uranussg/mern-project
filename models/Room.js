@@ -8,8 +8,8 @@ const RoomSchema = new Schema({
         required: true
     },
     users: {
-        type: [Schema.Types.ObjectId],
-        ref:"users"},
+        type: Array,
+        required: true},
     date: {
         type: Date, 
         default: Date.now

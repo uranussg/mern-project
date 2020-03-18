@@ -16,7 +16,12 @@ router.get("/test", (req,res) => {
 })
 
 router.get("/", (req,res) => {
-  User.where("_id").in(req.body.user_ids)
+  const ids = req.body.user_ids
+  // console.log(ids)
+  // console.log(typeof ids)
+  // console.log(JSON.parse(ids))
+  User.find().where("_id").in(JSON.parse(ids))
+  // User.find({_id: req.body.user_ids})
   .then(users=> res.json(users))
 })
 
