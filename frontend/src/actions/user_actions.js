@@ -19,10 +19,14 @@ export const receiveErrors = errors => ({
 
 
 
-export const fetchUsers = user => dispatch => (
-    APIUtil.getUsers(user).then((users) => (
+export const fetchUsers = users => dispatch => {
+    
+    APIUtil.getUsers(users).then((users) => {
+        
         dispatch(receiveUsers(users))
-    ), err => (
-        dispatch(receiveErrors(err.response.data))
-    ))
-);
+    }
+        , err => (
+            dispatch(receiveErrors(err.response.data)
+            ))
+            );
+        }

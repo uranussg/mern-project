@@ -22,7 +22,7 @@ mongoose
   require('./config/passport')(passport);
 app.get("/", (req, res) => {
   // console.log(req)
-  // debugger
+  // 
   return res.send("Hello ChatRoom")});
 
 app.use(bodyParser.urlencoded({ extended: false }));

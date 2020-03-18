@@ -4,11 +4,14 @@ import {fetchUsers} from '../../actions/user_actions'
 
 import Room from './room_show';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state, ownProps) => {
+  
+return {
   curr_user: state.session.user,
-  room: state.rooms[ownProps.match.params.roomId]||{},
+  room: state.rooms.user||{},
     users: state.users
-});
+}
+};
 
 export default connect(
   mapStateToProps,

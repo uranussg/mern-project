@@ -28,19 +28,20 @@ router.post('/',
 
     const newRoom = new Room({
       title: req.body.title,
-      users: {[req.user.id]: {user_id: req.user.id,
-        username: req.user.user}}
+      // users: {[req.body.user.id]: {user_id: req.body.user.id,
+      //   username: req.body.user.username}}
+      users: [req.body.user_id]
     });
 
     newRoom.save().then(room => res.json(room));
   }
 );
 
-router.get('/:room_id', (req, res) => {
+router.post('/:room_id', (req, res) => {
    Room.findById(req.params.room_id)
   .then(room => {
-    // debugger
-    room.users.push(req.body.user_id)
+    // 
+    if (!room.users.includes(req.body.user_id)) room.users.push(req.body.user_id)
     room.save().then(room => res.json(room))
 }
   )

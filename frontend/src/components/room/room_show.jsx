@@ -20,8 +20,13 @@ class Room extends React.Component {
 
   componentDidMount() {
       
-      this.props.fetchRoom().then(()=>this.props.fetchUsers(this.props.rooms.users))
-    this.socket = io(config[process.env.NODE_ENV].endpoint);
+      this.props.fetchRoom(this.props.match.params.roomId, {user_id: this.props.curr_user.id})
+      .then(()=>
+      { 
+        const users = {user_ids: this.props.room.users}
+        return this.props.fetchUsers(users)})
+    // this.socket = io(config[process.env.NODE_ENV].endpoint);
+    this.socket = io("http://localhost:5000");
 
     // Load the last 10 messages in the window.
     this.socket.on('init', (msg) => {

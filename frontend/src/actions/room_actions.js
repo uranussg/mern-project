@@ -27,11 +27,15 @@ export const fetchRooms = () => dispatch => (
     .catch(err => console.log(err))
 );
 
-export const fetchRoom = room_id => dispatch => (
-    enterRoom(room_id)
-        .then(room=>dispatch(receiveRoom(room)))
-        .catch(err => console.log(err))
-)
+export const fetchRoom = (room_id, userData) => dispatch => {
+  
+ return enterRoom(room_id, userData)
+  .then(room=>{
+    
+    return dispatch(receiveRoom(room))})
+  .catch(err => console.log(err))
+}
+
 
 export const buildRoom = data => dispatch => (
   createRoom(data)
