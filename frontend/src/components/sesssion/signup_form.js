@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import "./signup.css"
+import './signup.css'
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -94,7 +94,7 @@ class SignupForm extends React.Component {
               />
             </div>
             
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Sign Up" />
             {this.renderErrors()}
           </div>
         </form>
