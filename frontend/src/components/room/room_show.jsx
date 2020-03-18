@@ -70,11 +70,12 @@ class Room extends React.Component {
     //   console.log('this', this.socket);
       // Send the new message to the server.
       debugger
-      this.socket.emit('message', {
-        user: this.props.curr_user._id,
+      const message = {
+        user: this.props.curr_user.id,
         content: state.content,
         room: this.props.room._id
-      });
+      }
+      this.socket.emit('message', message);
 
       // Update the chat with the user's message and remove the current message.
       return {
@@ -103,7 +104,7 @@ class Room extends React.Component {
             return (
               <div key={index}>
                 <Typography variant="caption" className="name">
-                  {el.user}
+                  {this.props.users[el.user].username}
                 </Typography>
                 <Typography variant="body" className="content">
                   {el.content}
