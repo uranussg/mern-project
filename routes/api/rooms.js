@@ -13,7 +13,13 @@ router.get("/test", (req,res) => {
 router.get('/', (req, res) => {
   Room.find()
     .sort({ date: -1 })
-    .then(rooms => res.json(rooms))
+    .then(rooms => {
+      const roomsRes = {};
+      rooms.forEach((room) => {
+        roomsRes[room._id] = room;
+      });
+      return res.json(roomsRes);
+    })
     .catch(err => res.status(404).json({ notRoomsfound: 'No rooms found' }));
 });
 
