@@ -16,6 +16,8 @@ class Room extends React.Component {
       chat: [],
       content: ''
     };
+    this.handleContent = this.handleContent.bind(this)
+    this.handleSubmit =this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
@@ -24,24 +26,29 @@ class Room extends React.Component {
       .then(()=>
       { 
         const users = {user_ids: this.props.room.users}
+        
         return this.props.fetchUsers(users)})
     // this.socket = io(config[process.env.NODE_ENV].endpoint);
     this.socket = io("http://localhost:5000");
-
+        
     // Load the last 10 messages in the window.
-    this.socket.on('init', (msg) => {
-      this.setState((state) => ({
-        chat: [...state.chat, ...msg.reverse()],
-      }), this.scrollToBottom);
+    // this.socket.on('init', (msg) => {
+    //   this.setState((state) => ({
+    //     chat: [...state.chat, ...msg.reverse()],
+    //   }), this.scrollToBottom);
+    // });
+    this.socket.on('connection', () => {
+      
+      console.log(this.socket.connected); // true
     });
-
-    // Update the chat if a new message in this room is broadcasted .
+    // // Update the chat if a new message in this room is broadcasted .
     this.socket.on('push', (msg) => {
         if(msg.room_id === this.props.room_id)
      { this.setState((state) => ({
         chat: [...state.chat, msg],
       }), this.scrollToBottom)};
     });
+
   }
 
   // Save the message the user is typing in the input field.
@@ -62,6 +69,7 @@ class Room extends React.Component {
     //   console.log(state);
     //   console.log('this', this.socket);
       // Send the new message to the server.
+      debugger
       this.socket.emit('message', {
         user: this.props.curr_user._id,
         content: state.content,
@@ -71,7 +79,7 @@ class Room extends React.Component {
       // Update the chat with the user's message and remove the current message.
       return {
         chat: [...state.chat, {
-            user: this.props.curr_user._id,
+            user: this.props.curr_user.id,
             content: state.content,
             room: this.props.room._id
         }],
@@ -110,7 +118,7 @@ class Room extends React.Component {
           value={this.state.content}
           onChange={this.handleContent}
         />
-        <button type='submit' value='submit'/>
+        <button type='submit'>Submit</button>
         </form>
       </div>
     );

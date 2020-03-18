@@ -47,7 +47,7 @@ router.post('/:room_id', (req, res) => {
    Room.findById(req.params.room_id)
   .then(room => {
     // 
-    if (!room.users.includes(req.body.user_id)) room.users.push(req.body.user_id)
+    if (!room.users.includes(req.body.user_id) && req.body.user_id) room.users.push(req.body.user_id)
     room.save().then(room => res.json(room))
 }
   )
