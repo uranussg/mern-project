@@ -1,0 +1,27 @@
+.navbar-div {
+    background-image: url("../../images/stonewall2.jpg");
+    text-align: center;
+    height: 150px;
+}
+
+.navbar-div > h1 {
+    color: goldenrod;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 40px;
+    text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+}
+
+.auth-div {
+    display: flex;
+    justify-content: center;
+}
+
+.auth-div > button {
+    margin: 5px;
+    background-color: goldenrod;
+    color: white;
+    padding: 10px 20px;
+    display: inline-block;
+    font-size: 16px;
+}
+
