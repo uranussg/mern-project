@@ -12,7 +12,7 @@ const RoomIndexItem = (props) => {
         <p className="room-owner">{"Owner name"}</p>
         <p className="room-date">Created at: {"1:00"}</p>
       </div>
-      <button className="room-join-button">Join Room</button>
+      <button onClick={props.handleRedirect(props.room._id)} className="room-join-button">Join Room</button>
     </li>
   )
 }

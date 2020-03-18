@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { fetchRooms } from '../../../actions/room_actions';
 import { enterRoom } from '../../../util/room_api_util';
 import RoomIndex from './room_index';
+import { withRouter } from 'react-router-dom'
 
 const mapStateToProps = (state) => {
   return {
@@ -17,5 +18,5 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const RoomIndexContainer = connect(mapStateToProps, mapDispatchToProps)(RoomIndex);
+const RoomIndexContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(RoomIndex));
 export default RoomIndexContainer;
