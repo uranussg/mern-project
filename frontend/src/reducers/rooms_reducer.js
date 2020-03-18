@@ -12,7 +12,8 @@ import { RECEIVE_ROOM, RECEIVE_NEW_ROOM,RECEIVE_ROOMS } from '../actions/room_ac
         newState.new = action.room.data
         return newState;
       case RECEIVE_ROOM:
-        newState.user = action.room.date
+        
+        newState.user = action.room.data
         return newState
       default:
         return state;

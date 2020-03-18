@@ -10,6 +10,7 @@ import Modal from './modal/modal'
 import ProfilePageContainer from '../components/profile/profile_container';
 import RoomIndexContainer from './room/room_index/room_index_container';
 import CreateRoomContainer from './room/room_forms/create_room_container';
+import RoomShowContainer from './room/room_show_container'
 
 const App = () => (
   <div>
@@ -23,6 +24,7 @@ const App = () => (
         <Route exact path="/rooms" component={RoomIndexContainer} />
         <Route exact path="/rooms/new" component={CreateRoomContainer} />
     </Switch>
+    <Route exact path='/rooms/:roomId' component={RoomShowContainer}/>
   </div>
 );
 
