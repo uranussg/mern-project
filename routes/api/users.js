@@ -11,16 +11,19 @@ const validateRegisterInput = require('../../validation/register')
 const validateLoginInput = require('../../validation/login')
 
 router.get("/test", (req,res) => {
-    // debugger
+    // 
     res.json({msg: "this is the user router"})
 })
 
-router.get("/", (req,res) => {
-  const ids = req.body.user_ids
+router.get("/:user_ids", (req, res) => {
+  // console.log(req.body)
+  // const ids = req.body.user_ids
+  const ids = req.params.user_ids.split(',')
   // console.log(ids)
   // console.log(typeof ids)
   // console.log(JSON.parse(ids))
-  User.find().where("_id").in(JSON.parse(ids))
+  // User.find().where("_id").in(JSON.parse(ids))
+  User.find().where("_id").in(ids)
   // User.find({_id: req.body.user_ids})
   .then(users=> res.json(users))
 })

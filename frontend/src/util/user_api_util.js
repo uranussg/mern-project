@@ -1,7 +1,9 @@
 import axios from "axios";
 
 
-export const getUsers = user_ids => {
-  return axios.post(`/api/users/`, user_ids);
+export const getUsers = users => {
+  
+  // return axios.get(`/api/users/`, users);
+  return axios.get(`/api/users/${users.user_ids}`);
 };
 
