@@ -20,9 +20,7 @@ router.get("/", (req,res) => {
   .then(users=> res.json(users))
 })
 
-router.post('/register', (req, res) => {
-    // 
-
+router.post('/register', (req, res) => { 
     const { errors, isValid } = validateRegisterInput(req.body);
     
     if (!isValid) {
@@ -53,7 +51,8 @@ router.post('/register', (req, res) => {
           })
         }
       })
-  })
+})
+
 
   router.post('/login', (req, res) => {
     
@@ -101,5 +100,20 @@ router.post('/register', (req, res) => {
         email: req.user.email
       });
   })
+
+router.get('/:id', (req, res) => {
+    User.findById(req.params.id)
+        .then(user => res.json(user))
+});
+
+// router.get('/', (req, res) => {
+//   console.log('hiiiiiiiiiiiiiiiiiiiiiii')// why is this not getting hit?
+//   // const users = User
+//   const result = User.find()
+//       .then(users => {
+//         console.log("hiii")
+//         res.json(users)})
+//   return result
+// });
 
 module.exports = router
