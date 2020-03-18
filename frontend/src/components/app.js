@@ -9,6 +9,7 @@ import SignupFormContainer from './sesssion/signup_form_container';
 import Modal from './modal/modal'
 import ProfilePageContainer from '../components/profile/profile_container';
 import RoomIndexContainer from './room/room_index/room_index_container';
+import CreateRoomContainer from './room/room_forms/create_room_container';
 
 const App = () => (
   <div>
@@ -20,6 +21,7 @@ const App = () => (
         <AuthRoute exact path="/signup" component={SignupFormContainer} /> */}
         <AuthRoute exact path="/profile" component={ProfilePageContainer} />
         <Route exact path="/rooms" component={RoomIndexContainer} />
+        <Route exact path="/rooms/new" component={CreateRoomContainer} />
     </Switch>
   </div>
 );
