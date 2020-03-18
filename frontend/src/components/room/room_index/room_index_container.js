@@ -1,17 +1,20 @@
 import { connect } from 'react-redux';
 import { fetchRooms } from '../../../actions/room_actions';
+import { enterRoom } from '../../../util/room_api_util';
 import RoomIndex from './room_index';
 
-const mapStateToProps = ({ entities, session }) => {
+const mapStateToProps = (state) => {
   return {
-    users: entities.users,
-    rooms: Object.values(entities.rooms)
+    users: state.users,
+    // rooms: Object.values(state.rooms)
+    rooms: [{title: "room1"}, {title: "room2"}]
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchRooms: () => dispatch(fetchRooms())
+    fetchRooms: () => dispatch(fetchRooms()),
+    enterRoom: (room_id) => dispatch(enterRoom(room_id))
   };
 };
 

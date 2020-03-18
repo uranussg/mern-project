@@ -7,6 +7,7 @@ class RoomIndex extends Component {
   }
 
   render() {
+    console.log(this.props.rooms)
     return (
       <div className='room-index-main'>
         <h1>All rooms</h1>
