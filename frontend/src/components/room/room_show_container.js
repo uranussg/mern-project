@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { fetchRoom } from '../../actions/room_actions';
-import {fetchUsers} from '../../actions/user_actions'
+import {fetchUsers, fetchUser} from '../../actions/user_actions'
 
 import Room from './room_show';
 
@@ -15,5 +15,5 @@ return {
 
 export default connect(
   mapStateToProps,
-  { fetchRoom, fetchUsers }
+  { fetchRoom, fetchUsers, fetchUser }
 )(Room);
