@@ -13,7 +13,13 @@ router.get("/test", (req,res) => {
 router.get('/', (req, res) => {
   Room.find()
     .sort({ date: -1 })
-    .then(rooms => res.json(rooms))
+    .then(rooms => {
+      const roomsRes = {};
+      rooms.forEach((room) => {
+        roomsRes[room._id] = room;
+      });
+      return res.json(roomsRes);
+    })
     .catch(err => res.status(404).json({ notRoomsfound: 'No rooms found' }));
 });
 
@@ -28,19 +34,20 @@ router.post('/',
 
     const newRoom = new Room({
       title: req.body.title,
-      users: {[req.user.id]: {user_id: req.user.id,
-        username: req.user.user}}
+      // users: {[req.body.user.id]: {user_id: req.body.user.id,
+      //   username: req.body.user.username}}
+      users: [req.body.user_id]
     });
 
     newRoom.save().then(room => res.json(room));
   }
 );
 
-router.get('/:room_id', (req, res) => {
+router.post('/:room_id', (req, res) => {
    Room.findById(req.params.room_id)
   .then(room => {
-    // debugger
-    room.users.push(req.body.user_id)
+    // 
+    if (!room.users.includes(req.body.user_id) && req.body.user_id) room.users.push(req.body.user_id)
     room.save().then(room => res.json(room))
 }
   )
