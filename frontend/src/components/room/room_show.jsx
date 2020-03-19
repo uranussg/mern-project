@@ -18,12 +18,17 @@ class Room extends React.Component {
     };
     this.handleContent = this.handleContent.bind(this)
     this.handleSubmit =this.handleSubmit.bind(this)
+    this.handleExit = this.handleExit.bind(this)
   }
 
   componentDidUpdate(prevProps) {
-    if (JSON.stringify(this.props.room.users) !== JSON.stringify(prevProps.room.users) )
-    {
-      this.setState({users:this.props.users})}
+    if (this.props.room.users) {
+      
+      
+      if (this.props.room.users.length !== Object.keys(this.props.users).length )
+      {
+        this.props.fetchUsers({user_ids: this.props.room.users})}
+      }
     
 
     if (this.props.match.params.roomId !== prevProps.room._id ) {
@@ -38,7 +43,7 @@ class Room extends React.Component {
       .then(()=>
       { 
         const users = {user_ids: this.props.room.users}
-        debugger
+        
         return this.props.fetchUsers(users)})
     // this.socket = io(config[process.env.NODE_ENV].endpoint);
     this.socket = io("http://localhost:5000");
@@ -84,8 +89,10 @@ class Room extends React.Component {
 
 
   handleExit(e) {
+    
     this.props.exitRoom(this.props.room._id, {user_id: this.props.curr_user.id}).then(()=>
-    this.props.histroy.push('/'))
+    { 
+      this.props.history.push('/rooms')})
   }
 
   // When the user is posting a new message.
@@ -99,7 +106,7 @@ class Room extends React.Component {
     //   console.log(state);
     //   console.log('this', this.socket);
       // Send the new message to the server.
-      debugger
+      
       const message = {
         user: this.props.curr_user.id,
         content: state.content,
@@ -126,6 +133,7 @@ class Room extends React.Component {
   }
 
   render() {
+    // 
     return (
       <div className="game-room">
           <div className='gameroom-title'>{this.props.room.title}</div>
@@ -138,6 +146,7 @@ class Room extends React.Component {
               <div key={index}>
                 <Typography variant="caption" className="name">
                   {this.props.users[el.user]? this.props.users[el.user].username: null}
+                  {/* {this.props.users[el.user].username} */}
                 </Typography>
                 <Typography variant="body" className="content">
                   {el.content}

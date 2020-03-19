@@ -17,7 +17,7 @@ import { RECEIVE_ROOM, RECEIVE_NEW_ROOM,RECEIVE_ROOMS, EXIT_ROOM } from '../acti
         return newState
 
       case EXIT_ROOM:
-        delete newState.user
+        newState.user = undefined
         return newState
       default:
         return state;
