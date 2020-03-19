@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ProfileAvatarSelector from "./profile_avatar_selector"
-
+import ProfileAvatarSelectorContainer from "./profile_avatar_selector_container"
 
 class ProfilePage extends React.Component {
 
@@ -25,24 +25,24 @@ class ProfilePage extends React.Component {
             this.setState({avatarSelector: null})
         }
         else {
-            this.setState({avatarSelector:<ProfileAvatarSelector />})
+            this.setState({avatarSelector:<ProfileAvatarSelectorContainer />})
         }
-        // debugger
     }
 
     render(){
-        // if (this.props.users)
         const avatarId = this.props.avatarId? this.props.avatarId: "0"
-        // debugger
+    
         
         return(
-        <div className="profile-page-container">
-            <p>{this.props.currentUser.username}</p>
-            <img src={`/avatar${avatarId}.png`} onClick={()=>this.handleClick()}/>
-            <div>
-                {this.state.avatarSelector}
+            <div className="profile-page-container">
+                    <p>Welcome, {this.props.currentUser.username}!</p>
+                <div className="profile-images-container" onClick={()=>this.handleClick()}>
+                    <img src={`/avatar${avatarId}.png`}/>
+                    <div>
+                        {this.state.avatarSelector}
+                    </div>
+                </div>
             </div>
-        </div>
         )
       
     }
