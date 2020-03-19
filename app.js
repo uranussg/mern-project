@@ -39,12 +39,12 @@ const port = process.env.PORT || 5000;
 
 io.on('connection', (socket) => {
   console.log('a user connected');
-  // Message.find().sort({createdAt: -1}).limit(10).exec((err, messages) => {
-  //   if (err) return console.error(err);
+  Message.find().sort({createdAt: -1}).limit(20).exec((err, messages) => {
+    if (err) return console.error(err);
 
-  //   // Send the last messages to the user.
-  //   socket.emit('init', messages);
-  // });
+    // Send the last messages to the user.
+    socket.emit('init', messages);
+  });
 
   // Listen to connected users for a new message.
   socket.on('message', (msg) => {

@@ -26,13 +26,14 @@ export const receiveErrors = errors => ({
     errors
 });
 
-export const fetchUsers = user => dispatch => (
-    APIUtil.getUsers(user).then((users) => (
+export const fetchUsers = users => dispatch => {
+    debugger
+    APIUtil.getUsers(users).then((users) => (
         dispatch(receiveUsers(users))
     ), err => (
         dispatch(receiveErrors(err.response.data))
     ))
-);
+    };
 
 export const fetchUser = userId => dispatch => {
     // debugger

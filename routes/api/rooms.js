@@ -49,14 +49,37 @@ router.post('/:room_id', (req, res) => {
     // 
     if (!room.users.includes(req.body.user_id) && req.body.user_id) room.users.push(req.body.user_id)
     room.save().then(room => res.json(room))
-}
-  )
+  })
+})
 
+// router.post('/:room_id', (req, res) => {
+//   Room.findById(req.params.room_id)
+//  .then(room => {
+//    // 
+//    if (!room.users.includes(req.body.user_id) && req.body.user_id) room.users.push(req.body.user_id)
+//    room.save().then(room => res.json(room))
+//  })
+// })
 
-  
+router.patch('/:room_id', (req, res) => {
+  Room.findById(req.params.room_id)
+ .then(room => {
+   // 
 
-}
-)
+   if (req.body.user_id) {
+
+     if (room.users.includes(req.body.user_id) ) 
+     {
+       const idx = room.users.indexOf(req.body.user_id)
+       room.users = room.users.slice(0, idx).concat(room.users.slice(idx+1))
+      }
+      else {
+        room.users.push(req.body.user_id)
+      }
+    }
+   room.save().then(room => res.json(room))
+ })
+})
 
 router.pos
 module.exports = router

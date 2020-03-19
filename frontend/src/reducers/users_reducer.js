@@ -8,7 +8,8 @@ import { RECEIVE_USERS,  RECEIVE_USER } from "../actions/user_actions";
     const newState = {}
     switch (action.type) {
     case RECEIVE_USERS:
-        action.forEach(user => {
+      debugger
+        action.users.data.forEach(user => {
             newState[user._id] = user
         });
     return newState;
