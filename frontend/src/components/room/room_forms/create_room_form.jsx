@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import "./create_room.css";
 
 class CreateRoomForm extends React.Component {
 
@@ -17,6 +18,7 @@ class CreateRoomForm extends React.Component {
   componentDidUpdate() {
     if(this.props.newRoom) {
       this.props.history.push(`/rooms/${this.props.newRoom._id}`);
+      this.props.closeModal();
     }
   }
 
@@ -51,17 +53,19 @@ class CreateRoomForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="room-new-container">
+        <h1>New Room</h1>
         <form onSubmit={this.handleSubmit}>
-          <div>
+          <div className="textbox">
             <input
-              type="textarea"
+              className="room-new-title"
+              type="text"
               value={this.state.title}
               onChange={this.update("title")}
               placeholder="Title"
             />
-            <input type="submit" value="Submit" />
-          </div>
+            </div>
+          <input type="submit" value="Create New Room" />
         </form>
       </div>
     )
