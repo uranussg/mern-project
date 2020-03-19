@@ -14,10 +14,10 @@ class ProfilePage extends React.Component {
     }
 
     componentDidMount(){
-        // debugger
+        // 
         const userId = this.props.currentUser.id
         this.props.fetchUser(userId)
-        // debugger
+        // 
     }
 
     handleClick(){
@@ -27,13 +27,13 @@ class ProfilePage extends React.Component {
         else {
             this.setState({avatarSelector:<ProfileAvatarSelector />})
         }
-        // debugger
+        // 
     }
 
     render(){
         // if (this.props.users)
         const avatarId = this.props.avatarId? this.props.avatarId: "0"
-        // debugger
+        // 
         
         return(
         <div className="profile-page-container">

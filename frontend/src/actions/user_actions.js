@@ -14,7 +14,7 @@ export const receiveUsers = users => ({
 });
 
 export const receiveUser = user => {
-    // debugger
+    // 
     return{
         type: RECEIVE_USER,
         user
@@ -26,20 +26,22 @@ export const receiveErrors = errors => ({
     errors
 });
 
-export const fetchUsers = user => dispatch => (
-    APIUtil.getUsers(user).then((users) => (
-        dispatch(receiveUsers(users))
-    ), err => (
+export const fetchUsers = userData => dispatch => {
+    
+    APIUtil.getUsers(userData).then((users) => {
+        
+        dispatch(receiveUsers(users)
+    )}, err => (
         dispatch(receiveErrors(err.response.data))
     ))
-);
+    };
 
 export const fetchUser = userId => dispatch => {
-    // debugger
+    // 
 
     return(
     APIUtil.getUser(userId).then((user) => {
-        // debugger
+        // 
     
         dispatch(receiveUser(user))
     }, err => (

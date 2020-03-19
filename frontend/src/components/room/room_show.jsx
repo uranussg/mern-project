@@ -18,12 +18,17 @@ class Room extends React.Component {
     };
     this.handleContent = this.handleContent.bind(this)
     this.handleSubmit =this.handleSubmit.bind(this)
+    this.handleExit = this.handleExit.bind(this)
   }
 
   componentDidUpdate(prevProps) {
-    if (JSON.stringify(this.props.room.users) !== JSON.stringify(prevProps.room.users) )
-    {
-      this.setState({users:this.props.users})}
+    if (this.props.room.users) {
+      
+      
+      if (this.props.room.users.length !== Object.keys(this.props.users).length )
+      {
+        this.props.fetchUsers({user_ids: this.props.room.users})}
+      }
     
 
     if (this.props.match.params.roomId !== prevProps.room._id ) {
@@ -44,11 +49,12 @@ class Room extends React.Component {
     this.socket = io("http://localhost:5000");
         
     // Load the last 10 messages in the window.
-    // this.socket.on('init', (msg) => {
-    //   this.setState((state) => ({
-    //     chat: [...state.chat, ...msg.reverse()],
-    //   }), this.scrollToBottom);
-    // });
+    this.socket.on('init', (msgs) => {
+      const filteredmsgs = msgs.filter(message=> message.room === this.props.room._id)
+      this.setState((state) => ({
+        chat: [...state.chat, ...filteredmsgs.reverse()],
+      }), this.scrollToBottom);
+    });
     this.socket.on('connection', () => {
       
       console.log(this.socket.connected); // true
@@ -81,6 +87,14 @@ class Room extends React.Component {
     });
   }
 
+
+  handleExit(e) {
+    
+    this.props.exitRoom(this.props.room._id, {user_id: this.props.curr_user.id}).then(()=>
+    { 
+      this.props.history.push('/rooms')})
+  }
+
   // When the user is posting a new message.
   handleSubmit(event) {
     // console.log(event);
@@ -92,7 +106,7 @@ class Room extends React.Component {
     //   console.log(state);
     //   console.log('this', this.socket);
       // Send the new message to the server.
-      debugger
+      
       const message = {
         user: this.props.curr_user.id,
         content: state.content,
@@ -119,15 +133,20 @@ class Room extends React.Component {
   }
 
   render() {
+    // 
     return (
       <div className="game-room">
           <div className='gameroom-title'>{this.props.room.title}</div>
+          <div className='exit-gameroom'>
+            <button onClick={this.handleExit}>Exit</button>
+          </div>
         <Paper id="chat" elevation={3}>
           {this.state.chat.map((el, index) => {
             return (
               <div key={index}>
                 <Typography variant="caption" className="name">
-                  {this.props.users[el.user].username}
+                  {this.props.users[el.user]? this.props.users[el.user].username: null}
+                  {/* {this.props.users[el.user].username} */}
                 </Typography>
                 <Typography variant="body" className="content">
                   {el.content}
