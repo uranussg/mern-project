@@ -16,27 +16,62 @@ class Room extends React.Component {
       chat: [],
       content: ''
     };
+    this.handleContent = this.handleContent.bind(this)
+    this.handleSubmit =this.handleSubmit.bind(this)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (JSON.stringify(this.props.room.users) !== JSON.stringify(prevProps.room.users) )
+    {
+      this.setState({users:this.props.users})}
+    
+
+    if (this.props.match.params.roomId !== prevProps.room._id ) {
+      this.props.fetchRoom(this.props.match.params.roomId, {user_id: this.props.curr_user.id})
+    }
+
   }
 
   componentDidMount() {
       
-      this.props.fetchRoom().then(()=>this.props.fetchUsers(this.props.rooms.users))
-    this.socket = io(config[process.env.NODE_ENV].endpoint);
-
+      this.props.fetchRoom(this.props.match.params.roomId, {user_id: this.props.curr_user.id})
+      .then(()=>
+      { 
+        const users = {user_ids: this.props.room.users}
+        
+        return this.props.fetchUsers(users)})
+    // this.socket = io(config[process.env.NODE_ENV].endpoint);
+    this.socket = io("http://localhost:5000");
+        
     // Load the last 10 messages in the window.
-    this.socket.on('init', (msg) => {
-      this.setState((state) => ({
-        chat: [...state.chat, ...msg.reverse()],
-      }), this.scrollToBottom);
+    // this.socket.on('init', (msg) => {
+    //   this.setState((state) => ({
+    //     chat: [...state.chat, ...msg.reverse()],
+    //   }), this.scrollToBottom);
+    // });
+    this.socket.on('connection', () => {
+      
+      console.log(this.socket.connected); // true
+    });
+    // // Update the chat if a new message in this room is broadcasted .
+    this.socket.on('push', (msg) => {
+
+        if(msg.room === this.props.room)
+     { 
+      if(!this.props.users[msg.user]){
+        this.props.fetchUser(msg.user).then(()=>this.setState((state) => ({
+          chat: [...state.chat, msg],
+        }), this.scrollToBottom))
+      }
+        else {
+          this.setState((state) => ({
+            chat: [...state.chat, msg],
+          }), this.scrollToBottom)
+        }
+      
+    };
     });
 
-    // Update the chat if a new message in this room is broadcasted .
-    this.socket.on('push', (msg) => {
-        if(msg.room_id === this.props.room_id)
-     { this.setState((state) => ({
-        chat: [...state.chat, msg],
-      }), this.scrollToBottom)};
-    });
   }
 
   // Save the message the user is typing in the input field.
@@ -57,16 +92,18 @@ class Room extends React.Component {
     //   console.log(state);
     //   console.log('this', this.socket);
       // Send the new message to the server.
-      this.socket.emit('message', {
-        user: this.props.curr_user._id,
+      debugger
+      const message = {
+        user: this.props.curr_user.id,
         content: state.content,
         room: this.props.room._id
-      });
+      }
+      this.socket.emit('message', message);
 
       // Update the chat with the user's message and remove the current message.
       return {
         chat: [...state.chat, {
-            user: this.props.curr_user._id,
+            user: this.props.curr_user.id,
             content: state.content,
             room: this.props.room._id
         }],
@@ -90,7 +127,7 @@ class Room extends React.Component {
             return (
               <div key={index}>
                 <Typography variant="caption" className="name">
-                  {el.user}
+                  {this.props.users[el.user].username}
                 </Typography>
                 <Typography variant="body" className="content">
                   {el.content}
@@ -105,7 +142,7 @@ class Room extends React.Component {
           value={this.state.content}
           onChange={this.handleContent}
         />
-        <button type='submit' value='submit'/>
+        <button type='submit'>Submit</button>
         </form>
       </div>
     );

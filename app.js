@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const http = require('http').Server(app);
 const mongoose = require('mongoose');
 const db = require('./config/keys').mongoURI;
 const bodyParser = require('body-parser');
@@ -8,7 +7,10 @@ const users = require('./routes/api/users')
 const rooms = require('./routes/api/rooms')
 const passport = require('passport');
 const path = require('path');
-const io = require('socket.io')(http);
+const cors = require('cors');
+
+const server = require('http').createServer(app);
+const io = require('socket.io').listen(server);
 const Message = require('./models/Message');
 
 mongoose
@@ -22,31 +24,36 @@ mongoose
   require('./config/passport')(passport);
 app.get("/", (req, res) => {
   // console.log(req)
-  // debugger
+  // 
   return res.send("Hello ChatRoom")});
-
+// app.use(cors({
+//   origin: 'http://localhost:3000'
+// }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use("/api/users", users)
 app.use("/api/rooms", rooms)
 
 const port = process.env.PORT || 5000;
+
+
 io.on('connection', (socket) => {
+  console.log('a user connected');
+  // Message.find().sort({createdAt: -1}).limit(10).exec((err, messages) => {
+  //   if (err) return console.error(err);
 
-  Message.find().sort({createdAt: -1}).limit(10).exec((err, messages) => {
-    if (err) return console.error(err);
-
-    // Send the last messages to the user.
-    socket.emit('init', messages);
-  });
+  //   // Send the last messages to the user.
+  //   socket.emit('init', messages);
+  // });
 
   // Listen to connected users for a new message.
   socket.on('message', (msg) => {
+    // console.log(msg)
     // Create a message with the content and the name of the user.
     const message = new Message({
       content: msg.content,
-      user: msg.user_id,
-      room: msg.room_id
+      user: msg.user,
+      room: msg.room
     });
 
     // Save the message to the database.
@@ -59,4 +66,4 @@ io.on('connection', (socket) => {
   });
 });
 
-app.listen(port, () => console.log(`Server is running on port ${port}`));
+server.listen(port, () => console.log(`Server is running on port ${port}`));
