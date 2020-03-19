@@ -14,10 +14,10 @@ export const receiveUsers = users => ({
 });
 
 export const receiveUser = user => {
-    // 
-    return{
+    
+    return {
         type: RECEIVE_USER,
-        user
+        user: user.data
     }
 };
 
@@ -49,3 +49,11 @@ export const fetchUser = userId => dispatch => {
     ))
     )
 };
+
+export const updateUser = user => dispatch => {
+    // debugger
+    return APIUtil.updateUser(user)
+    .then(updatedUser => {
+        // debugger
+        dispatch(receiveUser(updatedUser))})
+}

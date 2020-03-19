@@ -111,17 +111,22 @@ router.post('/register', (req, res) => {
 
 router.get('/:id', (req, res) => {
     User.findById(req.params.id)
-        .then(user => res.json(user))
+        .then(user => {
+          console.log(user)
+          return res.json(user)})
 });
 
-// router.get('/', (req, res) => {
-//   console.log('hiiiiiiiiiiiiiiiiiiiiiii')// why is this not getting hit?
-//   // const users = User
-//   const result = User.find()
-//       .then(users => {
-//         console.log("hiii")
-//         res.json(users)})
-//   return result
-// });
+
+// only updating avatarId for now
+router.post(`/:id`,(req,res) => {
+  // console.log(req.body)
+  // User.updateOne({_id:req.params.id}, {"avatarId": req.body.avatarId})
+  User.findById(req.params.id)
+  .then(user => {user.avatarId = req.body.avatarId
+    user.save()
+    .then(user => res.json(user))
+  })
+}
+)
 
 module.exports = router

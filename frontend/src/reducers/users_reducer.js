@@ -14,8 +14,9 @@ import { RECEIVE_USERS,  RECEIVE_USER } from "../actions/user_actions";
         });
     return newState;
     case RECEIVE_USER:
-      // 
-        return Object.assign({}, state, {[action.user.data._id] : action.user.data})
+     
+      const user = action.user[0]? action.user[0] : action.user
+        return Object.assign({}, state, {[user._id] : user})
     default:
     return state;
   }

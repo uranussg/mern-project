@@ -12,7 +12,9 @@ const mapStateToProps = state => {
   // 
   return {
     currentUser: state.session.user,
-    avatarId: avatarId
+    avatarId: avatarId,
+    // user: Object.values(state.users)
+    
   };
 };
 
