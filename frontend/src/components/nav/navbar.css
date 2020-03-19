@@ -4,11 +4,15 @@
     height: 150px;
 }
 
-.navbar-div > h1 {
+.logo-link {
     color: goldenrod;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 40px;
     text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+}
+
+.header-link {
+    text-decoration: none;
 }
 
 .auth-div {

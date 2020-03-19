@@ -27,8 +27,6 @@ class NavBar extends React.Component {
       } else {
         return (
             <div className="auth-div">
-                {/* <Link to={'/signup'}>Signup</Link>
-                <Link to={'/login'}>Login</Link> */}
                 <button onClick={() => this.props.openModal('login')}>Login</button>
                 <button onClick={() => this.props.openModal('signup')}>Signup</button>
             </div>
@@ -39,8 +37,10 @@ class NavBar extends React.Component {
   render() {
       return (
         <div className="navbar-div">
-            <h1>The Game Room</h1>
-            { this.getLinks() }
+          <Link to={"/"} className="header-link">
+            <h1 className="logo-link">The Game Room</h1>
+          </Link>
+          {this.getLinks()}
         </div>
       );
   }
