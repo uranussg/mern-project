@@ -62,7 +62,7 @@ class Room extends React.Component {
     // // Update the chat if a new message in this room is broadcasted .
     this.socket.on('push', (msg) => {
 
-        if(msg.room === this.props.room)
+        if(msg.room === this.props.room._id)
      { 
       if(!this.props.users[msg.user]){
         this.props.fetchUser(msg.user).then(()=>this.setState((state) => ({
@@ -75,8 +75,16 @@ class Room extends React.Component {
           }), this.scrollToBottom)
         }
       
-    };
-    });
+    }
+    }
+    
+    
+    );
+      this.socket.on('modeon', gamemode => {
+        if (gamemode.room_id === this.props.room._id){
+          this.props.fetchDistribution()
+        }
+      })
 
   }
 
@@ -108,9 +116,9 @@ class Room extends React.Component {
       // Send the new message to the server.
       
       const message = {
-        user: this.props.curr_user.id,
+        user_id: this.props.curr_user.id,
         content: state.content,
-        room: this.props.room._id
+        room_id: this.props.room._id
       }
       this.socket.emit('message', message);
 
