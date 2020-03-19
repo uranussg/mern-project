@@ -1,17 +1,24 @@
 import { connect } from "react-redux";
-// import { login } from "../../actions/session_actions";
+import { fetchUser } from "../../actions/user_actions";
 import ProfilePage from "./profile_page";
 
 const mapStateToProps = state => {
+   
+  // debugger
+  
+  const currentUserId = Object.keys(state.users).length > 0 ? state.session.user.id : null
+  // debugger
+  const avatarId = state.users[currentUserId] ? state.users[currentUserId].avatarId : null
+  // debugger
   return {
     currentUser: state.session.user,
-    avatar: state.session.user.avatarName
+    avatarId: avatarId
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    
+    fetchUser: (userId) => dispatch(fetchUser(userId))
   };
 };
 

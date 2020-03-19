@@ -20,9 +20,9 @@ const UserSchema = new Schema({
         default: Date.now
     },
 
-    imageName: {
-        type: String,
-        default: "defaultAvatar"
+    avatarId: {
+        type: Number,
+        default: 0
     }
 })
 
