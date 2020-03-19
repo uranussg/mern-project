@@ -17,8 +17,9 @@ class NavBar extends React.Component {
   getLinks() {
       if (this.props.loggedIn) {
         return (
-            <div>
+            <div className="auth-div">
                 <Link to={'/profile'}>Profile</Link>
+                <button onClick={() => this.props.openModal('newroom')}>New Room</button>
                 <button onClick={this.logoutUser}>Logout</button>
             </div>
         );

@@ -18,9 +18,10 @@ class LoginForm extends React.Component {
 
   // Once the user has been authenticated, redirect
   componentWillReceiveProps(nextProps) {
-    if (nextProps.currentUser === true) {
+    if (nextProps.currentUser) {
       // redirect to main page or user profile
-      this.props.history.push('/')
+      this.props.history.push('/');
+      this.props.closeModal();
     }
 
     // Set or clear errors

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import LoginFormContainer from '../sesssion/login_form_container';
 import SignupFormContainer from '../sesssion/signup_form_container';
 import "./modal.css"
+import CreateRoomContainer from '../room/room_forms/create_room_container';
 
 function Modal({ modal, closeModal }) {
     if (!modal) {
@@ -16,6 +17,9 @@ function Modal({ modal, closeModal }) {
             break;
         case 'signup':
             component = <SignupFormContainer />;
+            break;
+        case 'newroom':
+            component = <CreateRoomContainer />;
             break;
         default:
             return null;
