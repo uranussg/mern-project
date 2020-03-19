@@ -12,7 +12,7 @@ const ProfileAvatarSelector = (props) => {
     const images =  avatarIds.map(avatarId => <option id={avatarId}><img src={`/avatar${avatarId}.png`}/></option>)
         
 
-    // debugger
+    // 
 
     return (
      <div className="pofile-avatars-container">

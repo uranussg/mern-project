@@ -1,5 +1,5 @@
 
-import { getRooms, updateRoom, createRoom, } from '../util/room_api_util';
+import { getRooms, enterRoom, createRoom, outRoom } from '../util/room_api_util';
 
 export const RECEIVE_ROOM = "RECEIVE_ROOM"
 export const RECEIVE_ROOMS = "RECEIVE_ROOMS";
@@ -28,8 +28,11 @@ export const getoutRoom = (room) => ({
 })
 
 export const exitRoom = (room_id, userData) =>dispatch=> {
-  return updateRoom(room_id, userData)
-    .then(room => dispatch(getoutRoom(room)))
+  
+  return outRoom(room_id, userData)
+    .then(room => {
+      
+      dispatch(getoutRoom(room))})
     .catch(err => console.log(err))
 }
 
@@ -41,7 +44,7 @@ export const fetchRooms = () => dispatch => (
 
 export const fetchRoom = (room_id, userData) => dispatch => {
   
- return updateRoom(room_id, userData)
+ return enterRoom(room_id, userData)
   .then(room=>{
     
     return dispatch(receiveRoom(room))})
