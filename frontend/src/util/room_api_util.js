@@ -9,8 +9,12 @@ export const createRoom = data => {
   return axios.post('/api/rooms/', data)
 }
 
-export const enterRoom = (room_id, userData) => { 
+export const updateRoom = (room_id, userData) => { 
   
-    return axios.post(`/api/rooms/${room_id}`, userData)
+    return axios.patch(`/api/rooms/${room_id}`, userData)
     
 }
+
+// export const changeUserfromRoom = (room_id, userData) => {
+//   return axios.patch(`/api/rooms/${room_id}`, userData)
+// }

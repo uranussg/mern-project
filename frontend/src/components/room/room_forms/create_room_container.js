@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { buildRoom } from '../../../actions/room_actions';
-import { enterRoom } from '../../../util/room_api_util';
+import { updateRoom } from '../../../util/room_api_util';
 import CreateRoomForm from './create_room_form';
 import { withRouter } from 'react-router-dom';
 import { closeModal } from '../../../actions/modal_actions';

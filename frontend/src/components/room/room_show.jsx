@@ -38,17 +38,18 @@ class Room extends React.Component {
       .then(()=>
       { 
         const users = {user_ids: this.props.room.users}
-        
+        debugger
         return this.props.fetchUsers(users)})
     // this.socket = io(config[process.env.NODE_ENV].endpoint);
     this.socket = io("http://localhost:5000");
         
     // Load the last 10 messages in the window.
-    // this.socket.on('init', (msg) => {
-    //   this.setState((state) => ({
-    //     chat: [...state.chat, ...msg.reverse()],
-    //   }), this.scrollToBottom);
-    // });
+    this.socket.on('init', (msgs) => {
+      const filteredmsgs = msgs.filter(message=> message.room === this.props.room._id)
+      this.setState((state) => ({
+        chat: [...state.chat, ...filteredmsgs.reverse()],
+      }), this.scrollToBottom);
+    });
     this.socket.on('connection', () => {
       
       console.log(this.socket.connected); // true
@@ -79,6 +80,12 @@ class Room extends React.Component {
     this.setState({
       content: event.target.value,
     });
+  }
+
+
+  handleExit(e) {
+    this.props.exitRoom(this.props.room._id, {user_id: this.props.curr_user.id}).then(()=>
+    this.props.histroy.push('/'))
   }
 
   // When the user is posting a new message.
@@ -122,12 +129,15 @@ class Room extends React.Component {
     return (
       <div className="game-room">
           <div className='gameroom-title'>{this.props.room.title}</div>
+          <div className='exit-gameroom'>
+            <button onClick={this.handleExit}>Exit</button>
+          </div>
         <Paper id="chat" elevation={3}>
           {this.state.chat.map((el, index) => {
             return (
               <div key={index}>
                 <Typography variant="caption" className="name">
-                  {this.props.users[el.user].username}
+                  {this.props.users[el.user]? this.props.users[el.user].username: null}
                 </Typography>
                 <Typography variant="body" className="content">
                   {el.content}
