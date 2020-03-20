@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export const getThemes = () => {
-    debugger
   return axios.get('/api/games/roleplay/')
 };
 
