@@ -23,8 +23,7 @@ mongoose
   app.use(passport.initialize());
   require('./config/passport')(passport);
 app.get("/", (req, res) => {
-  // console.log(req)
-  // 
+ 
   return res.send("Hello ChatRoom")});
 // app.use(cors({
 //   origin: 'http://localhost:3000'
