@@ -7,14 +7,11 @@ const mapStateToProps = state => {
 //   debugger
   
   const currentUserId = Object.keys(state.users).length > 0 ? state.session.user.id : null
-  // debugger
   const avatarId = state.users[currentUserId] ? state.users[currentUserId].avatarId : null
-//   debugger
   return {
     currentUser: state.session.user,
     avatarId: avatarId,
     user: Object.values(state.users)[0]
-    // currentUserId: state.session.user.id
   };
 };
 
