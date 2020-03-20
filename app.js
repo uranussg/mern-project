@@ -23,8 +23,15 @@ mongoose
 
   app.use(passport.initialize());
   require('./config/passport')(passport);
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('frontend/build'));
+    app.get('/', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+    })
+  }
+
 app.get("/", (req, res) => {
- 
   return res.send("Hello ChatRoom")});
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -33,12 +40,6 @@ app.use("/api/users", users)
 app.use("/api/rooms", rooms)
 app.use("/api/games", games)
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('frontend/build'));
-  app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
-  })
-}
 
 const port = process.env.PORT || 5000;
 
