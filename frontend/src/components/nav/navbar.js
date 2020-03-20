@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import "./navbar.css"
+import scroll from "../../images/dimbrownscroll.png"
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -27,8 +28,6 @@ class NavBar extends React.Component {
       } else {
         return (
             <div className="auth-div">
-                {/* <Link to={'/signup'}>Signup</Link>
-                <Link to={'/login'}>Login</Link> */}
                 <button onClick={() => this.props.openModal('login')}>Login</button>
                 <button onClick={() => this.props.openModal('signup')}>Signup</button>
             </div>
@@ -39,8 +38,14 @@ class NavBar extends React.Component {
   render() {
       return (
         <div className="navbar-div">
-            <h1>The Game Room</h1>
-            { this.getLinks() }
+          <div className="scroll-cont">
+            <img src={scroll} alt="scroll" className="nav-scroll">
+            </img>
+            <Link to={"/"} className="header-link">
+              <h1 className="logo-link">The Game Room</h1>
+            </Link>
+            {this.getLinks()}
+          </div>
         </div>
       );
   }

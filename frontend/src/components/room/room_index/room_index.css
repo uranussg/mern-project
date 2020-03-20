@@ -8,15 +8,42 @@
 
 
 .room-info-container {
-  background-color: lightgreen;
+  background-color: rgba(255,255,255,0.85);
   padding: 20px;
-  width: 70%;
+  width: 80%;
   margin-bottom: 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; 
   position: relative;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-image: url(../../../images/border0-2.png); 
+  background-repeat: no-repeat;
+  background-size: 100% 100%; 
+}
+
+.inner-box {
+  background-color: rgba(255,255,255,0.8);
+}
+
+.room-info-container p {
+  font-family: Arial, sans-serif;
+  font-weight: 300;
+}
+
+.room-owner {
+  margin-top: 15px;
+}
+
+.room-index-main h1{
+  font-family: Arial, sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: rgb(187, 100, 0);
+  text-shadow: 2px 3px 0 rgb(207, 158, 34), 7px 7px 10px rgba(255, 255, 255, 0.9)
 }
 
 .room-title {
@@ -33,11 +60,24 @@
 }
 
 .room-join-button {
-  position: absolute;
+  position: relative;
   border: none;
   border-radius: 3px;
   right: 10px;
   bottom: 10px;
   font-size: 20px;
-  padding: 10px
+  padding: 10px;
+  top: 1px;
+  display: inline-block;
+  background-color: rgb(231, 181, 54);
+  box-shadow: 0 6px 0 rgb(207, 158, 34), 0 6px 15px rgba(0, 0, 0, 0.5)
+}
+
+.room-join-button:active {
+  position: relative;
+  top:3px;
+  box-shadow: 0 3px 0 rgb(207, 158, 34), 0 3px 6px rgba(0, 0, 0, 0.7);
+}
+.room-index-main {
+  background-attachment: fixed;
 }

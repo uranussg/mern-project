@@ -5,7 +5,8 @@ import io from 'socket.io-client';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Theme from '../game/theme'
-
+import "./room_show.css"
+import backgroundImage from "../../images/gameroom3.jpg";
 
 
 // import MessageInput from './message_input';
@@ -160,6 +161,7 @@ class Room extends React.Component {
 
     return (
       <div className="game-room">
+         <img className="main-page-image" src={backgroundImage} />
           <div className='gameroom-title'>{this.props.room.title}</div>
           <div className='exit-gameroom'>
             <button onClick={this.handleExit}>Exit</button>

@@ -1,0 +1,10 @@
+.game-room button {
+    border: none;
+    border-radius: 3px;
+    right: 10px;
+    width: 100px;
+    bottom: 10px;
+    font-size: 20px;
+    padding: 8px;
+    text-align: center;
+}

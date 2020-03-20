@@ -14,10 +14,8 @@ class ProfilePage extends React.Component {
     }
 
     componentDidMount(){
-        // 
         const userId = this.props.currentUser.id
         this.props.fetchUser(userId)
-        // 
     }
 
     handleClick(){
@@ -31,8 +29,6 @@ class ProfilePage extends React.Component {
 
     render(){
         const avatarId = this.props.avatarId? this.props.avatarId: "0"
-    
-        
         return(
             <div className="profile-page-container">
                     <p>Welcome, {this.props.currentUser.username}!</p>
@@ -44,9 +40,7 @@ class ProfilePage extends React.Component {
                 </div>
             </div>
         )
-      
     }
-
 }
 
 export default ProfilePage;
