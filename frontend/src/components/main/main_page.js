@@ -9,10 +9,7 @@ class MainPage extends React.Component {
       <div className="main-page-container">
         {/* <div className="main-page-background"></div> */}
         <img className="main-page-image" src={backgroundImage} />
-        <p>The Game Room</p>
-        <footer>
-          Copyright &copy; 2020 the Game Room
-        </footer>
+   
       <div className="testcontent"></div>
       </div>
     );

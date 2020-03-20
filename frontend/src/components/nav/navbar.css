@@ -4,35 +4,58 @@
 }
 
 .scroll-cont {
-    background-image: url("../../images/scroll.jpeg");
-    background-repeat: no-repeat;
-    background-size: 350px 300px; 
-    background-position: center;
+    position: relative;
+    /* background-image: url("../../images/dimbrownscroll.png"); */
+    /* background-repeat: no-repeat; */
+    /* background-size: 600px 300px;  */
+    /* background-position: center; */
+    min-width: 400px;
+    min-height: 300px;
+    text-align: center;
     
 }
 
+.nav-scroll {
+    position: relative;
+    height: 300px;
+    width: 600px;
+}
+
 .logo-link {
-    color: goldenrod;
+    color: rgb(25, 153, 83);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 40px;
     text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+    position: absolute;
+    text-align: center;
+    right: 110px;
+    min-width: 350px;
 }
 
 .header-link {
+    position: absolute;
     text-decoration: none;
+    margin-top: 50px;
+    text-align: center;
 }
 
 .auth-div {
+    position: absolute;
     display: flex;
     justify-content: center;
+    bottom: 80px;
+    left: 45%;
+
 }
 
 .auth-div > button {
     margin: 5px;
-    background-color: goldenrod;
-    color: white;
+    background-color: lightgray;
+    color: black;
     padding: 10px 20px;
     display: inline-block;
     font-size: 16px;
+    border: 2px solid rgb(25, 153, 83);
+    border-radius: 10px;
 }
 

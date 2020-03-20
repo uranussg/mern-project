@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import "./navbar.css"
+import scroll from "../../images/dimbrownscroll.png"
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -38,6 +39,8 @@ class NavBar extends React.Component {
       return (
         <div className="navbar-div">
           <div className="scroll-cont">
+            <img src={scroll} alt="scroll" className="nav-scroll">
+            </img>
             <Link to={"/"} className="header-link">
               <h1 className="logo-link">The Game Room</h1>
             </Link>

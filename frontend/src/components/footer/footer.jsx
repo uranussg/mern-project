@@ -16,7 +16,7 @@ class Footer extends React.Component {
                         <div></div>
                     </div>
                     <div className="default-game-column">
-                        <h2>Pre-made Game</h2>
+                        <h2>Pre-made Games</h2>
                         <div>Avalon</div>
                         <div>Secret Hitler</div>
                         <div>Mafia</div>
