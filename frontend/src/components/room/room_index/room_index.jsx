@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import RoomIndexItem from './room_index_item';
+import backgroundImage from "../../../images/gameroom3.jpg";
 
 class RoomIndex extends Component {
   componentDidMount() {
@@ -13,7 +14,8 @@ class RoomIndex extends Component {
   render() {
     return (
       <div className='room-index-main'>
-        <h1>All rooms</h1>
+        <img className="main-page-image" src={backgroundImage} />
+        <h1>All Rooms</h1>
         <ul className="rooms-container">
           {this.props.rooms.map((room) => {
             return <RoomIndexItem handleRedirect={this.handleRedirect.bind(this)}  key={room._id} room={room} />
