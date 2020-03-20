@@ -157,7 +157,7 @@ class Room extends React.Component {
   }
 
   render() {
-    // 
+
     return (
       <div className="game-room">
           <div className='gameroom-title'>{this.props.room.title}</div>
@@ -168,28 +168,37 @@ class Room extends React.Component {
             <button onClick={this.handleRolePlay}>Role-Play</button>
             {this.state.game}
           </div>
-        <Paper id="chat" elevation={3}>
+        <Paper id="chat" elevation={3} className='chat-box'>
           {this.state.chat.map((el, index) => {
-            return (
-              <div key={index}>
+            return this.props.curr_user === el.user ? (
+              <div key={index} className='self-message'>
                 <Typography variant="caption" className="name">
-                  {this.props.users[el.user]? this.props.users[el.user].username: null}
+                  {this.props.users[el.user]? this.props.users[el.user].username: el.user}
                   {/* {this.props.users[el.user].username} */}
                 </Typography>
                 <Typography variant="body" className="content">
                   {el.content}
                 </Typography>
               </div>
-            );
+            ) : 
+            ( <div key={index} className='other-users-message'>
+              <Typography variant="caption" className="name">
+                {this.props.users[el.user]? this.props.users[el.user].username: el.user}
+                {/* {this.props.users[el.user].username} */}
+              </Typography>
+              <Typography variant="body" className="content">
+                {el.content}
+              </Typography>
+            </div> );
           })}
         </Paper>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} className='submit-message-box'>
 
         <input
           value={this.state.content}
           onChange={this.handleContent}
         />
-        <button type='submit'>Submit</button>
+        <button type='submit' className='submit-button'>Submit</button>
         </form>
       </div>
     );
