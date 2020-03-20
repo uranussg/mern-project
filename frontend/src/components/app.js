@@ -12,6 +12,7 @@ import ProfilePageContainer from '../components/profile/profile_container';
 import RoomIndexContainer from './room/room_index/room_index_container';
 import CreateRoomContainer from './room/room_forms/create_room_container';
 import RoomShowContainer from './room/room_show_container'
+import Footer from "./footer/footer"
 
 const App = () => (
   <div>
@@ -26,6 +27,7 @@ const App = () => (
         {/* <Route exact path="/rooms/new" component={CreateRoomContainer} /> */}
         <ProtectedRoute exact path='/rooms/:roomId' component={RoomShowContainer}/>
     </Switch>
+    <Footer/>
   </div>
 );
 

@@ -1,0 +1,84 @@
+.footer {
+    background-color: #996515;
+    color: white;
+    font-size: 12px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.columns-cont {
+    display: flex;
+    justify-content: center;
+}
+
+.nav-column {
+    /* margin-top: 10px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 2%;
+}
+
+.default-game-column {
+    /* margin-top: 10px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 2%;
+}
+
+.dev-column {
+    /* margin-top: 10px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 2%;
+}
+
+.nav-column > div {
+    margin-bottom: 10px;
+    min-width: 200px;
+}
+
+.dev-column > div {
+    margin-bottom: 10px;
+    min-width: 200px;
+
+}
+
+.default-game-column > div {
+    margin-bottom: 10px;
+    min-width: 200px;
+
+}
+
+/* .underline {
+    border-bottom: 1px solid white;
+    margin-left: 600px;
+    margin-right: 600px;
+    margin-bottom: 10px;
+} */
+
+.bottom-box {
+    display: flex;
+    justify-content: center;
+}
+
+.footer-logo {
+    font-size: 16px;
+    margin-right: 15px;
+    font-weight: bolder;
+    
+}
+
+.footer-detail {
+    display: flex;
+}
+
+.footer-detail-cont > div{
+    margin-bottom: 10px;   
+}
+
+.columns-cont > div > h2 {
+    min-width: 200px;
+    color: #D4AF37;
+}

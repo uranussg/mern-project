@@ -1,7 +1,14 @@
 .navbar-div {
-    background-image: url("../../images/stonewall2.jpg");
     text-align: center;
     height: 150px;
+}
+
+.scroll-cont {
+    background-image: url("../../images/scroll.jpeg");
+    background-repeat: no-repeat;
+    background-size: 350px 300px; 
+    background-position: center;
+    
 }
 
 .logo-link {
