@@ -19,7 +19,7 @@ router.get("/:user_ids", (req, res) => {
   // console.log(req.body)
   // const ids = req.body.user_ids
   const ids = req.params.user_ids.split(',')
-  console.log(ids)
+  // console.log(ids)
   // console.log(typeof ids)
   // console.log(JSON.parse(ids))
   // User.find().where("_id").in(JSON.parse(ids))
@@ -112,7 +112,7 @@ router.post('/register', (req, res) => {
 router.get('/:id', (req, res) => {
     User.findById(req.params.id)
         .then(user => {
-          console.log(user)
+          // console.log(user)
           return res.json(user)})
 });
 

@@ -44,11 +44,11 @@ router.post('/roleplay/:theme_id', (req, res) => {
   // console.log(req.params.theme_id)
    Role.find({theme_id:req.params.theme_id})
   .then(roles => {
-    console.log(req.body.room_id)
+    // console.log(req.body.room_id)
     Room.findById(req.body.room_id).then(room =>
       {
-        console.log(roles)
-        console.log(room)
+        // console.log(roles)
+        // console.log(room)
         let primes = roles.filter(role => role.type === "Prime")
         const nonPrimes = roles.filter(role => role.type !== "Prime")
         const roleDis = {}
@@ -64,11 +64,13 @@ router.post('/roleplay/:theme_id', (req, res) => {
             }
         
         }) 
-        // const roleDisRes = new RoleDistribution({
-        //     distribution:roleDis
-        // })
+        const roleDisRes = new RoleDistribution({
+            distribution:roleDis,
+            room_id: room._id
+        })
+        roleDisRes.save().then(roles => res.json(roles))
     
-    return res.json(roleDis)
+
 });
 })
     .catch(err => res.status(404).json({ noThemesfound: 'No roles found' }));
@@ -83,13 +85,24 @@ router.post('/roleplay/:theme_id', (req, res) => {
 // })
 
 router.get('/roleplay/:room_id',(req, res) => {
-  RoleDistribution.find({room_id: req.params.room_id})
-  .sort({ date: -1 })
+  console.log(req.params.room_id)
+  RoleDistribution.findOne({room_id: req.params.room_id})
+  // .sort({date:-1}).limit(1)
+
   .then(distribution => {
-    res.json(distribution[0])
+    console.log(distribution)
+    res.json(distribution)
   })
 })
 
+router.delete('/roleplay/:room_id',(req, res) => {
+
+  RoleDistribution.deleteMany({room_id: req.params.room_id})
+  .then(distribution => {
+    console.log(distribution)
+    res.json(distribution)
+  })
+} )
 
 
 router.pos
