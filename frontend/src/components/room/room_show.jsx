@@ -4,6 +4,8 @@ import io from 'socket.io-client';
 
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Theme from '../game/theme'
+
 
 // import MessageInput from './message_input';
 // import './App.css';
@@ -18,7 +20,8 @@ class Room extends React.Component {
     };
     this.handleContent = this.handleContent.bind(this)
     this.handleSubmit =this.handleSubmit.bind(this)
-    this.handleExit = this.handleExit.bind(this)
+    this.handleExit = this.handleExit.bind(this)  
+    this.handleRolePlay = this.handleRolePlay.bind(this)
   }
 
   componentDidUpdate(prevProps) {
@@ -49,12 +52,13 @@ class Room extends React.Component {
     this.socket = io("http://localhost:5000");
         
     // Load the last 10 messages in the window.
-    this.socket.on('init', (msgs) => {
+    if(!this.state.chat)
+    {this.socket.on('init', (msgs) => {
       const filteredmsgs = msgs.filter(message=> message.room === this.props.room._id)
       this.setState((state) => ({
         chat: [...state.chat, ...filteredmsgs.reverse()],
       }), this.scrollToBottom);
-    });
+    });}
     this.socket.on('connection', () => {
       
       console.log(this.socket.connected); // true
@@ -62,7 +66,7 @@ class Room extends React.Component {
     // // Update the chat if a new message in this room is broadcasted .
     this.socket.on('push', (msg) => {
 
-        if(msg.room === this.props.room._id)
+        if(msg.room_id === this.props.room._id)
      { 
       if(!this.props.users[msg.user]){
         this.props.fetchUser(msg.user).then(()=>this.setState((state) => ({
@@ -82,7 +86,8 @@ class Room extends React.Component {
     );
       this.socket.on('modeon', gamemode => {
         if (gamemode.room_id === this.props.room._id){
-          this.props.fetchDistribution()
+          this.props.fetchDistribution(this.props.room._id)
+          .then(()=> this.setState({roles: this.props.roles}))
         }
       })
 
@@ -95,6 +100,12 @@ class Room extends React.Component {
     });
   }
 
+  handleRolePlay(e) {
+    debugger
+    this.setState(
+      {game: this.state.game? null : <Theme roomId={this.props.room._id} socket={this.socket} />}
+    )
+  }
 
   handleExit(e) {
     
@@ -147,6 +158,10 @@ class Room extends React.Component {
           <div className='gameroom-title'>{this.props.room.title}</div>
           <div className='exit-gameroom'>
             <button onClick={this.handleExit}>Exit</button>
+          </div>
+          <div className='theme-choose'>
+            <button onClick={this.handleRolePlay}>Role-Play</button>
+            {this.state.game}
           </div>
         <Paper id="chat" elevation={3}>
           {this.state.chat.map((el, index) => {

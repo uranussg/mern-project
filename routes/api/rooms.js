@@ -66,10 +66,10 @@ router.patch('/:room_id', (req, res) => {
  .then(room => {
    // 
 
-   console.log(room.users)
    if (req.body.user_id) {
-     if (!room.users.includes(req.body.user_id) ) 
+     if (!(room.users.includes(req.body.user_id)) ) 
      {
+      console.log(room.users)
 
         room.users.push(req.body.user_id)
       }
