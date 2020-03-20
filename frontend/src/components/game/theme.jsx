@@ -7,11 +7,12 @@ export default class Theme extends Component {
         this.state={
             themes:[]
         }
+        this.handleChoose = this.handleChoose.bind(this)
     }
     componentDidMount(){
-        debugger
+        
         getThemes().then(themes=> {
-            debugger
+            
             this.setState({themes: themes.data})
         })
         this.socket = this.props.socket
@@ -20,8 +21,12 @@ export default class Theme extends Component {
 
     handleChoose(e) {
         e.preventDefault()
-        getRoles(e.target.value, {roome_id: this.props.roomId})
-        .then(()=>this.socket.emit('gamemode'), {room_id: this.props.roomId})
+
+        getRoles(e.target.getAttribute("value"), {room_id: this.props.roomId})
+        .then((roles)=>{
+            debugger
+            this.socket.emit('gamemode', {room_id: this.props.roomId})
+        })
     }
     render() {
 

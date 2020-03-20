@@ -85,6 +85,8 @@ class Room extends React.Component {
     
     );
       this.socket.on('modeon', gamemode => {
+        debugger
+        console.log('game begin')
         if (gamemode.room_id === this.props.room._id){
           this.props.fetchDistribution(this.props.room._id)
           .then(()=> this.setState({roles: this.props.roles}))
@@ -101,7 +103,7 @@ class Room extends React.Component {
   }
 
   handleRolePlay(e) {
-    debugger
+    
     this.setState(
       {game: this.state.game? null : <Theme roomId={this.props.room._id} socket={this.socket} />}
     )

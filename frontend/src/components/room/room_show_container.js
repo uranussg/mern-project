@@ -11,7 +11,7 @@ return {
   curr_user: state.session.user,
   room: state.rooms.user||{},
   users: state.users,
-  roles:state.roles || []
+  roles:state.roles || {}
 }
 };
 

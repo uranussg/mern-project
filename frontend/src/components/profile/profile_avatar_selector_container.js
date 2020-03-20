@@ -4,7 +4,7 @@ import ProfileAvatarSelector from "./profile_avatar_selector";
 
 const mapStateToProps = state => {
 
-//   debugger
+//   
   
   const currentUserId = Object.keys(state.users).length > 0 ? state.session.user.id : null
   const avatarId = state.users[currentUserId] ? state.users[currentUserId].avatarId : null

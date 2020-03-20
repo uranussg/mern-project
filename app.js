@@ -71,6 +71,7 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('push', msg);
 
     socket.on('gamemode', (gm) => {
+      console.log(gm)
       const gamemode = {
         room_id: gm.room_id,
         mode: true

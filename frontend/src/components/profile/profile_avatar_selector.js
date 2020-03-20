@@ -12,30 +12,30 @@ class ProfileAvatarSelector extends React.Component {
     }
     
     // componentDidMount(){
-    //     // debugger
+    //     // 
     //     const userId = this.props.currentUser.id
     //     this.props.fetchUser(userId).then((user) => this.setState({user: user}))
         
-    //     debugger
+    //     
     // }
 
     handleClick(e){
-        // debugger
+        // 
         if(typeof this.props.user === "undefined")
         {this.props.fetchUser(this.props.currentUser.id)}
-        // debugger
+        // 
         const updatedUser = this.props.user
         const avatarId = this.props.user.avatarId
         updatedUser["avatarId"] = e.target.getAttribute("value")
         this.props.updateUser(updatedUser)
         // this.setState({user: updatedUser}, () => console.log(this.state))
-        // debugger
+        // 
     
     }
 
     
     render (){
-        // debugger
+        // 
         const avatarIds = [];
          for (let i = 1; i <= 8; i ++){
              avatarIds.push(i)

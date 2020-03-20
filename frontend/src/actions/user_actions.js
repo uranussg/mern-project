@@ -51,9 +51,9 @@ export const fetchUser = userId => dispatch => {
 };
 
 export const updateUser = user => dispatch => {
-    // debugger
+    // 
     return APIUtil.updateUser(user)
     .then(updatedUser => {
-        // debugger
+        // 
         dispatch(receiveUser(updatedUser))})
 }
