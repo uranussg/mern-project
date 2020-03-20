@@ -1,0 +1,91 @@
+const express = require("express");
+const router = express.Router();
+const passport = require('passport')
+
+
+
+const Role = require('../../models/Role');
+const RoleTheme = require('../../models/RoleTheme')
+const RoleDistribution = require('../../models/RoleDistribution')
+
+router.get("/test", (req,res) => {
+    res.json({msg: "this is the game router"})
+})
+
+router.get('/roleplay/', (req, res) => {
+  RoleTheme.find()
+    // .sort({ date: -1 })
+    .then(themes => res.json(themes))
+    .catch(err => res.status(404).json({ noThemesfound: 'No themes found' }));
+})
+
+router.post('/roleplay/', (req, res) => {
+  // console.log(req.body)
+  const newTheme = new RoleTheme({
+    theme:req.body.theme
+  })
+
+  newTheme.save().then(theme => res.json(theme))
+})
+
+router.post('/roleplay/roles', (req, res) => {
+  console.log(req.body)
+  const newRole = new Role({
+    theme_id:req.body.theme,
+    name: req.body.name,
+    role_avator_id: req.body.role_avator_id
+  })
+
+  newRole.save().then(role => res.json(role))
+})
+
+router.post('/roleplay/:theme_id', (req, res) => {
+   Role.find({theme_id:req.params.theme_id})
+  .then(roles => {
+        Room.findById(req.body.room_id).then(room =>
+      {
+        let primes = roles.data.fileter(role => role.type === "Prime")
+        const nonPrimes = roles.data.fileter(role => role.type !== "Prime")
+        const roleDis = {}
+        room.data.users.forEach(user_id => {
+            if(primes) {
+                const idx =  Math.floorMath.random() * (primes.length - 1)
+                roleDis[user_id] = primes[idx]
+                primes = primes.slice(0, idx).concat(primes.slice(idx+1))
+            }
+            else{
+                const idx = Math.floorMath.random() * (nonPrimes.length - 1)
+                roleDis[user_id] = nonPrimes[idx]
+            }
+        
+        }) 
+        const roleDisRes = new RoleDistribution({
+            distribution:roleDis
+        })
+    
+    return res.json(roleDisRes)
+});
+})
+    .catch(err => res.status(404).json({ noThemesfound: 'No roles found' }));
+});
+// router.post('/:room_id', (req, res) => {
+//   Room.findById(req.params.room_id)
+//  .then(room => {
+//    // 
+//    if (!room.users.includes(req.body.user_id) && req.body.user_id) room.users.push(req.body.user_id)
+//    room.save().then(room => res.json(room))
+//  })
+// })
+
+router.get('/roleplay/:room_id',(req, res) => {
+  RoleDistribution.find({room_id: req.params.room_id})
+  .sort({ date: -1 })
+  .then(distribution => {
+    res.json(distribution[0])
+  })
+})
+
+
+
+router.pos
+module.exports = router

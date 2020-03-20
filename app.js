@@ -5,6 +5,7 @@ const db = require('./config/keys').mongoURI;
 const bodyParser = require('body-parser');
 const users = require('./routes/api/users')
 const rooms = require('./routes/api/rooms')
+const games = require('./routes/api/games')
 const passport = require('passport');
 const path = require('path');
 const cors = require('cors');
@@ -33,6 +34,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use("/api/users", users)
 app.use("/api/rooms", rooms)
+app.use("/api/games", games)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('frontend/build'));
@@ -59,8 +61,8 @@ io.on('connection', (socket) => {
     // Create a message with the content and the name of the user.
     const message = new Message({
       content: msg.content,
-      user: msg.user,
-      room: msg.room
+      user_id: msg.user_id,
+      room_id: msg.room_id
     });
 
     // Save the message to the database.
@@ -70,6 +72,15 @@ io.on('connection', (socket) => {
 
     // Notify all other users about a new message.
     socket.broadcast.emit('push', msg);
+
+    socket.on('gamemode', (gm) => {
+      const gamemode = {
+        room_id: gm.room_id,
+        mode: true
+      }
+      socket.broadcast.emit('modeon', gamemode)
+    })
+
   });
 });
 
