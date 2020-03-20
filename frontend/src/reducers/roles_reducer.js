@@ -6,6 +6,7 @@ import{ EXIT_ROOM } from '../actions/room_actions'
     let newState = Object.assign({}, state);
     switch(action.type) {
       case RECEIVE_ROLES:
+        debugger
         newState = action.roles.data.distribution;
         return newState;
 

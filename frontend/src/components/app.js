@@ -4,8 +4,8 @@ import { Switch, Route } from 'react-router-dom';
 import NavBarContainer from './nav/navbar_container';
 
 import MainPage from './main/main_page';
-import LoginFormContainer from './sesssion/login_form_container';
-import SignupFormContainer from './sesssion/signup_form_container';
+// import LoginFormContainer from './sesssion/login_form_container';
+// import SignupFormContainer from './sesssion/signup_form_container';
 import Modal from './modal/modal'
 import ProfilePageContainer from '../components/profile/profile_container';
 import RoomIndexContainer from './room/room_index/room_index_container';

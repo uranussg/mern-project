@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Theme from '../game/theme'
 
 
+
 // import MessageInput from './message_input';
 // import './App.css';
 
@@ -52,7 +53,8 @@ class Room extends React.Component {
     this.socket = io("http://localhost:5000");
         
     // Load the last 10 messages in the window.
-    if(!this.state.chat)
+
+    if(!this.state.chat.length)
     {this.socket.on('init', (msgs) => {
       const filteredmsgs = msgs.filter(message=> message.room === this.props.room._id)
       this.setState((state) => ({
@@ -65,7 +67,7 @@ class Room extends React.Component {
     });
     // // Update the chat if a new message in this room is broadcasted .
     this.socket.on('push', (msg) => {
-
+      debugger
         if(msg.room_id === this.props.room._id)
      { 
       if(!this.props.users[msg.user]){
@@ -88,6 +90,7 @@ class Room extends React.Component {
         debugger
         console.log('game begin')
         if (gamemode.room_id === this.props.room._id){
+          debugger
           this.props.fetchDistribution(this.props.room._id)
           .then(()=> this.setState({roles: this.props.roles}))
         }
@@ -105,7 +108,7 @@ class Room extends React.Component {
   handleRolePlay(e) {
     
     this.setState(
-      {game: this.state.game? null : <Theme roomId={this.props.room._id} socket={this.socket} />}
+      {game: this.state.game? null : <Theme roomId={this.props.room._id} socket={this.socket} startRoleDistribution={this.props.startRoleDistribution}/>}
     )
   }
 

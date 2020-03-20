@@ -8,6 +8,10 @@ const RoleDistributionSchema = new Schema({
         type: Object,
         required: true
     },
+    room_id: {
+        type:Schema.Types.ObjectId,
+        ref: 'rooms'
+    },
     date: {
         type: Date, 
         default: Date.now

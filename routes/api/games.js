@@ -65,7 +65,8 @@ router.post('/roleplay/:theme_id', (req, res) => {
         
         }) 
         const roleDisRes = new RoleDistribution({
-            distribution:roleDis
+            distribution:roleDis,
+            room_id: room._id
         })
         roleDisRes.save().then(roles => res.json(roles))
     
@@ -84,13 +85,24 @@ router.post('/roleplay/:theme_id', (req, res) => {
 // })
 
 router.get('/roleplay/:room_id',(req, res) => {
-  RoleDistribution.find({room_id: req.params.room_id})
-  .sort({ date: -1 })
+  console.log(req.params.room_id)
+  RoleDistribution.findOne({room_id: req.params.room_id})
+  // .sort({date:-1}).limit(1)
+
   .then(distribution => {
-    res.json(distribution[0])
+    console.log(distribution)
+    res.json(distribution)
   })
 })
 
+router.delete('/roleplay/:room_id',(req, res) => {
+
+  RoleDistribution.deleteMany({room_id: req.params.room_id})
+  .then(distribution => {
+    console.log(distribution)
+    res.json(distribution)
+  })
+} )
 
 
 router.pos
