@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { getRoles, getThemes} from '../../util/game_api_util'
 // import { startRoleDistribution } from '../../actions/game_actions'
+import "./theme.css"
 export default class Theme extends Component {
     constructor(props) {
         super(props)
@@ -35,7 +36,7 @@ export default class Theme extends Component {
         })
         return (
             <div>
-                <ul>
+                <ul className='theme-list'>
                     {themeList}
                 </ul>
             </div>
