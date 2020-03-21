@@ -4,13 +4,15 @@ import errors from './errors_reducer';
 import ui from './ui_reducer'
 import rooms from './rooms_reducer'
 import users from './users_reducer'
+import roles from './roles_reducer'
 
 const RootReducer = combineReducers({
   session,
-  ui,
-  errors,
   rooms,
-  users
+  users,
+  roles,
+  errors,
+  ui,
 });
 
 export default RootReducer;

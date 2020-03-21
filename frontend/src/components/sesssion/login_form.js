@@ -62,6 +62,7 @@ class LoginForm extends React.Component {
   render() {
     return (
       <div className="login-form-container">
+        <div onClick={this.props.closeModal} className="close-x">×</div>
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="textbox">
@@ -82,7 +83,6 @@ class LoginForm extends React.Component {
           </div>
           <input type="submit" value="Login" />
           {this.renderErrors()}
-          
         </form>
       </div>
     );

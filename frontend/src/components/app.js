@@ -5,13 +5,14 @@ import "./reset.css";
 import NavBarContainer from './nav/navbar_container';
 
 import MainPage from './main/main_page';
-import LoginFormContainer from './sesssion/login_form_container';
-import SignupFormContainer from './sesssion/signup_form_container';
+// import LoginFormContainer from './sesssion/login_form_container';
+// import SignupFormContainer from './sesssion/signup_form_container';
 import Modal from './modal/modal'
 import ProfilePageContainer from '../components/profile/profile_container';
 import RoomIndexContainer from './room/room_index/room_index_container';
 import CreateRoomContainer from './room/room_forms/create_room_container';
 import RoomShowContainer from './room/room_show_container'
+import Footer from "./footer/footer"
 
 const App = () => (
   <div>
@@ -26,6 +27,7 @@ const App = () => (
         {/* <Route exact path="/rooms/new" component={CreateRoomContainer} /> */}
         <ProtectedRoute exact path='/rooms/:roomId' component={RoomShowContainer}/>
     </Switch>
+    <Footer/>
   </div>
 );
 

@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
 import { getRoles, getThemes} from '../../util/game_api_util'
-
+// import { startRoleDistribution } from '../../actions/game_actions'
 export default class Theme extends Component {
     constructor(props) {
         super(props)
         this.state={
             themes:[]
         }
+        this.handleChoose = this.handleChoose.bind(this)
     }
     componentDidMount(){
-        debugger
+        
         getThemes().then(themes=> {
-            debugger
+            
             this.setState({themes: themes.data})
         })
         this.socket = this.props.socket
@@ -20,8 +21,12 @@ export default class Theme extends Component {
 
     handleChoose(e) {
         e.preventDefault()
-        getRoles(e.target.value, {roome_id: this.props.roomId})
-        .then(()=>this.socket.emit('gamemode'), {room_id: this.props.roomId})
+
+        this.props.startRoleDistribution(e.target.getAttribute("value"), {room_id: this.props.roomId})
+        .then((roles)=>{
+            debugger
+            this.socket.emit('gamemode', {room_id: this.props.roomId})
+        })
     }
     render() {
 

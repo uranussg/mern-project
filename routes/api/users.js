@@ -19,7 +19,7 @@ router.get("/:user_ids", (req, res) => {
   // console.log(req.body)
   // const ids = req.body.user_ids
   const ids = req.params.user_ids.split(',')
-  console.log(ids)
+  // console.log(ids)
   // console.log(typeof ids)
   // console.log(JSON.parse(ids))
   // User.find().where("_id").in(JSON.parse(ids))
@@ -81,7 +81,7 @@ router.post('/register', (req, res) => {
         bcrypt.compare(password, user.password)
           .then(isMatch => {
             if (isMatch) {
-                const payload = {id: user.id, username: user.username};
+                const payload = {id: user.id, username: user.username, avatarId: user.avatarId, email: user.email, date: user.date};
 
                 jwt.sign(
                   payload,
@@ -112,7 +112,7 @@ router.post('/register', (req, res) => {
 router.get('/:id', (req, res) => {
     User.findById(req.params.id)
         .then(user => {
-          console.log(user)
+          // console.log(user)
           return res.json(user)})
 });
 

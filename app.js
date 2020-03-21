@@ -13,7 +13,7 @@ const cors = require('cors');
 const server = require('http').createServer(app);
 const io = require('socket.io').listen(server);
 const Message = require('./models/Message');
-
+const RoleDistribution = require('./models/RoleDistribution')
 mongoose
   .connect(db, { 
     useUnifiedTopology: true,
@@ -55,7 +55,7 @@ io.on('connection', (socket) => {
 
   // Listen to connected users for a new message.
   socket.on('message', (msg) => {
-    // console.log(msg)
+    console.log(msg)
     // Create a message with the content and the name of the user.
     const message = new Message({
       content: msg.content,
@@ -71,15 +71,18 @@ io.on('connection', (socket) => {
     // Notify all other users about a new message.
     socket.broadcast.emit('push', msg);
 
-    socket.on('gamemode', (gm) => {
-      const gamemode = {
-        room_id: gm.room_id,
-        mode: true
-      }
-      socket.broadcast.emit('modeon', gamemode)
-    })
 
   });
+  socket.on('gamemode', (gm) => {
+    console.log('game mode is on')        
+
+    const gamemode = {
+      room_id: gm.room_id,
+      mode: true
+    }
+    socket.broadcast.emit('modeon', gamemode)
+  })
+
 });
 
 server.listen(port, () => console.log(`Server is running on port ${port}`));

@@ -69,12 +69,12 @@ router.patch('/:room_id', (req, res) => {
    if (req.body.user_id) {
      if (!(room.users.includes(req.body.user_id)) ) 
      {
-      console.log(room.users)
+      // console.log(room.users)
 
         room.users.push(req.body.user_id)
       }
     }
-    console.log(room.users)
+    // console.log(room.users)
    room.save().then(room => res.json(room))
  })
 })
@@ -84,8 +84,8 @@ router.patch('/:room_id/exit', (req, res) => {
  .then(room => {
    // 
 
-   console.log(room.users)
-   console.log(req.body.user_id)
+  //  console.log(room.users)
+  //  console.log(req.body.user_id)
    if (req.body.user_id) {
      if (room.users.includes(req.body.user_id) ) 
      {
@@ -94,7 +94,7 @@ router.patch('/:room_id/exit', (req, res) => {
       }
       
     }
-    console.log(room.users)
+    // console.log(room.users)
    room.save().then(room => res.json(room))
  })
 })

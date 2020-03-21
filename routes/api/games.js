@@ -7,6 +7,7 @@ const passport = require('passport')
 const Role = require('../../models/Role');
 const RoleTheme = require('../../models/RoleTheme')
 const RoleDistribution = require('../../models/RoleDistribution')
+const Room = require('../../models/Room')
 
 router.get("/test", (req,res) => {
     res.json({msg: "this is the game router"})
@@ -29,9 +30,9 @@ router.post('/roleplay/', (req, res) => {
 })
 
 router.post('/roleplay/roles', (req, res) => {
-  console.log(req.body)
+
   const newRole = new Role({
-    theme_id:req.body.theme,
+    theme_id:req.body.theme_id,
     name: req.body.name,
     role_avator_id: req.body.role_avator_id
   })
@@ -40,30 +41,36 @@ router.post('/roleplay/roles', (req, res) => {
 })
 
 router.post('/roleplay/:theme_id', (req, res) => {
+  // console.log(req.params.theme_id)
    Role.find({theme_id:req.params.theme_id})
   .then(roles => {
-        Room.findById(req.body.room_id).then(room =>
+    // console.log(req.body.room_id)
+    Room.findById(req.body.room_id).then(room =>
       {
-        let primes = roles.data.fileter(role => role.type === "Prime")
-        const nonPrimes = roles.data.fileter(role => role.type !== "Prime")
+        // console.log(roles)
+        // console.log(room)
+        let primes = roles.filter(role => role.type === "Prime")
+        const nonPrimes = roles.filter(role => role.type !== "Prime")
         const roleDis = {}
-        room.data.users.forEach(user_id => {
+        room.users.forEach(user_id => {
             if(primes) {
-                const idx =  Math.floorMath.random() * (primes.length - 1)
+                const idx =  Math.floor(Math.random() * (primes.length - 1))
                 roleDis[user_id] = primes[idx]
                 primes = primes.slice(0, idx).concat(primes.slice(idx+1))
             }
             else{
-                const idx = Math.floorMath.random() * (nonPrimes.length - 1)
+                const idx = Math.floor(Math.random() * (nonPrimes.length - 1))
                 roleDis[user_id] = nonPrimes[idx]
             }
         
         }) 
         const roleDisRes = new RoleDistribution({
-            distribution:roleDis
+            distribution:roleDis,
+            room_id: room._id
         })
+        roleDisRes.save().then(roles => res.json(roles))
     
-    return res.json(roleDisRes)
+
 });
 })
     .catch(err => res.status(404).json({ noThemesfound: 'No roles found' }));
@@ -78,13 +85,24 @@ router.post('/roleplay/:theme_id', (req, res) => {
 // })
 
 router.get('/roleplay/:room_id',(req, res) => {
-  RoleDistribution.find({room_id: req.params.room_id})
-  .sort({ date: -1 })
+  console.log(req.params.room_id)
+  RoleDistribution.findOne({room_id: req.params.room_id})
+  // .sort({date:-1}).limit(1)
+
   .then(distribution => {
-    res.json(distribution[0])
+    console.log(distribution)
+    res.json(distribution)
   })
 })
 
+router.delete('/roleplay/:room_id',(req, res) => {
+
+  RoleDistribution.deleteMany({room_id: req.params.room_id})
+  .then(distribution => {
+    console.log(distribution)
+    res.json(distribution)
+  })
+} )
 
 
 router.pos

@@ -8,6 +8,7 @@ import Theme from '../game/theme'
 import "./room_show.css"
 import backgroundImage from "../../images/gameroom3.jpg";
 
+
 // import MessageInput from './message_input';
 // import './App.css';
 
@@ -53,7 +54,8 @@ class Room extends React.Component {
     this.socket = io("http://localhost:5000");
         
     // Load the last 10 messages in the window.
-    if(!this.state.chat)
+
+    if(!this.state.chat.length)
     {this.socket.on('init', (msgs) => {
       const filteredmsgs = msgs.filter(message=> message.room === this.props.room._id)
       this.setState((state) => ({
@@ -66,7 +68,7 @@ class Room extends React.Component {
     });
     // // Update the chat if a new message in this room is broadcasted .
     this.socket.on('push', (msg) => {
-
+      debugger
         if(msg.room_id === this.props.room._id)
      { 
       if(!this.props.users[msg.user]){
@@ -86,7 +88,10 @@ class Room extends React.Component {
     
     );
       this.socket.on('modeon', gamemode => {
+        debugger
+        console.log('game begin')
         if (gamemode.room_id === this.props.room._id){
+          debugger
           this.props.fetchDistribution(this.props.room._id)
           .then(()=> this.setState({roles: this.props.roles}))
         }
@@ -102,9 +107,9 @@ class Room extends React.Component {
   }
 
   handleRolePlay(e) {
-    debugger
+    
     this.setState(
-      {game: this.state.game? null : <Theme roomId={this.props.room._id} socket={this.socket} />}
+      {game: this.state.game? null : <Theme roomId={this.props.room._id} socket={this.socket} startRoleDistribution={this.props.startRoleDistribution}/>}
     )
   }
 
@@ -153,7 +158,7 @@ class Room extends React.Component {
   }
 
   render() {
-    // 
+
     return (
       <div className="game-room">
          <img className="main-page-image" src='/gameroom3.jpg' />
@@ -165,28 +170,37 @@ class Room extends React.Component {
             <button onClick={this.handleRolePlay}>Role-Play</button>
             {this.state.game}
           </div>
-        <Paper id="chat" elevation={3}>
+        <Paper id="chat" elevation={3} className='chat-box'>
           {this.state.chat.map((el, index) => {
-            return (
-              <div key={index}>
+            return this.props.curr_user === el.user ? (
+              <div key={index} className='self-message'>
                 <Typography variant="caption" className="name">
-                  {this.props.users[el.user]? this.props.users[el.user].username: null}
+                  {this.props.users[el.user]? this.props.users[el.user].username: el.user}
                   {/* {this.props.users[el.user].username} */}
                 </Typography>
                 <Typography variant="body" className="content">
                   {el.content}
                 </Typography>
               </div>
-            );
+            ) : 
+            ( <div key={index} className='other-users-message'>
+              <Typography variant="caption" className="name">
+                {this.props.users[el.user]? this.props.users[el.user].username: el.user}
+                {/* {this.props.users[el.user].username} */}
+              </Typography>
+              <Typography variant="body" className="content">
+                {el.content}
+              </Typography>
+            </div> );
           })}
         </Paper>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} className='submit-message-box'>
 
         <input
           value={this.state.content}
           onChange={this.handleContent}
         />
-        <button type='submit'>Submit</button>
+        <button type='submit' className='submit-button'>Submit</button>
         </form>
       </div>
     );
