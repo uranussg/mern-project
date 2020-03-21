@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 export const getThemes = () => {
     
   return axios.get('/api/games/roleplay/')
@@ -14,6 +15,11 @@ export const getRoles = (theme_id, roomData) => {
 
 
 export const getDistribution = (room_id) => {
-  debugger
+  
     return axios.get(`/api/games/roleplay/${room_id}`)
+}
+
+
+export const deleteDistribution = (room_id) => {
+  return axios.delete(`api/games/roleplay/${room_id}`)
 }

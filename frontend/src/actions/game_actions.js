@@ -1,7 +1,8 @@
 
-import { getDistribution, getRoles } from '../util/game_api_util';
+import { getDistribution, getRoles, deleteDistribution } from '../util/game_api_util';
 
 export const RECEIVE_ROLES = "RECEIVE_ROLES"
+export const DELETE_ROLES ='DELETE_ROLES'
 
 
 export const receiveRoles = roles=> ({
@@ -9,8 +10,9 @@ export const receiveRoles = roles=> ({
   roles
 });
 
-
-
+export const deleteRoles = () => ({
+  type: DELETE_ROLES
+ })
 
 
 export const fetchDistribution = (room_id) =>dispatch=> {
@@ -27,4 +29,12 @@ export const startRoleDistribution = (theme_id, roomData) => dispatch => {
   .then(roles => {
       
     dispatch(receiveRoles(roles))}, err => console.log(err))   
+}
+
+export const deleteRoleDistribution = (room_id) => dispatch => {
+  return deleteDistribution(room_id)
+    .then(() => {
+      dispatch(deleteRoles())
+    })
+    .catch(err => console.log(err))
 }
