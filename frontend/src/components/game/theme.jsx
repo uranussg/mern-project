@@ -25,14 +25,15 @@ export default class Theme extends Component {
 
         this.props.startRoleDistribution(e.target.getAttribute("value"), {room_id: this.props.roomId})
         .then((roles)=>{
-            debugger
-            this.socket.emit('gamemode', {room_id: this.props.roomId})
+            
+            this.socket.emit('gamemode', {room_id: this.props.roomId, mode: true})
+            this.props.unMountMe()
         })
     }
     render() {
 
         const themeList = this.state.themes.map(theme => {
-        return <li><div onClick={this.handleChoose} value={theme._id}>{theme.theme}</div></li>
+        return <li key={theme._id}><div onClick={this.handleChoose} value={theme._id}>{theme.theme}</div></li>
         })
         return (
             <div>

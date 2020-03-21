@@ -55,7 +55,7 @@ io.on('connection', (socket) => {
 
   // Listen to connected users for a new message.
   socket.on('message', (msg) => {
-    console.log(msg)
+    // console.log(msg)
     // Create a message with the content and the name of the user.
     const message = new Message({
       content: msg.content,
@@ -78,7 +78,7 @@ io.on('connection', (socket) => {
 
     const gamemode = {
       room_id: gm.room_id,
-      mode: true
+      mode: gm.mode
     }
     socket.broadcast.emit('modeon', gamemode)
   })

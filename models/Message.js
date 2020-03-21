@@ -8,11 +8,11 @@ const MessageSchema = new Schema({
         type: String, 
         required: true
     },
-    user: {
+    user_id: {
         type: Schema.Types.ObjectId, 
         ref: 'users'
     },
-    room: {
+    room_id: {
         type: Schema.Types.ObjectId, 
         ref: 'rooms'
     },
