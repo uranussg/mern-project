@@ -53,9 +53,9 @@ class Room extends React.Component {
         
         return this.props.fetchUsers(users)}).then(()=>{
 
-        
-    // this.socket = io(config[process.env.NODE_ENV].endpoint);
-    this.socket = io("http://localhost:5000");
+        debugger
+    this.socket = io(config[process.env.NODE_ENV].endpoint);
+    // this.socket = io("http://localhost:5000");
         
     // Load the last 10 messages in the window.
 
