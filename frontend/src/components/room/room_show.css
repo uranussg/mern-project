@@ -7,6 +7,10 @@
     font-size: 20px;
     padding: 8px;
     text-align: center;
+
+}
+
+.game-room {
     position: relative;
     z-index: 2;
 }
