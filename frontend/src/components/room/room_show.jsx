@@ -53,7 +53,6 @@ class Room extends React.Component {
         
         return this.props.fetchUsers(users)}).then(()=>{
 
-        debugger
     this.socket = io(config[process.env.NODE_ENV].endpoint);
     // this.socket = io("http://localhost:5000");
         
@@ -74,15 +73,17 @@ class Room extends React.Component {
     });
     // // Update the chat if a new message in this room is broadcasted .
     this.socket.on('push', (msg) => {
-      
+
       if(msg.room_id === this.props.room._id)
      { 
-      if(!this.props.users[msg.user]){
+      if(!this.props.users[msg.user_id]){
+        debugger
         this.props.fetchUser(msg.user).then(()=>this.setState((state) => ({
           chat: [...state.chat, msg],
         }), this.scrollToBottom))
       }
         else {
+          debugger
           this.setState((state) => ({
             chat: [...state.chat, msg],
           }), this.scrollToBottom)
@@ -102,11 +103,11 @@ class Room extends React.Component {
         })}
         else {
           this.props.deleteRoles()
-          .then(()=> {
+
             this.setState({roles: {}, chat:[]})
             const gameroom = document.getElementsByClassName('game-room')[0]
             gameroom.classList.remove('game-mode')
-          })
+
         }
       }
     })
@@ -203,7 +204,9 @@ class Room extends React.Component {
 
   handleExitGame() {
     this.props.deleteRoleDistribution(this.props.room._id).then(
-      ()=> this.socket.emit('gamemode', {room_id: this.props.room._id, mode:false})
+      ()=> {
+        this.socket.emit('gamemode', {room_id: this.props.room._id, mode:false})
+      this.setState({roles: {}, chat:[]})}
     )
   }
 
