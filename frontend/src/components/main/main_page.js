@@ -8,7 +8,7 @@ class MainPage extends React.Component {
     return (
       <div className="main-page-container">
         {/* <div className="main-page-background"></div> */}
-        <img className="main-page-image" src={backgroundImage} />
+        <img className="main-page-image" src='/gameroom3.jpg' />
         <p>The Game Room</p>
         <footer>
           Copyright &copy; 2020 the Game Room
