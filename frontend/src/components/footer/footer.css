@@ -13,21 +13,21 @@
 .nav-column {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-start;
     margin: 2%;
 }
 
 .default-game-column {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-start;
     margin: 2%;
 }
 
 .dev-column {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-start;
     margin: 2%;
 }
 
@@ -78,4 +78,7 @@
 .columns-cont > div > h2 {
     min-width: 200px;
     color: #D4AF37;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
 }

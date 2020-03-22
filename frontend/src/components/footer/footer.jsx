@@ -20,7 +20,7 @@ class Footer extends React.Component {
                         <div>Avalon</div>
                         <div>Secret Hitler</div>
                         <div>Mafia</div>
-                        <div>test</div>
+                        <div>Harry Potter</div>
                     </div>
                     <div className="dev-column">
                         <h2>Developers</h2>
