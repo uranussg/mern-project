@@ -1,6 +1,9 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import "./login.css"
+import "./login.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAt, faLock } from "@fortawesome/free-solid-svg-icons";
+
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -62,10 +65,13 @@ class LoginForm extends React.Component {
   render() {
     return (
       <div className="login-form-container">
-        <div onClick={this.props.closeModal} className="close-x">×</div>
+        <div onClick={this.props.closeModal} className="close-x">
+          ×
+        </div>
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="textbox">
+            <FontAwesomeIcon icon={faAt} className="icon" />
             <input
               type="text"
               value={this.state.email}
@@ -74,6 +80,7 @@ class LoginForm extends React.Component {
             />
           </div>
           <div className="textbox">
+            <FontAwesomeIcon icon={faLock} className="icon" />
             <input
               type="password"
               value={this.state.password}
