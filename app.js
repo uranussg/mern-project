@@ -73,6 +73,10 @@ io.on('connection', (socket) => {
 
 
   });
+  socket.on('user-in-out', roomData => {
+    socket.broadcast.emit('update-room-info', roomData)
+  })
+
   socket.on('gamemode', (gm) => {
     console.log('game mode is on')        
 
