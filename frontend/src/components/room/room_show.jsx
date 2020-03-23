@@ -72,6 +72,20 @@ class Room extends React.Component {
       console.log(this.socket.connected); // true
     });
     // // Update the chat if a new message in this room is broadcasted .
+
+    this.socket.emit('user-in-out', {room_id: this.props.room._id})
+
+    this.socket.on('update-room-info', (roomData)=> {
+      if (roomData.room_id == this.props.room._id)
+      {this.props.fetchRoom(this.props.match.params.roomId)
+      .then(()=>
+      { 
+        const users = {user_ids: this.props.room.users}
+        
+        return this.props.fetchUsers(users)})}
+    })
+
+
     this.socket.on('push', (msg) => {
 
       if(msg.room_id === this.props.room._id)
@@ -136,6 +150,7 @@ class Room extends React.Component {
     
     this.props.exitRoom(this.props.room._id, {user_id: this.props.curr_user.id}).then(()=>
     { 
+      this.socket.emit('user-in-out', {room_id: this.props.room._id})
       this.props.history.push('/rooms')})
   }
 
