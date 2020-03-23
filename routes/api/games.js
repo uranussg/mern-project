@@ -54,12 +54,12 @@ router.post('/roleplay/:theme_id', (req, res) => {
         const roleDis = {}
         room.users.forEach(user_id => {
             if(primes) {
-                const idx =  Math.floor(Math.random() * (primes.length - 1))
+                const idx =  Math.floor(Math.random() * (primes.length ))
                 roleDis[user_id] = primes[idx]
                 primes = primes.slice(0, idx).concat(primes.slice(idx+1))
             }
             else{
-                const idx = Math.floor(Math.random() * (nonPrimes.length - 1))
+                const idx = Math.floor(Math.random() * (nonPrimes.length ))
                 roleDis[user_id] = nonPrimes[idx]
             }
         
