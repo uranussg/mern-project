@@ -1,6 +1,8 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import './signup.css'
+import './signup.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAt, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -57,11 +59,14 @@ class SignupForm extends React.Component {
   render() {
     return (
       <div className="signup-form-container">
-        <div onClick={this.props.closeModal} className='close-x'>×</div>
+        <div onClick={this.props.closeModal} className="close-x">
+          ×
+        </div>
         <h1>Signup</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="signup-form">
             <div className="textbox">
+              <FontAwesomeIcon icon={faAt} className="icon" />
               <input
                 type="text"
                 value={this.state.email}
@@ -70,6 +75,7 @@ class SignupForm extends React.Component {
               />
             </div>
             <div className="textbox">
+              <FontAwesomeIcon icon={faUser} className="icon" />
               <input
                 type="text"
                 value={this.state.username}
@@ -78,6 +84,7 @@ class SignupForm extends React.Component {
               />
             </div>
             <div className="textbox">
+              <FontAwesomeIcon icon={faLock} className="icon" />
               <input
                 type="password"
                 value={this.state.password}
@@ -86,6 +93,7 @@ class SignupForm extends React.Component {
               />
             </div>
             <div className="textbox">
+              <FontAwesomeIcon icon={faLock} className="icon" />
               <input
                 type="password"
                 value={this.state.password2}
@@ -93,7 +101,7 @@ class SignupForm extends React.Component {
                 placeholder="Confirm Password"
               />
             </div>
-            
+
             <input type="submit" value="Sign Up" />
             {this.renderErrors()}
           </div>
