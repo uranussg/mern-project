@@ -29,5 +29,5 @@
     left: 0;
     opacity: 60%;
     z-index: -1;
-    object-fit: cover;
+    background-size: cover;
   }
