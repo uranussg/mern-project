@@ -194,11 +194,12 @@ class Room extends React.Component {
 
   messageDisplay(el, index) {
     const mgsClass = this.props.curr_user === el.user_id ? 'self-message' : 'other-users-message'
+    const imgsrc = this.props.roles[el.user_id] ? `ThemeAvatars/${this.props.roles[el.user_id].theme_id}/${this.props.roles[el.user_id].role_avator_id}.png` :
+    this.props.users[el.user_id]? `/avatar${this.props.users[el.user_id].avatarId}.png`: null
 
 
     return (<div key={index} className={mgsClass}>
-        {/* <div><img src={this.props.roles[el.user_id]? this.props.roles[el.user_id].name: 
-          this.props.users[el.user_id]? this.props.users[el.user_id].username: el.user_id} alt=""/></div> */}
+        <div><img src={imgsrc} /></div>
         <Typography variant="caption" className="name">
           {this.props.roles[el.user_id]? this.props.roles[el.user_id].name: 
           this.props.users[el.user_id]? this.props.users[el.user_id].username: el.user_id}
