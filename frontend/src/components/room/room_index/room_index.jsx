@@ -14,7 +14,8 @@ class RoomIndex extends Component {
   render() {
     return (
       <div className='room-index-main'>
-        <img className="main-page-image" src='/gameroom3.jpg' />
+        {/* <img className="main-page-image" src='/gameroom3.jpg' /> */}
+        <div className="main-page-background"></div>
         <h1>All Rooms</h1>
         <ul className="rooms-container">
           {this.props.rooms.map((room) => {

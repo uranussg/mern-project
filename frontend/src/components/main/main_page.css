@@ -8,7 +8,16 @@
   z-index: -1;
 }
 
-.main-page-image {
+
+
+.testcontent {
+  background-color: red;
+  height: 1000px;
+  width: 100px;
+}
+
+.main-page-background {
+  background-image: url(../../images/gameroom3.jpg); 
   height: 100vh;
   width: 100vw;
   position: fixed;
@@ -17,10 +26,4 @@
   opacity: 60%;
   z-index: -1;
   object-fit: cover;
-}
-
-.testcontent {
-  background-color: red;
-  height: 1000px;
-  width: 100px;
 }

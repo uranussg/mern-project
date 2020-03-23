@@ -78,6 +78,19 @@
   top:3px;
   box-shadow: 0 3px 0 rgb(207, 158, 34), 0 3px 6px rgba(0, 0, 0, 0.7);
 }
+
 .room-index-main {
   background-attachment: fixed;
+  margin-top: 10px;
+}
+
+.main-page-image {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 60%;
+  z-index: 0;
+  object-fit: cover;
 }

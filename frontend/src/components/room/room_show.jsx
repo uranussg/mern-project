@@ -72,6 +72,20 @@ class Room extends React.Component {
       console.log(this.socket.connected); // true
     });
     // // Update the chat if a new message in this room is broadcasted .
+
+    this.socket.emit('user-in-out', {room_id: this.props.room._id})
+
+    this.socket.on('update-room-info', (roomData)=> {
+      if (roomData.room_id == this.props.room._id)
+      {this.props.fetchRoom(this.props.match.params.roomId)
+      .then(()=>
+      { 
+        const users = {user_ids: this.props.room.users}
+        
+        return this.props.fetchUsers(users)})}
+    })
+
+
     this.socket.on('push', (msg) => {
 
       if(msg.room_id === this.props.room._id)
@@ -136,6 +150,7 @@ class Room extends React.Component {
     
     this.props.exitRoom(this.props.room._id, {user_id: this.props.curr_user.id}).then(()=>
     { 
+      this.socket.emit('user-in-out', {room_id: this.props.room._id})
       this.props.history.push('/rooms')})
   }
 
@@ -179,11 +194,12 @@ class Room extends React.Component {
 
   messageDisplay(el, index) {
     const mgsClass = this.props.curr_user === el.user_id ? 'self-message' : 'other-users-message'
+    const imgsrc = this.props.roles[el.user_id] ? `ThemeAvatars/${this.props.roles[el.user_id].theme_id}/${this.props.roles[el.user_id].role_avator_id}.png` :
+    this.props.users[el.user_id]? `/avatar${this.props.users[el.user_id].avatarId}.png`: null
 
 
     return (<div key={index} className={mgsClass}>
-        {/* <div><img src={this.props.roles[el.user_id]? this.props.roles[el.user_id].name: 
-          this.props.users[el.user_id]? this.props.users[el.user_id].username: el.user_id} alt=""/></div> */}
+        <div><img src={imgsrc} /></div>
         <Typography variant="caption" className="name">
           {this.props.roles[el.user_id]? this.props.roles[el.user_id].name: 
           this.props.users[el.user_id]? this.props.users[el.user_id].username: el.user_id}
@@ -214,7 +230,8 @@ class Room extends React.Component {
 
     return (
       <div className="game-room">
-         <img className="main-page-image" src='/gameroom3.jpg' />
+         {/* <img className="main-page-image" src='/gameroom3.jpg' /> */}
+         <div className="show-page-background"></div>
           <div className='gameroom-title'>{this.props.room.title}</div>
           <div className='exit-gameroom'>
             <button onClick={this.handleExit}>Exit Room</button>
@@ -226,11 +243,13 @@ class Room extends React.Component {
           {Object.keys(this.props.roles).length?(<div className='exit gamemode'>
             <button onClick={this.handleExitGame}>Exit Game Mode</button>
           </div>): null }
-        <Paper id="chat" elevation={3} className='chat-box'>
+          <div className='chat-box'>
+        <Paper id="chat" elevation={3} >
           {this.state.chat.map((el, index) => {
             return this.messageDisplay(el, index)
           })}
         </Paper>
+        </div>
         <form onSubmit={this.handleSubmit} className='submit-message-box'>
 
         <input

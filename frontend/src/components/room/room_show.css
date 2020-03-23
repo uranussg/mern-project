@@ -14,3 +14,20 @@
     position: relative;
     z-index: 2;
 }
+
+.chat-box {
+    background-color:  white; 
+    z-index: 20;
+}
+
+.show-page-background {
+    background-image: url(../../images/gameroom3.jpg); 
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 60%;
+    z-index: -1;
+    object-fit: cover;
+  }
