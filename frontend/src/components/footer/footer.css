@@ -1,7 +1,7 @@
 .footer {
     background-color: #996515;
     color: white;
-    font-size: 12px;
+    font-size: 14px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
@@ -81,4 +81,10 @@
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 5px;
+}
+
+div a {
+    font-size: 14px;
+    margin-left: 2px;
+    margin-right: 2px;
 }
