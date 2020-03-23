@@ -214,7 +214,8 @@ class Room extends React.Component {
 
     return (
       <div className="game-room">
-         <img className="main-page-image" src='/gameroom3.jpg' />
+         {/* <img className="main-page-image" src='/gameroom3.jpg' /> */}
+         <div className="show-page-background"></div>
           <div className='gameroom-title'>{this.props.room.title}</div>
           <div className='exit-gameroom'>
             <button onClick={this.handleExit}>Exit Room</button>
@@ -226,11 +227,13 @@ class Room extends React.Component {
           {Object.keys(this.props.roles).length?(<div className='exit gamemode'>
             <button onClick={this.handleExitGame}>Exit Game Mode</button>
           </div>): null }
-        <Paper id="chat" elevation={3} className='chat-box'>
+          <div className='chat-box'>
+        <Paper id="chat" elevation={3} >
           {this.state.chat.map((el, index) => {
             return this.messageDisplay(el, index)
           })}
         </Paper>
+        </div>
         <form onSubmit={this.handleSubmit} className='submit-message-box'>
 
         <input
