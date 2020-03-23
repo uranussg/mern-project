@@ -1,0 +1,37 @@
+.avatars-selection-container {
+  width: 300px;
+  height: 400px;
+  background-color: green;
+  padding: 20px;
+  display: flex;
+  align-content: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow: auto;
+  position: relative;
+  padding-bottom: 30px;
+}
+
+.avatar-selection > img {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.already-selected {
+  outline: 3px solid goldenrod;
+}
+
+.avatar-selected {
+  outline: 3px solid blue;
+}
+
+.avatar-submit {
+  padding: 10px;
+  background-color: goldenrod;
+  border-radius: 3px;
+  position: absolute;
+  bottom: 10px;
+}

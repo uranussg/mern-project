@@ -5,6 +5,7 @@ import LoginFormContainer from '../sesssion/login_form_container';
 import SignupFormContainer from '../sesssion/signup_form_container';
 import "./modal.css"
 import CreateRoomContainer from '../room/room_forms/create_room_container';
+import AvatarSelectionContainer from '../main/user_info/avatar_selection_container';
 
 function Modal({ modal, closeModal }) {
     if (!modal) {
@@ -20,6 +21,9 @@ function Modal({ modal, closeModal }) {
             break;
         case 'newroom':
             component = <CreateRoomContainer />;
+            break;
+        case 'avatars':
+            component = <AvatarSelectionContainer />;
             break;
         default:
             return null;
