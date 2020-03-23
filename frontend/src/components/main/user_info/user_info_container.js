@@ -1,9 +1,7 @@
-import React from "react";
 import { connect } from "react-redux";
-import { login } from "../../actions/session_actions";
-import LoginForm from "./login_form";
-import { openModal, closeModal} from "../../actions/modal_actions"
-
+import UserInfo from "./user_info";
+import { fetchUser, updateUser } from "../../../actions/user_actions";
+import { openModal } from "../../../actions/modal_actions";
 
 const mapStateToProps = state => {
   return {
@@ -14,8 +12,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchUser: (userId) => dispatch(fetchUser(userId)),
-    updateUser: (user) => dispatch(updateUser(user))
+    updateUser: (user) => dispatch(updateUser(user)),
+    openModal: (modal) => dispatch(openModal(modal))
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+const UserInfoContainer = connect(mapStateToProps, mapDispatchToProps)(UserInfo);
+export default UserInfoContainer;
