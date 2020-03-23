@@ -3,9 +3,14 @@
     color: white;
     font-size: 12px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    z-index: 2;
 }
 
-.columns-cont {
+.footer * {
+    z-index: 3;
+}
+
+.columns-cont, .columns-cont {
     display: flex;
     justify-content: center;
 }

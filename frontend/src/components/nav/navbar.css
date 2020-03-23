@@ -1,6 +1,7 @@
-.navbar-div {
+.navbar-div div{
     text-align: center;
     height: 150px;
+    z-index: 3;
 }
 
 .scroll-cont {
@@ -43,8 +44,8 @@
     position: absolute;
     display: flex;
     justify-content: center;
-    bottom: 80px;
-    left: 45%;
+    bottom: 10px;
+    left:35%;
 
 }
 
@@ -57,5 +58,7 @@
     font-size: 16px;
     border: 2px solid rgb(25, 153, 83);
     border-radius: 10px;
+    width: 80px;
+    height: 20px;
 }
 
