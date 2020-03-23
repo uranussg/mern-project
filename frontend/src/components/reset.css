@@ -31,3 +31,9 @@ button,
 input[type="submit"] {
   cursor: pointer;
 }
+
+.MuiPaper-root, .MuiPaper-elevation3, .MuiPaper-rounded{
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important; 
+}

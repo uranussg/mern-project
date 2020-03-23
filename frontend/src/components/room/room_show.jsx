@@ -185,9 +185,9 @@ class Room extends React.Component {
         {/* <div><img src={this.props.roles[el.user_id]? this.props.roles[el.user_id].name: 
           this.props.users[el.user_id]? this.props.users[el.user_id].username: el.user_id} alt=""/></div> */}
         <Typography variant="caption" className="name">
-          {this.props.roles[el.user_id]? this.props.roles[el.user_id].name: 
+         {this.props.roles[el.user_id]? this.props.roles[el.user_id].name:
           this.props.users[el.user_id]? this.props.users[el.user_id].username: el.user_id}
-
+         
         </Typography>
         <Typography variant="body" className="content">
           {el.content}
@@ -216,17 +216,27 @@ class Room extends React.Component {
       <div className="game-room">
          {/* <img className="main-page-image" src='/gameroom3.jpg' /> */}
          <div className="show-page-background"></div>
-          <div className='gameroom-title'>{this.props.room.title}</div>
-          <div className='exit-gameroom'>
-            <button onClick={this.handleExit}>Exit Room</button>
+         <div className="game-room-container">
+
+        
+            <div className="show-page-buttons">
+                <div className='exit-gameroom'>
+                  <button onClick={this.handleExit}>Exit Room</button>
+                </div>
+                <div classNAme="role-play-dropdown">
+                  <div className='theme-choose'>
+                    <button onClick={this.handleRolePlay}>Role-Play</button>
+                  </div>
+                  <div className="room-name-bar"> 
+                    <p>{this.state.game}</p>
+                  </div>
+                </div>
+            </div>
+            <div className='gameroom-title-bar'>{this.props.room.title}
+          {Object.keys(this.props.roles).length?(
+            <button onClick={this.handleExitGame} className="exit-gamemode-button">Exit Game Mode</button>
+          ): null }
           </div>
-          <div className='theme-choose'>
-            <button onClick={this.handleRolePlay}>Role-Play</button>
-            {this.state.game}
-          </div>
-          {Object.keys(this.props.roles).length?(<div className='exit gamemode'>
-            <button onClick={this.handleExitGame}>Exit Game Mode</button>
-          </div>): null }
           <div className='chat-box'>
         <Paper id="chat" elevation={3} >
           {this.state.chat.map((el, index) => {
@@ -242,6 +252,7 @@ class Room extends React.Component {
         />
         <button type='submit' className='submit-button'>Submit</button>
         </form>
+        </div>
       </div>
     );
   }
