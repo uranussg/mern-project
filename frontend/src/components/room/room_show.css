@@ -5,9 +5,23 @@
     width: 100px;
     bottom: 10px;
     font-size: 20px;
-    padding: 8px;
+    padding: 7px;
     text-align: center;
+    background-color: rgb(231, 181, 54);
+    position: relative;
+    top: 1px;
+    box-shadow: 0 6px 0 rgb(207, 158, 34), 0 6px 15px rgba(0, 0, 0, 0.5);
+    
+}
 
+.exit-gameroom {
+    margin-right: 5px;
+}
+
+.game-room button:active {
+    position: relative;
+    top:3px;
+    box-shadow: 0 3px 0 rgb(207, 158, 34), 0 3px 6px rgba(0, 0, 0, 0.7);
 }
 
 .game-room {
@@ -15,9 +29,34 @@
     z-index: 2;
 }
 
+.game-room-container{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.gameroom-title-bar {
+    margin-top: 20px;
+    background-color: rgb(238, 216, 159, 0.9);
+    border-radius: 5px 5px 0px 0px;
+    padding: 6px;
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.5);
+    font-size: 22px;
+    display: flex;
+    justify-content: space-between;
+    height: 55px;
+}
+
 .chat-box {
-    background-color:  white; 
-    z-index: 20;
+    background-color:  rgba(255, 255, 255, 0.8); 
+    z-index: 3;
+    border-radius: 5px;
+    padding: 10px;
+    border-radius: 0px 0px 0px 0px;
+    border-top: 2px solid rgb(226, 206, 22);
+    border-bottom: 2px solid rgb(226, 206, 22);
+    min-height: 100px;
+    /* display: flex;
+    flex-direction: row; */
 }
 
 .show-page-background {
@@ -29,5 +68,76 @@
     left: 0;
     opacity: 60%;
     z-index: -1;
-    background-size: cover;
+    object-fit: cover;
   }
+
+  .show-page-buttons {
+      display: flex;
+      margin-left: 2%;
+  }
+
+  .game-room input {
+      padding: 2px;
+      width: 70%;
+  }
+
+  .submit-message-box {
+    background-color: rgb(238, 216, 159, 0.9);
+    border-radius: 0px 0px 5px 5px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .role-plau-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .theme-list{
+      background-color: rgb(255, 255, 240);
+      position: absolute;
+      border-radius: 5px;
+      top: 44px;
+      margin-left: -10px;
+      overflow: hidden;
+  }
+
+  .theme-list li:hover {
+      background-color: rgb(200, 229, 155);
+  }
+
+  .exit-gamemode {
+      position: absolute;
+  }
+
+  .exit-gamemode-button{
+      width: 150px;
+  }
+
+  .self-message {
+      background-color:  rgb(245, 208, 139);
+      border-radius: 3px 3px 0 3px;
+  }
+
+  .other-users-message {
+      background-color:rgb(200, 229, 155);
+      margin: 10px;
+      padding: 6px;
+      border-radius: 15px 15px 15px 0;
+      margin-right: 30%;
+  }
+
+  
+  .other-users-message span:first-child, .self-message span:first-child {
+      font-size: 16px;
+      margin-right: 8px;
+  }
+
+  .other-users-message span:nth-child(2), .self-message span:nth-child(2) {
+    font-size: 16px;
+    width: 100px;
+   /* question */
+
+}
