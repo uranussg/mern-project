@@ -193,7 +193,7 @@ class Room extends React.Component {
 
 
   messageDisplay(el, index) {
-    const mgsClass = this.props.curr_user === el.user_id ? 'self-message' : 'other-users-message'
+    const mgsClass = this.props.curr_user.id === el.user_id ? 'self-message' : 'other-users-message'
     const imgsrc = this.props.roles[el.user_id] ? `ThemeAvatars/${this.props.roles[el.user_id].theme_id}/${this.props.roles[el.user_id].role_avator_id}.png` :
     this.props.users[el.user_id]? `/avatar${this.props.users[el.user_id].avatarId}.png`: null
 
