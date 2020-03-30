@@ -18,7 +18,7 @@ class AvatarSelection extends React.Component {
   }
 
   handleSubmit() {
-    this.props.updateUser({_id: this.props.currentUser.id,avatarId: this.state.selected});
+    this.props.updateUser({_id: this.props.currentUser._id, avatarId: this.state.selected});
     this.props.closeModal();
   }
 
