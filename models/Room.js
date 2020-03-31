@@ -13,6 +13,10 @@ const RoomSchema = new Schema({
     date: {
         type: Date, 
         default: Date.now
+    },
+    game: {
+        type:Boolean,
+        default:false
     }
 })
 

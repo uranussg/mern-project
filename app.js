@@ -14,6 +14,7 @@ const server = require('http').createServer(app);
 const io = require('socket.io').listen(server);
 const Message = require('./models/Message');
 const RoleDistribution = require('./models/RoleDistribution')
+const Room = require('./models/Room')
 mongoose
   .connect(db, { 
     useUnifiedTopology: true,
@@ -45,46 +46,83 @@ const port = process.env.PORT || 5000;
 
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
-  Message.find().sort({createdAt: -1}).limit(20).exec((err, messages) => {
-    if (err) return console.error(err);
-
+  console.log('a user connect')
+  socket.on('join-room', roomData => {
+      
+      // console.log(roomData.room_id)
+    socket.join(roomData.room_id)
+    Room.findById(roomData.room_id)
+    .then(room => {
+        if (roomData.user_id) {
+            if (!(room.users.includes(roomData.user_id)) ) 
+            {
+                room.users.push(roomData.user_id)
+            }
+            }
+ 
+    room.save().then(() => io.to(roomData.room_id).emit('update-room-info', roomData))
+    })
+    Message.find({room_id:roomData.room_id}).sort({createdAt: -1}).limit(20).exec((err, messages) => {
+    if (err) return console.error(err);    
     // Send the last messages to the user.
     socket.emit('init', messages);
-  });
+
+    });
+  })
+  socket.on('disconnect', ()=> {
+    console.log('user disconnect')
+  })
+
+  socket.on('exit-room', (roomData) => {
+    socket.leave(roomData.room_id)
+    Room.findById(roomData.room_id)
+    .then(room => {
+
+      if (roomData.user_id) {
+        if (room.users.includes(roomData.user_id) ) 
+        {
+          const idx = room.users.indexOf(roomData.user_id)
+          room.users = room.users.slice(0, idx).concat(room.users.slice(idx+1))
+        //   if(!room.users.length){
+        //       Room.deleteOne({_id:room._id})
+        //   }
+         }
+         
+       }
+      room.save().then(() => io.to(roomData.room_id).emit('update-room-info', roomData))
+    })
+  })
+
 
   // Listen to connected users for a new message.
   socket.on('message', (msg) => {
-    // console.log(msg)
+    console.log(msg)
     // Create a message with the content and the name of the user.
     const message = new Message({
       content: msg.content,
       user_id: msg.user_id,
       room_id: msg.room_id
     });
-
+    // console.log(message)
     // Save the message to the database.
     message.save((err) => {
       if (err) return console.error(err);
     });
-
     // Notify all other users about a new message.
-    socket.broadcast.emit('push', msg);
+    socket.to(message.room_id).emit('push', msg);
 
 
   });
-  socket.on('user-in-out', roomData => {
-    socket.broadcast.emit('update-room-info', roomData)
-  })
+
 
   socket.on('gamemode', (gm) => {
-    console.log('game mode is on')        
+    Room.findByIdAndUpdate(gm.room_id, {access: gm.mode})     
 
     const gamemode = {
       room_id: gm.room_id,
       mode: gm.mode
     }
-    socket.broadcast.emit('modeon', gamemode)
+    socket.to(gamemode.room_id).emit('modeon', gamemode)
   })
 
 });

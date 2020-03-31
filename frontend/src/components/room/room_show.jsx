@@ -49,82 +49,87 @@ class Room extends React.Component {
       this.props.fetchRoom(this.props.match.params.roomId, {user_id: this.props.curr_user.id})
       .then(()=>
       { 
-        const users = {user_ids: this.props.room.users}
-        
-        return this.props.fetchUsers(users)}).then(()=>{
+      const users = {user_ids: this.props.room.users}       
+      return this.props.fetchUsers(users)}).then(()=>{
 
-    this.socket = io(config[process.env.NODE_ENV].endpoint);
-    // this.socket = io("http://localhost:5000");
-        
-    // Load the last 10 messages in the window.
-
-    if(!this.state.chat.length)
-    {this.socket.on('init', (msgs) => {
-      const chatmsgsId = this.state.chat.map(msg => msg._id)
-      const filteredmsgs = msgs.filter(message=> message.room_id === this.props.room._id && !chatmsgsId.includes(message._id))
+      this.socket = io(config[process.env.NODE_ENV].endpoint);
+          
+      // Load the last 10 messages in the window.
       
-      this.setState((state) => ({
-        chat: [...state.chat, ...filteredmsgs.reverse()],
-      }), this.scrollToBottom);
-    });}
-    this.socket.on('connection', () => {
-      
-      console.log(this.socket.connected); // true
-    });
-    // // Update the chat if a new message in this room is broadcasted .
-
-    this.socket.emit('user-in-out', {room_id: this.props.room._id})
-
-    this.socket.on('update-room-info', (roomData)=> {
-      if (roomData.room_id == this.props.room._id)
-      {this.props.fetchRoom(this.props.match.params.roomId)
-      .then(()=>
-      { 
-        const users = {user_ids: this.props.room.users}
-        
-        return this.props.fetchUsers(users)})}
-    })
-
-
-    this.socket.on('push', (msg) => {
-
-      if(msg.room_id === this.props.room._id)
-     { 
-      if(!this.props.users[msg.user_id]){
-        debugger
-        this.props.fetchUser(msg.user).then(()=>this.setState((state) => ({
-          chat: [...state.chat, msg],
-        }), this.scrollToBottom))
-      }
-        else {
-          debugger
+      const roomData={room_id: this.props.room._id,
+      user_id: this.props.curr_user.id}
+      this.socket.emit('join-room', roomData)
+      if(!this.state.chat.length)
+      {  
+      this.socket.on('init', (msgs) => {
+          
+          const chatmsgsId = this.state.chat.map(msg => msg._id)
+          const filteredmsgs = msgs.filter(message=> message.room_id === this.props.room._id && !chatmsgsId.includes(message._id))
+          
           this.setState((state) => ({
-            chat: [...state.chat, msg],
-          }), this.scrollToBottom)
-        }
-      }
-    });
-    this.socket.on('modeon', gamemode => {
+            chat: [...state.chat, ...filteredmsgs.reverse()],
+            admin: this.props.room.users[0] === this.props.curr_user.id
+          }), this.scrollToBottom);
+        });
     
-      if (gamemode.room_id === this.props.room._id){
-        console.log('gamemode toggle')
-        if (gamemode.mode)
-        {this.props.fetchDistribution(this.props.room._id)
-        .then(()=> {
-          this.setState({roles: this.props.roles, chat:[]})
-          const gameroom = document.getElementsByClassName('game-room')[0]
-          gameroom.classList.add('game-mode')
-        })}
-        else {
-          this.props.deleteRoles()
-
-            this.setState({roles: {}, chat:[]})
-            const gameroom = document.getElementsByClassName('game-room')[0]
-            gameroom.classList.remove('game-mode')
-
-        }
       }
-    })
+    
+
+
+      // // Update the chat if a new message in this room is broadcasted .
+      this.socket.on('disconnect', ()=> {
+        this.socket.emit('exit-room', roomData)
+      })
+
+
+      this.socket.on('update-room-info', (roomData)=> {
+        
+        if (roomData.room_id == this.props.room._id)
+        {this.props.fetchRoom(this.props.match.params.roomId)
+        .then(()=>
+        { 
+          const users = {user_ids: this.props.room.users}
+          
+          return this.props.fetchUsers(users)
+          })
+        .then(()=>this.setState({admin:this.props.curr_user.id === this.props.room.users[0]}))
+        }
+      })
+
+
+      this.socket.on('push', (msg) => {
+        
+        // if(msg.room_id === this.props.room._id)
+      //  { 
+
+            
+            this.setState((state) => ({
+              chat: [...state.chat, msg],
+            }), this.scrollToBottom)
+          
+        // }
+      });
+      this.socket.on('modeon', gamemode => {
+        
+        // if (gamemode.room_id === this.props.room._id){
+          console.log('gamemode toggle')
+          if (gamemode.mode)
+          {this.props.fetchDistribution(this.props.room._id)
+          .then(()=> {
+            this.setState({roles: this.props.roles, chat:[]})
+            const gameroom = document.getElementsByClassName('game-room')[0]
+            gameroom.classList.add('game-mode')
+          })}
+          else {
+            this.props.deleteRoles()
+
+              this.setState({roles: {}, chat:[]})
+              const gameroom = document.getElementsByClassName('game-room')[0]
+              gameroom.classList.remove('game-mode')
+
+          // }
+        }
+      })
 
     })
 
@@ -147,10 +152,11 @@ class Room extends React.Component {
   }
 
   handleExit(e) {
-    
+    this.socket.emit('exit-room', {room_id: this.props.room._id,
+      user_id:this.props.curr_user.id})
     this.props.exitRoom(this.props.room._id, {user_id: this.props.curr_user.id}).then(()=>
     { 
-      this.socket.emit('user-in-out', {room_id: this.props.room._id})
+      
       this.props.history.push('/rooms')})
   }
 
@@ -200,14 +206,16 @@ class Room extends React.Component {
 
     return (<div key={index} className={mgsClass}>
         <div><img src={imgsrc} /></div>
-        <Typography variant="caption" className="name">
-         {this.props.roles[el.user_id]? this.props.roles[el.user_id].name:
-          this.props.users[el.user_id]? this.props.users[el.user_id].username: el.user_id}
-         
-        </Typography>
-        <Typography variant="body" className="content">
-          {el.content}
-        </Typography>
+        <div className='text-holder'>
+          <div className="name">
+          {this.props.roles[el.user_id]? this.props.roles[el.user_id].name:
+            this.props.users[el.user_id]? this.props.users[el.user_id].username: el.user_id}
+          
+          </div>
+          <div className="content">
+            {el.content}
+          </div>
+        </div>
       </div>)
   }
 
@@ -227,6 +235,7 @@ class Room extends React.Component {
   }
 
   render() {
+  
 
     return (
       <div className="game-room">
@@ -239,17 +248,18 @@ class Room extends React.Component {
                 <div className='exit-gameroom'>
                   <button onClick={this.handleExit}>Exit Room</button>
                 </div>
-                <div classNAme="role-play-dropdown">
+                {this.state.admin?
+                <div className="role-play-dropdown">
                   <div className='theme-choose'>
                     <button onClick={this.handleRolePlay}>Role-Play</button>
                   </div>
                   <div className="room-name-bar"> 
                     <p>{this.state.game}</p>
                   </div>
-                </div>
+                </div> : null}
             </div>
             <div className='gameroom-title-bar'>{this.props.room.title}
-          {Object.keys(this.props.roles).length?(
+          {Object.keys(this.props.roles).length && this.state.admin ?(
             <button onClick={this.handleExitGame} className="exit-gamemode-button">Exit Game Mode</button>
           ): null }
           </div>
