@@ -10,9 +10,16 @@ class UserInfo extends React.Component {
     this.props.openModal("avatars");
   }
 
+  componentDidMount() {
+    if (this.props.sessionUser.id) {
+      this.props.fetchUser(this.props.sessionUser.id)
+    }
+  }
+  
+
   render() {
     const { currentUser } = this.props;
-    if (currentUser && currentUser.id) {
+    if (currentUser) {
       return (
         <div className="user-controls-container">
           <div className="user-info-container">
