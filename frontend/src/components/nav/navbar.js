@@ -23,11 +23,8 @@ class NavBar extends React.Component {
             <div>
               <button onClick={() => this.props.openModal('newroom')}>New Room</button>
               <button onClick={this.logoutUser}>Logout</button>
-              {/* <Link to={'/profile'}>Profile</Link> */}
-              {/* onClick={this.props.history.push('/profile')} */}
-              <button>Profile</button>
+              <button onClick={() => this.props.history.push('/profile')}>Profile</button>
             </div>
-
           </div>
 
         );
