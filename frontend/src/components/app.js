@@ -17,16 +17,20 @@ import Footer from "./footer/footer"
 const App = () => (
   <div>
     <Modal />
-    <NavBarContainer />
     <Switch>
-        <Route exact path="/" component={MainPage} />
-        {/* <AuthRoute exact path="/login" component={LoginFormContainer} />
-        <AuthRoute exact path="/signup" component={SignupFormContainer} /> */}
-        <ProtectedRoute exact path="/profile" component={ProfilePageContainer} />
-        <ProtectedRoute exact exact path="/rooms" component={RoomIndexContainer} />
-        {/* <Route exact path="/rooms/new" component={CreateRoomContainer} /> */}
         <ProtectedRoute exact path='/rooms/:roomId' component={RoomShowContainer}/>
+        <NavBarContainer />
+
     </Switch>
+    <Switch>
+          <Route exact path="/" component={MainPage} />
+          {/* <AuthRoute exact path="/login" component={LoginFormContainer} />
+          <AuthRoute exact path="/signup" component={SignupFormContainer} /> */}
+          <ProtectedRoute exact path="/profile" component={ProfilePageContainer} />
+          <ProtectedRoute exact exact path="/rooms" component={RoomIndexContainer} />
+          {/* <Route exact path="/rooms/new" component={CreateRoomContainer} /> */}     
+        </Switch>
+
     {/* <Footer/> */}
   </div>
 );
