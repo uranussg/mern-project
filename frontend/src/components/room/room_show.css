@@ -14,7 +14,7 @@
     
 }
 
-.exit-gameroom {
+.exit-gameroom, .theme-choose, .show-users {
     margin-right: 5px;
 }
 
@@ -32,6 +32,19 @@
 .game-room-container {
     width: 90%;
     margin: 0 auto;
+    padding-top: 20px;
+}
+
+chat-section-container
+
+
+.chat-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    height: 80%;
 }
 
 .gameroom-title-bar {
@@ -43,7 +56,8 @@
     font-size: 22px;
     display: flex;
     justify-content: space-between;
-    height: 55px;
+    height: 60px;
+    flex-grow: 1;
 }
 
 .chat-box {
@@ -54,10 +68,38 @@
     border-radius: 0px 0px 0px 0px;
     border-top: 2px solid rgb(226, 206, 22);
     border-bottom: 2px solid rgb(226, 206, 22);
-    min-height: 100px;
+    /* height: 50vh; */
+    overflow: scroll;
+    /* vh:  */
+    /* height: 100%; */
+    /* flex-grow: 99; */
     /* display: flex;
     flex-direction: row; */
 }
+
+  .submit-message-box {
+    background-color: rgb(238, 216, 159, 0.9);
+    border-radius: 0px 0px 5px 5px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-grow: 1;
+  }
+
+  .submit-message-box button{
+      margin-left: 20px;
+      margin-top: -3px;
+  }
+
+  .submit-message-box .name{
+      min-width: 80px;
+      text-align: end;
+      margin-right: 10px;
+      font-size: 20px;
+      height: 0 auto;
+      margin-top: 3px;
+  }
 
 .show-page-background {
     background-image: url(../../images/gameroom3.jpg); 
@@ -68,27 +110,20 @@
     left: 0;
     opacity: 60%;
     z-index: -1;
-    object-fit: cover;
+    background-size: cover;
   }
 
   .show-page-buttons {
       display: flex;
       margin-left: 2%;
+      /* min-height: 15vh; */
   }
 
   .game-room input {
       padding: 2px;
-      width: 70%;
+      /* width: 70%; */
+      flex-grow: 99;
       border-radius: 3px;
-  }
-
-  .submit-message-box {
-    background-color: rgb(238, 216, 159, 0.9);
-    border-radius: 0px 0px 5px 5px;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
   }
 
   .role-play-dropdown {
@@ -109,12 +144,14 @@
       background-color: rgb(200, 229, 155);
   }
 
-  .exit-gamemode {
+  .exit-gamemode button {
       position: absolute;
+     
   }
 
   .exit-gamemode-button {
       width: 150px;
+      height: 40px;
   }
 
   .self-message .content {
@@ -152,8 +189,8 @@
 }
 
 .other-users-message img, .self-message img {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
 }
 
@@ -176,45 +213,81 @@
     max-width: 60%;
 }
 
+
 .game-mode .chat-box {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.65);
 }
 
 .game-mode .submit-message-box, .game-mode .gameroom-title-bar {
-    background-color: rgb(26, 26, 26);
+    background-color: rgb(44, 44, 44);
     color: rgb(235, 235, 235);
 }
 
 .game-mode .chat-box {
-    border-color: rgb(40, 40, 40);
+    border-color: rgb(68, 68, 68);
 }
 
 .game-mode button {
-    background-color: rgb(92, 92, 92);
-    box-shadow:0 6px 0 rgb(0, 0, 0);
+    background-color: rgb(66, 66, 66);
+    box-shadow:0 6px 0 rgb(20, 20, 20);
     color: rgb(235, 235, 235);
 }
 
 .game-mode button:active {
-    box-shadow:0 3px 0 rgb(0, 0, 0);
+    box-shadow:0 3px 0 rgb(35, 35, 35);
 
 }
 
 .game-mode input {
-    background-color: rgb(209, 209, 209);
-    color: black;
+    background-color: rgb(88, 88, 88);
+    color: rgb(235, 235, 235);
+    border: 1px solid  rgb(68, 68, 68);
 }
 
 .game-mode {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 .game-mode .self-message .content {
-    background-color: rgb(109, 108, 108);
+    background-color: rgb(71, 71, 71);
+    /* background-color: rgb(21, 80, 57); */
     color: rgb(235, 235, 235);
 }
 
 .game-mode .other-users-message .content {
-    background-color: rgb(43, 43, 131);
+    background-color: rgb(21, 80, 57);
     color: rgb(235, 235, 235);
 }
+
+@media screen and (max-height: 800px) {
+    .chat-box {
+        height: 50vh;
+    }
+
+    .show-page-buttons {
+        height: 12vh;
+    }
+}
+
+@media only screen 
+  and (min-height: 800px) 
+  and (max-height: 1000px) {
+    .chat-box {
+        height: 65vh;
+    }
+
+    .show-page-buttons {
+        height: 8vh;
+    }
+  }
+
+  @media only screen 
+  and (min-height: 1000px) {
+    .chat-box {
+        height: 70vh;
+    }
+
+    .show-page-buttons {
+        height: 5vh;
+    }
+  }
