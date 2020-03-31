@@ -73,9 +73,6 @@ class LoginForm extends React.Component {
         </div>
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
-          <div className='session-errors'>
-            {this.renderErrors()}
-          </div>
           <div className="textbox">
             <FontAwesomeIcon icon={faAt} className="icon" />
             <input
@@ -95,8 +92,10 @@ class LoginForm extends React.Component {
             />
           </div>
           <input type="submit" value="Login" />
-          
         </form>
+        <div className="session-errors">
+          {this.renderErrors()}
+          </div>
       </div>
     );
   }

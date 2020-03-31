@@ -57,3 +57,7 @@ input[type=submit] {
     float: left;
     margin-right: 2px;
 }
+
+.session-errors {
+    color: red;
+}
