@@ -17,7 +17,7 @@
 }
 
 .nav-scroll {
-    position: relative;
+    /* position: relative; */
     height: 300px;
     width: 600px;
 }
@@ -41,15 +41,34 @@
 }
 
 .auth-div {
+    position: relative;
+    width: 20%;
+    left: 40.5%;
+    bottom: 60%
+    
+}
+
+.auth-div > div {
     position: absolute;
     display: flex;
     justify-content: center;
-    bottom: 10px;
-    left:41%;
 
 }
 
 .auth-div > button {
+    margin: 5px;
+    background-color: lightgray;
+    color: black;
+    padding: 10px 20px;
+    display: inline-block;
+    font-size: 16px;
+    border: 2px solid rgb(25, 153, 83);
+    border-radius: 10px;
+    width: 80px;
+    height: 20px;
+}
+
+.auth-div > div > button {
     margin: 5px;
     background-color: lightgray;
     color: black;
