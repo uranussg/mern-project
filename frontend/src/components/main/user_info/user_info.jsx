@@ -19,7 +19,7 @@ class UserInfo extends React.Component {
 
   render() {
     const { currentUser } = this.props;
-    if (currentUser && currentUser._id) {
+    if (currentUser) {
       return (
         <div className="user-controls-container">
           <div className="user-info-container">
