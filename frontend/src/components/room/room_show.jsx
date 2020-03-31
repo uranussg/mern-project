@@ -152,11 +152,11 @@ class Room extends React.Component {
   }
 
   handleExit(e) {
-    
+    this.socket.emit('exit-room', {room_id: this.props.room._id,
+      user_id:this.props.curr_user.id})
     this.props.exitRoom(this.props.room._id, {user_id: this.props.curr_user.id}).then(()=>
     { 
-      this.socket.emit('exit-room', {room_id: this.props.room._id,
-                                    user_id:this.props.curr_user.id})
+      
       this.props.history.push('/rooms')})
   }
 
@@ -206,15 +206,15 @@ class Room extends React.Component {
 
     return (<div key={index} className={mgsClass}>
         <div><img src={imgsrc} /></div>
-        <div className='text-content'>
-        <div className="name">
-         {this.props.roles[el.user_id]? this.props.roles[el.user_id].name:
-          this.props.users[el.user_id]? this.props.users[el.user_id].username: el.user_id}
-         
-        </div>
-        <div className="content">
-          {el.content}
-        </div>
+        <div className='text-holder'>
+          <div className="name">
+          {this.props.roles[el.user_id]? this.props.roles[el.user_id].name:
+            this.props.users[el.user_id]? this.props.users[el.user_id].username: el.user_id}
+          
+          </div>
+          <div className="content">
+            {el.content}
+          </div>
         </div>
       </div>)
   }

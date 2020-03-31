@@ -109,20 +109,20 @@ io.on('connection', (socket) => {
       if (err) return console.error(err);
     });
     // Notify all other users about a new message.
-    socket.broadcast.to(message.room_id).emit('push', msg);
+    socket.to(message.room_id).emit('push', msg);
 
 
   });
 
 
   socket.on('gamemode', (gm) => {
-    console.log('game mode is on')        
+    Room.findByIdAndUpdate(gm.room_id, {access: gm.mode})     
 
     const gamemode = {
       room_id: gm.room_id,
       mode: gm.mode
     }
-    socket.broadcast.to(gamemode.room_id).emit('modeon', gamemode)
+    socket.to(gamemode.room_id).emit('modeon', gamemode)
   })
 
 });
