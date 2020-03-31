@@ -6,12 +6,16 @@ import { Link } from 'react-router-dom';
 import "./user_info.css";
 
 class UserInfo extends React.Component {
-  handleClick() {
+  openNewRoomModal() {
+    this.props.openModal("newroom");
+  }
+
+  openAvatarModal() {
     this.props.openModal("avatars");
   }
 
   componentDidMount() {
-    if (this.props.sessionUser.id) {
+    if (this.props.sessionUser) {
       this.props.fetchUser(this.props.sessionUser.id)
     }
   }
@@ -35,7 +39,7 @@ class UserInfo extends React.Component {
               </div>
             </div>
             <FontAwesomeIcon
-              onClick={this.handleClick.bind(this)}
+              onClick={this.openAvatarModal.bind(this)}
               className="change-avatar-icon"
               icon={faPortrait}
             />
@@ -49,7 +53,7 @@ class UserInfo extends React.Component {
                 icon={faAngleDoubleRight}
               />
             </Link>
-            <Link className="start-game-option user-option">
+            <Link onClick={this.openNewRoomModal.bind(this)} className="start-game-option user-option">
               <FontAwesomeIcon className="option-icon" icon={faDice} />
               <p className="option-text">Start a Game</p>
               <FontAwesomeIcon
