@@ -62,12 +62,12 @@ io.on('connection', (socket) => {
  
     room.save().then(() => io.to(roomData.room_id).emit('update-room-info', roomData))
     })
-    Message.find({room_id:roomData.room_id}).sort({createdAt: -1}).limit(20).exec((err, messages) => {
-    if (err) return console.error(err);    
-    // Send the last messages to the user.
-    socket.emit('init', messages);
+    // Message.find({room_id:roomData.room_id}).sort({date: -1}).limit(20).exec((err, messages) => {
+    // if (err) return console.error(err);    
+    // // Send the last messages to the user.
+    // socket.emit('init', messages);
 
-    });
+    // });
   })
   socket.on('disconnect', ()=> {
     console.log('user disconnect')
@@ -78,7 +78,7 @@ io.on('connection', (socket) => {
     Room.findById(roomData.room_id)
     .then(room => {
 
-      if (roomData.user_id) {
+      // if (roomData.user_id) {
         if (room.users.includes(roomData.user_id) ) 
         {
           const idx = room.users.indexOf(roomData.user_id)
@@ -88,7 +88,7 @@ io.on('connection', (socket) => {
         //   }
          }
          
-       }
+      //  }
       room.save().then(() => io.to(roomData.room_id).emit('update-room-info', roomData))
     })
   })
@@ -96,20 +96,20 @@ io.on('connection', (socket) => {
 
   // Listen to connected users for a new message.
   socket.on('message', (msg) => {
-    console.log(msg)
+    // console.log(msg)
     // Create a message with the content and the name of the user.
-    const message = new Message({
-      content: msg.content,
-      user_id: msg.user_id,
-      room_id: msg.room_id
-    });
+    // const message = new Message({
+    //   content: msg.content,
+    //   user_id: msg.user_id,
+    //   room_id: msg.room_id
+    // });
     // console.log(message)
-    // Save the message to the database.
-    message.save((err) => {
-      if (err) return console.error(err);
-    });
+    // // Save the message to the database.
+    // message.save((err) => {
+    //   if (err) return console.error(err);
+    // });
     // Notify all other users about a new message.
-    socket.to(message.room_id).emit('push', msg);
+    socket.to(msg.room_id).emit('push', msg);
 
 
   });
