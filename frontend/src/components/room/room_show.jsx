@@ -200,14 +200,16 @@ class Room extends React.Component {
 
     return (<div key={index} className={mgsClass}>
         <div><img src={imgsrc} /></div>
-        <Typography variant="caption" className="name">
-         {this.props.roles[el.user_id]? this.props.roles[el.user_id].name:
-          this.props.users[el.user_id]? this.props.users[el.user_id].username: el.user_id}
-         
-        </Typography>
-        <Typography variant="body" className="content">
-          {el.content}
-        </Typography>
+        <div className="text-holder">
+          <div variant="caption" className="name">
+          {this.props.roles[el.user_id]? this.props.roles[el.user_id].name:
+            this.props.users[el.user_id]? this.props.users[el.user_id].username: el.user_id}
+          
+          </div>
+          <div variant="body" className="content">
+              {el.content}
+          </div>
+        </div>
       </div>)
   }
 
