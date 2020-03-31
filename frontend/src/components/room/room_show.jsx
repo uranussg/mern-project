@@ -62,7 +62,7 @@ class Room extends React.Component {
       if(!this.state.chat.length)
       {  
       this.socket.on('init', (msgs) => {
-          debugger
+          
           const chatmsgsId = this.state.chat.map(msg => msg._id)
           const filteredmsgs = msgs.filter(message=> message.room_id === this.props.room._id && !chatmsgsId.includes(message._id))
           
@@ -83,7 +83,7 @@ class Room extends React.Component {
 
 
       this.socket.on('update-room-info', (roomData)=> {
-        debugger
+        
         if (roomData.room_id == this.props.room._id)
         {this.props.fetchRoom(this.props.match.params.roomId)
         .then(()=>
@@ -98,11 +98,11 @@ class Room extends React.Component {
 
 
       this.socket.on('push', (msg) => {
-        debugger
+        
         // if(msg.room_id === this.props.room._id)
       //  { 
 
-            debugger
+            
             this.setState((state) => ({
               chat: [...state.chat, msg],
             }), this.scrollToBottom)
@@ -110,7 +110,7 @@ class Room extends React.Component {
         // }
       });
       this.socket.on('modeon', gamemode => {
-        debugger
+        
         // if (gamemode.room_id === this.props.room._id){
           console.log('gamemode toggle')
           if (gamemode.mode)
@@ -176,7 +176,7 @@ class Room extends React.Component {
         content: state.content,
         room_id: this.props.room._id
       }
-      debugger
+      
       this.socket.emit('message', message);
 
       // Update the chat with the user's message and remove the current message.

@@ -48,7 +48,7 @@ const port = process.env.PORT || 5000;
 io.on('connection', (socket) => {
   console.log('a user connect')
   socket.on('join-room', roomData => {
-      debugger
+      
       // console.log(roomData.room_id)
     socket.join(roomData.room_id)
     Room.findById(roomData.room_id)
