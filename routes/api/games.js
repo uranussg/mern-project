@@ -91,7 +91,7 @@ router.get('/roleplay/:room_id',(req, res) => {
   // .sort({date:-1}).limit(1)
 
   .then(distribution => {
-    console.log(distribution)
+    // console.log(distribution)
     res.json(distribution)
   })
 })
@@ -100,7 +100,7 @@ router.delete('/roleplay/:room_id',(req, res) => {
 
   RoleDistribution.deleteMany({room_id: req.params.room_id})
   .then(distribution => {
-    console.log(distribution)
+    // console.log(distribution)
     res.json(distribution)
   })
 } )

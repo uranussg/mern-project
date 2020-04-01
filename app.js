@@ -143,7 +143,7 @@ io.on('connection', (socket) => {
       let gamemode = {
         room_id: themeData.room_id,
         roles: roleDis,
-        mode: true
+        mode: themeData.theme
       }
       console.log(gamemode)
       io.in(themeData.room_id).emit('modeon', gamemode)

@@ -90,7 +90,7 @@ class Room extends React.Component {
             }), this.scrollToBottom)
       });
       this.socket.on('modeon', gamemode => {
-          console.log('gamemode toggle')         
+          console.log(gamemode)  
           if (gamemode.mode)
           {
             if(gamemode.roles){              
@@ -101,6 +101,7 @@ class Room extends React.Component {
               gameroom.classList.add('game-mode')
             }
             else{
+
                 this.props.fetchDistribution(this.props.room._id)
                 .then(()=> {
                 this.setState({roles: this.props.roles, chat:[], game: gamemode.mode})
@@ -110,8 +111,9 @@ class Room extends React.Component {
             }
           }
           else {
+
             this.props.deleteRoles()
-              this.setState({roles: {}, chat:[]})
+              this.setState({roles: {}, chat:[],game: gamemode.mode})
               const gameroom = document.getElementsByClassName('game-room')[0]
               gameroom.classList.remove('game-mode')
           }
