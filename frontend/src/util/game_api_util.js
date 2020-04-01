@@ -24,6 +24,8 @@ export const deleteDistribution = (room_id) => {
   return axios.delete(`api/games/roleplay/${room_id}`)
 }
 
+
+
 export const createTheme = (themeData) => {
   return axios.post(`api/games/roleplay`, themeData)
 }

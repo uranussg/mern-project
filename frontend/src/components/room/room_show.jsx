@@ -1,10 +1,7 @@
 import React from 'react';
-// import config from '../../config';
-// import io from 'socket.io-client';
 import Paper from '@material-ui/core/Paper';
-// import ThemeContainer from '../game/theme_container'
 import "./room_show.css"
-
+import {socket} from '../socket'
 
 class Room extends React.Component {
   constructor(props) {
@@ -14,7 +11,8 @@ class Room extends React.Component {
       chat: [],
       content: '',
       roles:{},
-      userShow: null
+      userShow: null,
+      game:false
     };
     this.handleContent = this.handleContent.bind(this)
     this.handleSubmit =this.handleSubmit.bind(this)
@@ -42,22 +40,20 @@ class Room extends React.Component {
   // }
 
   componentDidMount() {
-      
+      console.log(this.props.match.params.roomId)
       this.props.fetchRoom(this.props.match.params.roomId, {user_id: this.props.curr_user.id})
       .then(()=>
-      { const users = {user_ids: this.props.room.users}       
+      {       
+        const users = {user_ids: this.props.room.users}       
         return this.props.fetchUsers(users)})
+
         .then(()=>{
-      // this.socket = io(config[process.env.NODE_ENV].endpoint);
-      this.socket = this.props.socket
+      this.socket = socket
+      this.socket.connect()
       
-      const roomData={room_id: this.props.room._id,
-                      user_id: this.props.curr_user.id}
-      this.socket.emit('join-room', roomData)
       // if(!this.state.chat.length)
       // {  
-      // this.socket.on('init', (msgs) => {
-          
+      // this.socket.on('init', (msgs) => {     
       //     const chatmsgsId = this.state.chat.map(msg => msg._id)
       //     const filteredmsgs = msgs.filter(message=> message.room_id === this.props.room._id && !chatmsgsId.includes(message._id))
           
@@ -67,11 +63,14 @@ class Room extends React.Component {
       //     }), this.scrollToBottom);
       //   });   
       // }
+      const roomData={room_id: this.props.room._id,
+                      user_id: this.props.curr_user.id}
+      this.socket.emit('join-room', roomData)
       this.socket.on('disconnect', ()=> {
-        this.socket.emit('exit-room', roomData)
+          this.socket.emit('exit-room', roomData)
       })
 
-      this.socket.on('update-room-info', (roomData)=> {        
+      this.socket.on('update-room-info', ()=> {        
         // if (roomData.room_id == this.props.room._id)
         this.props.fetchRoom(this.props.room._id)
         .then(()=>
@@ -96,7 +95,7 @@ class Room extends React.Component {
           {
             if(gamemode.roles){              
               this.props.receiveRoles(gamemode.roles)
-              this.setState({roles: gamemode.roles, chat:[]}) 
+              this.setState({roles: gamemode.roles, chat:[], game: gamemode.mode}) 
               
               const gameroom = document.getElementsByClassName('game-room')[0]
               gameroom.classList.add('game-mode')
@@ -104,7 +103,7 @@ class Room extends React.Component {
             else{
                 this.props.fetchDistribution(this.props.room._id)
                 .then(()=> {
-                this.setState({roles: this.props.roles, chat:[]})
+                this.setState({roles: this.props.roles, chat:[], game: gamemode.mode})
                 const gameroom = document.getElementsByClassName('game-room')[0]
                 gameroom.classList.add('game-mode')
                 })
@@ -216,7 +215,7 @@ class Room extends React.Component {
         this.socket.emit('gamemode', {room_id: this.props.room._id, mode:false})
         const gameroom = document.getElementsByClassName('game-room')[0]
         gameroom.classList.remove('game-mode')
-      this.setState({roles: {}, chat:[]})}
+      this.setState({roles: {}, chat:[], game:''})}
     )
   }
 
@@ -232,13 +231,10 @@ class Room extends React.Component {
                 <div className='exit-gameroom'>
                   <button onClick={this.handleExit}>Exit Room</button>
                 </div>
-                {this.state.admin?
+                {this.state.admin && !this.state.game?
                 <div className="role-play-dropdown">
                   <div className='theme-choose'>
                     <button onClick={()=>this.props.openModal('theme')}>Role-Play</button>
-                  </div>
-                  <div className="room-name-bar"> 
-                    <p>{this.state.game}</p>
                   </div>
                 </div> : null}
                 <div className='show-users'>
@@ -253,9 +249,13 @@ class Room extends React.Component {
               </div>
 
               <div className="chat-section">
-                    <div className='gameroom-title-bar'>{this.props.room.title}
+                    <div className='gameroom-title-bar'>
+                      {this.props.room.title}
+  
+                    <p>{this.state.game}</p>
+
                   {Object.keys(this.props.roles).length && this.state.admin ?(
-                    <button onClick={this.handleExitGame} className="exit-gamemode-button">Exit Game Mode</button>
+                    <button onClick={this.handleExitGame} className="exit-gamemode-button">Exit Game</button>
                   ): null }
                   </div>
                   <div className='chat-box'>

@@ -116,13 +116,13 @@ io.on('connection', (socket) => {
 
 
   socket.on('gamemode', (gm) => {
-    Room.findByIdAndUpdate(gm.room_id, {access: gm.mode})     
+    Room.findByIdAndUpdate(gm.room_id, {game: gm.mode})     
 
     const gamemode = {
       room_id: gm.room_id,
       mode: gm.mode
     }
-    socket.in(gamemode.room_id).emit('modeon', gamemode)
+    io.in(gamemode.room_id).emit('modeon', gamemode)
   })
 
   socket.on('createtheme', (themeData) => {
@@ -132,7 +132,6 @@ io.on('connection', (socket) => {
         console.log(room)
       let roleDis = {}
       let roles = Object.values(themeData.roles)
-      // const numusers = room.users.length
 
       room.users.forEach(user_id => {
  

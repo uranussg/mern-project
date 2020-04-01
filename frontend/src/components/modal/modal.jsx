@@ -8,7 +8,7 @@ import CreateRoomContainer from '../room/room_forms/create_room_container';
 import AvatarSelectionContainer from '../main/user_info/avatar_selection_container';
 import ThemeContainer from '../game/theme_container'
 
-function Modal({ modal, closeModal, socket }) {
+function Modal({ modal, closeModal}) {
 
     if (!modal) {
         return null;
@@ -28,7 +28,7 @@ function Modal({ modal, closeModal, socket }) {
             component = <AvatarSelectionContainer />;
             break;
         case 'theme':
-            component = <ThemeContainer socket={socket}/>;
+            component = <ThemeContainer />;
             break;
         default:
             return null;

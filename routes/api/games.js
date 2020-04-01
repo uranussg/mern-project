@@ -66,7 +66,8 @@ router.post('/roleplay/:theme_id', (req, res) => {
         }) 
         const roleDisRes = new RoleDistribution({
             distribution:roleDis,
-            room_id: room._id
+            room_id: room._id,
+            theme:'',
         })
         roleDisRes.save().then(roles => res.json(roles))
     

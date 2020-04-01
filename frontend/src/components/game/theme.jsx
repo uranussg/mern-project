@@ -3,6 +3,8 @@ import { getRoles, getThemes, createTheme} from '../../util/game_api_util'
 // import { startRoleDistribution } from '../../actions/game_actions'
 import ThemeForm from './theme_form'
 import "./theme.css"
+import {socket} from '../socket'
+
 export default class Theme extends Component {
     constructor(props) {
         super(props)
@@ -18,21 +20,22 @@ export default class Theme extends Component {
             
             this.setState({themes: themes.data})
         })
-        this.socket = this.props.socket
+        this.socket = socket
+        this.socket.connect()
     
     }
 
     handleChoose(e) {
 
         e.preventDefault()
-        this.props.startRoleDistribution(e.target.getAttribute("value"), {room_id: this.props.room._id})
+        const gamemode = e.target.innerText
+        // this.props.startRoleDistribution(e.target.getAttribute("value"), {room_id: this.props.room._id})
+        getRoles(e.target.getAttribute("value"), {room_id: this.props.room._id})
         .then((roles)=>{
             
-            this.socket.emit('gamemode', {room_id: this.props.room._id, mode: true})
+            this.socket.emit('gamemode', {room_id: this.props.room._id, mode: gamemode})
             // this.props.unMountMe()
             this.props.closeModal()
-            const gameroom = document.getElementsByClassName('game-room')[0]
-            gameroom.classList.add('game-mode')
         })
     }
 

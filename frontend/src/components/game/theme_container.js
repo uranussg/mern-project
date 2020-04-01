@@ -8,7 +8,6 @@ const mapStateToProps = (state, ownProps) => {
   
   return {
     room: state.rooms.user,
-    socket: ownProps.socket
   };
 };
 

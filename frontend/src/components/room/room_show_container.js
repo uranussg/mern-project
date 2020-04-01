@@ -12,7 +12,6 @@ return {
   room: state.rooms.user || {},
   users: state.users,
   roles:state.roles || {},
-  socket: ownProps.socket
 }
 };
 

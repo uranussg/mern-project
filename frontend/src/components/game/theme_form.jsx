@@ -42,8 +42,6 @@ export default class ThemeForm extends Component {
 
     handleSubmit(e) {
         this.socket.emit('createtheme', this.state)
-        
-
         // this.props.unMountMe()
         this.props.closeModal()
 
