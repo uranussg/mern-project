@@ -53,3 +53,7 @@
   font-size: 30px;
   cursor: pointer;
 }
+
+.session-errors {
+    color: red;
+}

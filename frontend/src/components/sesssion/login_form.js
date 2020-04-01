@@ -12,7 +12,8 @@ class LoginForm extends React.Component {
     this.state = {
       email: "",
       password: "",
-      errors: {}
+      errors: {},
+      session: {}
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,8 +22,7 @@ class LoginForm extends React.Component {
 
   // Once the user has been authenticated, redirect
   componentWillReceiveProps(nextProps) {
-    if (nextProps.currentUser) {
-      // redirect to main page or user profile
+    if (nextProps.isAuthenticated) {
       this.props.history.push('/');
       this.props.closeModal();
     }
@@ -42,6 +42,7 @@ class LoginForm extends React.Component {
   // Handle form submission
   handleSubmit(e) {
     e.preventDefault();
+    
 
     let user = {
       email: this.state.email,
@@ -89,8 +90,10 @@ class LoginForm extends React.Component {
             />
           </div>
           <input type="submit" value="Login" />
-          {this.renderErrors()}
         </form>
+        <div className="session-errors">
+          {this.renderErrors()}
+          </div>
       </div>
     );
   }

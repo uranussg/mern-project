@@ -20,8 +20,9 @@ class SignupForm extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.signedIn === true) {
-      this.props.history.push("/login");
+    if (nextProps.isAuthenticated) {
+      this.props.history.push("/");
+      this.props.closeModal();
     }
 
     this.setState({ errors: nextProps.errors });
@@ -103,7 +104,9 @@ class SignupForm extends React.Component {
             </div>
 
             <input type="submit" value="Sign Up" />
-            {this.renderErrors()}
+            <div className="session-errors">
+              {this.renderErrors()}
+            </div>
           </div>
         </form>
       </div>
