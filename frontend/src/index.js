@@ -6,14 +6,17 @@ import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/session_api_util';
 import { logout } from './actions/session_actions';
 import axios from 'axios'
+import io from 'socket.io-client';
+import config from './config';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
+  const socket = io(config[process.env.NODE_ENV].endpoint);
   if (localStorage.jwtToken) {
 
     setAuthToken(localStorage.jwtToken);
     const decodedUser = jwt_decode(localStorage.jwtToken);
-    const preloadedState = { session: { isAuthenticated: true, user: decodedUser } };
+    const preloadedState = { session: { isAuthenticated: true, user: decodedUser }};
     store = configureStore(preloadedState);
     const currentTime = Date.now() / 1000;
 
@@ -26,8 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
     store = configureStore({});
   }
   window.axios = axios
+
   const root = document.getElementById('root');
 
-//   ReactDOM.render(<Root store={store} />, root);
-  ReactDOM.render(<Root store={store}/>, root);
+  ReactDOM.render(<Root store={store} socket={socket}/>, root);
 });

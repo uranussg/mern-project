@@ -42,9 +42,10 @@ export default class ThemeForm extends Component {
 
     handleSubmit(e) {
         this.socket.emit('createtheme', this.state)
-        debugger
+        
 
-        this.props.unMountMe()
+        // this.props.unMountMe()
+        this.props.closeModal()
 
 
     }
@@ -53,7 +54,6 @@ export default class ThemeForm extends Component {
 
         return (
             <div>
-
                     <div className='themename'>
                     <input type="text" onChange={this.handleChange('theme')} value={this.state.theme}/>
                     </div>

@@ -6,8 +6,10 @@ import SignupFormContainer from '../sesssion/signup_form_container';
 import "./modal.css"
 import CreateRoomContainer from '../room/room_forms/create_room_container';
 import AvatarSelectionContainer from '../main/user_info/avatar_selection_container';
+import ThemeContainer from '../game/theme_container'
 
-function Modal({ modal, closeModal }) {
+function Modal({ modal, closeModal, socket, ...rest }) {
+
     if (!modal) {
         return null;
     }
@@ -25,6 +27,9 @@ function Modal({ modal, closeModal }) {
         case 'avatars':
             component = <AvatarSelectionContainer />;
             break;
+        case 'theme':
+            component = <ThemeContainer socket={socket} {...rest}/>;
+            break;
         default:
             return null;
     }
@@ -37,7 +42,7 @@ function Modal({ modal, closeModal }) {
     );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
     return {
         modal: state.ui.modal
     };

@@ -1,19 +1,17 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
-import {createTheme} from '../../util/game_api_util'
-import {} from '../../actions/game_actions'
+import {createTheme, getThemes } from '../../util/game_api_util'
+import {startRoleDistribution} from '../../actions/game_actions'
+import { closeModal } from '../../actions/modal_actions';
 import Theme from './theme'
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+  
   return {
-    room: Object.values(state.room.user),
+    room: state.rooms.user,
+    socket: ownProps.socket
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    createTheme: () => dispatch(createTheme()),
-  };
-};
 
-const ThemeContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Theme));
+const ThemeContainer = withRouter(connect(mapStateToProps, {createTheme, startRoleDistribution, getThemes, closeModal})(Theme));
 export default ThemeContainer;

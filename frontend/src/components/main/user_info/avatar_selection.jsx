@@ -11,6 +11,7 @@ class AvatarSelection extends React.Component {
 
   handleClick(avatarId) {
     return e => {
+      
       this.setState({
         selected: avatarId
       })

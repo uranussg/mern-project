@@ -14,11 +14,13 @@ import CreateRoomContainer from './room/room_forms/create_room_container';
 import RoomShowContainer from './room/room_show_container'
 import Footer from "./footer/footer"
 
-const App = () => (
+
+const App = ({socket}) => {
+  return(
   <div>
-    <Modal />
+    <Modal socket={socket}/>
     <Switch>
-        <ProtectedRoute exact path='/rooms/:roomId' component={RoomShowContainer}/>
+        <ProtectedRoute exact path='/rooms/:roomId' socket={socket} component={RoomShowContainer}/>
         <NavBarContainer />
 
     </Switch>
@@ -34,5 +36,6 @@ const App = () => (
     {/* <Footer/> */}
   </div>
 );
+}
 
 export default App;

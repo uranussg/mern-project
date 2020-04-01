@@ -14,7 +14,6 @@ export default class Theme extends Component {
         this.handleCreate = this.handleCreate.bind(this)
     }
     componentDidMount(){
-        
         getThemes().then(themes=> {
             
             this.setState({themes: themes.data})
@@ -24,19 +23,23 @@ export default class Theme extends Component {
     }
 
     handleChoose(e) {
-        e.preventDefault()
 
+        e.preventDefault()
         this.props.startRoleDistribution(e.target.getAttribute("value"), {room_id: this.props.room._id})
         .then((roles)=>{
             
             this.socket.emit('gamemode', {room_id: this.props.room._id, mode: true})
-            this.props.unMountMe()
+            // this.props.unMountMe()
+            this.props.closeModal()
+            const gameroom = document.getElementsByClassName('game-room')[0]
+            gameroom.classList.add('game-mode')
         })
     }
 
     handleCreate(e) {
+
         e.preventDefault()
-        this.setState({createtheme: <ThemeForm unMountMe={this.props.unMountMe} room={this.props.room} socket={this.socket}/>})
+        this.setState({createtheme: <ThemeForm closeModal={this.props.closeModal} room={this.props.room} socket={this.socket}/>})
     }
 
     render() {

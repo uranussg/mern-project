@@ -3,14 +3,9 @@ import config from '../../config';
 import io from 'socket.io-client';
 
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import Theme from '../game/theme'
+import ThemeContainer from '../game/theme_container'
 import "./room_show.css"
-import backgroundImage from "../../images/gameroom3.jpg";
-
-
-// import MessageInput from './message_input';
-// import './App.css';
+import Modal  from '../modal/modal';
 
 class Room extends React.Component {
   constructor(props) {
@@ -31,21 +26,21 @@ class Room extends React.Component {
     this.userDisplay = this.userDisplay.bind(this)
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.room.users) {
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.room.users) {
       
       
-      if (this.props.room.users.length !== Object.keys(this.props.users).length )
-      {
-        this.props.fetchUsers({user_ids: this.props.room.users})}
-      }
+  //     if (this.props.room.users.length !== Object.keys(this.props.users).length )
+  //     {
+  //       this.props.fetchUsers({user_ids: this.props.room.users})}
+  //     }
     
 
-    if (this.props.match.params.roomId !== prevProps.room._id ) {
-      this.props.fetchRoom(this.props.match.params.roomId, {user_id: this.props.curr_user.id})
-    }
+  //   if (this.props.match.params.roomId !== prevProps.room._id ) {
+  //     this.props.fetchRoom(this.props.match.params.roomId, {user_id: this.props.curr_user.id})
+  //   }
 
-  }
+  // }
 
   componentDidMount() {
       
@@ -55,7 +50,8 @@ class Room extends React.Component {
         return this.props.fetchUsers(users)})
         .then(()=>{
 
-      this.socket = io(config[process.env.NODE_ENV].endpoint);
+      // this.socket = io(config[process.env.NODE_ENV].endpoint);
+      this.socket = this.props.socket
       
       const roomData={room_id: this.props.room._id,
                       user_id: this.props.curr_user.id}
@@ -100,11 +96,11 @@ class Room extends React.Component {
       });
       this.socket.on('modeon', gamemode => {
           console.log('gamemode toggle')
-          debugger
+          
           if (gamemode.mode)
           {
             if(gamemode.roles){
-              debugger
+              
               this.props.receiveRoles(gamemode.roles)
               this.setState({roles: gamemode.roles, chat:[]}) 
               
@@ -144,8 +140,10 @@ class Room extends React.Component {
   handleRolePlay(e) {
     
     this.setState(
-      {game: this.state.game? null : <Theme room={this.props.room} 
-      socket={this.socket} startRoleDistribution={this.props.startRoleDistribution}
+      // {game: this.state.game? null : <Theme room={this.props.room} 
+      // socket={this.socket} startRoleDistribution={this.props.startRoleDistribution}
+      // unMountMe={this.handleThemeUnmount}/>}
+      {game: this.state.game? null : <Modal modal='theme' socket={this.socket}
       unMountMe={this.handleThemeUnmount}/>}
     )
   }
@@ -255,7 +253,7 @@ class Room extends React.Component {
                 {this.state.admin?
                 <div className="role-play-dropdown">
                   <div className='theme-choose'>
-                    <button onClick={this.handleRolePlay}>Role-Play</button>
+                    <button onClick={()=>this.props.openModal('theme')}>Role-Play</button>
                   </div>
                   <div className="room-name-bar"> 
                     <p>{this.state.game}</p>
