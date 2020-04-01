@@ -19,8 +19,8 @@ class Room extends React.Component {
     this.handleContent = this.handleContent.bind(this)
     this.handleSubmit =this.handleSubmit.bind(this)
     this.handleExit = this.handleExit.bind(this)  
-    this.handleRolePlay = this.handleRolePlay.bind(this)
-    this.handleThemeUnmount = this.handleThemeUnmount.bind(this)
+    // this.handleRolePlay = this.handleRolePlay.bind(this)
+    // this.handleThemeUnmount = this.handleThemeUnmount.bind(this)
     this.handleExitGame = this.handleExitGame.bind(this)
     this.userDisplay = this.userDisplay.bind(this)
   }
@@ -226,9 +226,7 @@ class Room extends React.Component {
          {/* <img className="main-page-image" src='/gameroom3.jpg' /> */}
          <div className="game-room-container">
          <div className="show-page-background"></div>
-
-           
-        
+       
             <div className="show-page-buttons">
                 <div className='exit-gameroom'>
                   <button onClick={this.handleExit}>Exit Room</button>
