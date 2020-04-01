@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
-import { getRoles, getThemes} from '../../util/game_api_util'
+import { getRoles, getThemes, createTheme} from '../../util/game_api_util'
 // import { startRoleDistribution } from '../../actions/game_actions'
+import ThemeForm from './theme_form'
 import "./theme.css"
 export default class Theme extends Component {
     constructor(props) {
         super(props)
         this.state={
-            themes:[]
+            themes:[],
+            createtheme:null
         }
         this.handleChoose = this.handleChoose.bind(this)
+        this.handleCreate = this.handleCreate.bind(this)
     }
     componentDidMount(){
         
@@ -23,13 +26,19 @@ export default class Theme extends Component {
     handleChoose(e) {
         e.preventDefault()
 
-        this.props.startRoleDistribution(e.target.getAttribute("value"), {room_id: this.props.roomId})
+        this.props.startRoleDistribution(e.target.getAttribute("value"), {room_id: this.props.room._id})
         .then((roles)=>{
             
-            this.socket.emit('gamemode', {room_id: this.props.roomId, mode: true})
+            this.socket.emit('gamemode', {room_id: this.props.room._id, mode: true})
             this.props.unMountMe()
         })
     }
+
+    handleCreate(e) {
+        e.preventDefault()
+        this.setState({createtheme: <ThemeForm unMountMe={this.props.unMountMe} room={this.props.room} socket={this.socket}/>})
+    }
+
     render() {
 
         const themeList = this.state.themes.map(theme => {
@@ -37,9 +46,13 @@ export default class Theme extends Component {
         })
         return (
             <div>
+                {this.state.createtheme? this.state.createtheme: 
                 <ul className='theme-list'>
                     {themeList}
+                    <li><div onClick={this.handleCreate}>Create New Theme</div></li>
                 </ul>
+                }
+
             </div>
         )
     }

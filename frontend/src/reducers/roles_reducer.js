@@ -7,7 +7,7 @@ import{ EXIT_ROOM } from '../actions/room_actions'
     switch(action.type) {
       case RECEIVE_ROLES:
         
-        newState = action.roles.data.distribution;
+        newState = action.roles.data? action.roles.data.distribution : action.roles;
         return newState;
 
       case EXIT_ROOM:

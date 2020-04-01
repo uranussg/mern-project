@@ -122,9 +122,34 @@ io.on('connection', (socket) => {
       room_id: gm.room_id,
       mode: gm.mode
     }
-    socket.to(gamemode.room_id).emit('modeon', gamemode)
+    socket.in(gamemode.room_id).emit('modeon', gamemode)
   })
 
+  socket.on('createtheme', (themeData) => {
+    console.log(themeData)
+    Room.findById(themeData.room_id).then(room =>
+      {
+        console.log(room)
+      let roleDis = {}
+      let roles = Object.values(themeData.roles)
+      // const numusers = room.users.length
+
+      room.users.forEach(user_id => {
+ 
+              const idx =  Math.floor(Math.random() * (Object.keys(roles.length).length ))
+              roleDis[user_id] = {name:roles[idx],
+                role_avator_id :Math.floor(Math.random() * 6)}
+              roles = roles.slice(0, idx).concat(roles.slice(idx+1))
+      }) 
+      let gamemode = {
+        room_id: themeData.room_id,
+        roles: roleDis,
+        mode: true
+      }
+      console.log(gamemode)
+      io.in(themeData.room_id).emit('modeon', gamemode)
+    })
+  })
 });
 
 server.listen(port, () => console.log(`Server is running on port ${port}`));
