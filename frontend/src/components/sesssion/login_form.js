@@ -61,7 +61,7 @@ class LoginForm extends React.Component {
   handleDemo(e) {
     e.preventDefault();
     this.props.login(this.demoUser);
-    this.props.closeModal()
+    this.props.closeModal();
   }
 
   // Render the session errors if there are any
