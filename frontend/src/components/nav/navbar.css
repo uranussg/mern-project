@@ -43,16 +43,9 @@
 .auth-div {
     position: relative;
     width: 20%;
-    left: 40.5%;
-    bottom: 60%
+    left: 41%;
+    bottom: 65%
     
-}
-
-.auth-div > div {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-
 }
 
 .auth-div > button {

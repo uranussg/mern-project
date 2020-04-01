@@ -12,17 +12,23 @@ class LoginForm extends React.Component {
     this.state = {
       email: "",
       password: "",
-      errors: {}
+      errors: {},
+      session: {}
     };
+
+    this.demoUser = {
+      email: "song5@song5.song", 
+      password: "111111" 
+    }
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
   }
 
   // Once the user has been authenticated, redirect
   componentWillReceiveProps(nextProps) {
-    if (nextProps.currentUser) {
-      // redirect to main page or user profile
+    if (nextProps.isAuthenticated) {
       this.props.history.push('/');
       this.props.closeModal();
     }
@@ -42,6 +48,7 @@ class LoginForm extends React.Component {
   // Handle form submission
   handleSubmit(e) {
     e.preventDefault();
+    
 
     let user = {
       email: this.state.email,
@@ -49,6 +56,12 @@ class LoginForm extends React.Component {
     };
 
     this.props.login(user);
+  }
+
+  handleDemo(e) {
+    e.preventDefault();
+    this.props.login(this.demoUser);
+    this.props.closeModal();
   }
 
   // Render the session errors if there are any
@@ -89,8 +102,11 @@ class LoginForm extends React.Component {
             />
           </div>
           <input type="submit" value="Login" />
-          {this.renderErrors()}
         </form>
+        <div className="session-errors">
+          {this.renderErrors()}
+          </div>
+          <button className="demo-button" onClick={this.handleDemo}>Demo User</button>
       </div>
     );
   }
