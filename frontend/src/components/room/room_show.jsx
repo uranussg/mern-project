@@ -228,14 +228,11 @@ class Room extends React.Component {
     return (
       <div className="game-room">
          {/* <img className="main-page-image" src='/gameroom3.jpg' /> */}
-         <div className="show-page-background"></div>
          <div className="game-room-container">
+         <div className="show-page-background"></div>
 
-            <div className='user-list-container'>
-              <ul className='user-list'>
-                {this.state.userShow}
-              </ul>
-            </div>
+           
+        
             <div className="show-page-buttons">
                 <div className='exit-gameroom'>
                   <button onClick={this.handleExit}>Exit Room</button>
@@ -253,27 +250,37 @@ class Room extends React.Component {
                   <button onClick={this.userDisplay}>Users</button>
                 </div>
             </div>
-            <div className='gameroom-title-bar'>{this.props.room.title}
-          {Object.keys(this.props.roles).length && this.state.admin ?(
-            <button onClick={this.handleExitGame} className="exit-gamemode-button">Exit Game Mode</button>
-          ): null }
-          </div>
-          <div className='chat-box'>
-        <Paper id="chat" elevation={3} >
-          {this.state.chat.map((el, index) => {
-            return this.messageDisplay(el, index)
-          })}
-        </Paper>
-        </div>
-        <form onSubmit={this.handleSubmit} className='submit-message-box'>
-        <div className='name'>{this.props.roles[this.props.curr_user.id]? this.props.roles[this.props.curr_user.id].name:
-            this.props.users[this.props.curr_user.id]? this.props.users[this.props.curr_user.id].username: this.props.curr_user.id}</div>
-        <input
-          value={this.state.content}
-          onChange={this.handleContent}
-        />
-        <button type='submit' className='submit-button'>Submit</button>
-        </form>
+            <div className="chat-section-container">
+              <div className='user-list-container'>
+                <ul className='user-list'>
+                  {this.state.userShow}
+                </ul>
+              </div>
+
+              <div className="chat-section">
+                    <div className='gameroom-title-bar'>{this.props.room.title}
+                  {Object.keys(this.props.roles).length && this.state.admin ?(
+                    <button onClick={this.handleExitGame} className="exit-gamemode-button">Exit Game Mode</button>
+                  ): null }
+                  </div>
+                  <div className='chat-box'>
+                <Paper id="chat" elevation={3} >
+                  {this.state.chat.map((el, index) => {
+                    return this.messageDisplay(el, index)
+                  })}
+                </Paper>
+                </div>
+                <form onSubmit={this.handleSubmit} className='submit-message-box'>
+                <div className='name'>{this.props.roles[this.props.curr_user.id]? this.props.roles[this.props.curr_user.id].name:
+                    this.props.users[this.props.curr_user.id]? this.props.users[this.props.curr_user.id].username: this.props.curr_user.id}</div>
+                <input
+                  value={this.state.content}
+                  onChange={this.handleContent}
+                />
+                <button type='submit' className='submit-button'>Submit</button>
+                </form>
+                </div>
+            </div>
         </div>
       </div>
     );
