@@ -61,3 +61,15 @@ input[type=submit] {
 .session-errors {
     color: red;
 }
+
+.demo-button {
+    width: 100%;
+    background: none;
+    border: 2px solid goldenrod;
+    color: white;
+    padding: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 12px 0;
+    text-align: center;
+}
