@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
-import {getThemes} from '../../util/game_api_util'
+import {createTheme} from '../../util/game_api_util'
 import {} from '../../actions/game_actions'
 import Theme from './theme'
 const mapStateToProps = (state) => {
@@ -11,8 +11,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getThemes: () => dispatch(getThemes()),
-    enterRoom: (room_id) => dispatch(enterRoom(room_id))
+    createTheme: () => dispatch(createTheme()),
   };
 };
 

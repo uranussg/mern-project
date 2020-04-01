@@ -10,7 +10,7 @@ const RoleThemeSchema = new Schema({
     },
     type:{
         type: String,
-        default:'RoleGame'
+        default:'SelfDefine'
         },
     date: {
         type: Date, 

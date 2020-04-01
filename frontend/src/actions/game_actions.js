@@ -1,5 +1,6 @@
 
-import { getDistribution, getRoles, deleteDistribution } from '../util/game_api_util';
+// import { getDistribution, getRoles, deleteDistribution } from '../util/game_api_util';
+import * as APIUtil from '../util/game_api_util';
 
 export const RECEIVE_ROLES = "RECEIVE_ROLES"
 export const DELETE_ROLES ='DELETE_ROLES'
@@ -17,7 +18,7 @@ export const deleteRoles = () => ({
 
 export const fetchDistribution = (room_id) =>dispatch=> {
   
-  return getDistribution(room_id)
+  return APIUtil.getDistribution(room_id)
     .then(roles => {
       
       dispatch(receiveRoles(roles))})
@@ -25,16 +26,28 @@ export const fetchDistribution = (room_id) =>dispatch=> {
 }
 
 export const startRoleDistribution = (theme_id, roomData) => dispatch => {
-  return getRoles(theme_id, roomData)
+  return APIUtil.getRoles(theme_id, roomData)
   .then(roles => {
       
     dispatch(receiveRoles(roles))}, err => console.log(err))   
 }
 
 export const deleteRoleDistribution = (room_id) => dispatch => {
-  return deleteDistribution(room_id)
+  return APIUtil.deleteDistribution(room_id)
     .then(() => {
       dispatch(deleteRoles())
     })
     .catch(err => console.log(err))
+}
+
+
+
+export const createTheme = (themeData) => dispatch => {
+  return APIUtil.createTheme(themeData.theme)
+  .then((theme)=> {
+    themeData.roles.forEach(role => {
+      APIUtil.createRole(theme._id, role)
+    })
+    .then(()=>dispatch(startRoleDistribution(theme._id, themeData.room)));
+  })
 }
