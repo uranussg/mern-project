@@ -1,11 +1,10 @@
 import React from 'react';
-import config from '../../config';
-import io from 'socket.io-client';
-
+// import config from '../../config';
+// import io from 'socket.io-client';
 import Paper from '@material-ui/core/Paper';
-import ThemeContainer from '../game/theme_container'
+// import ThemeContainer from '../game/theme_container'
 import "./room_show.css"
-import Modal  from '../modal/modal';
+
 
 class Room extends React.Component {
   constructor(props) {
@@ -73,11 +72,9 @@ class Room extends React.Component {
         this.socket.emit('exit-room', roomData)
       })
 
-
-      this.socket.on('update-room-info', (roomData)=> {
-        
+      this.socket.on('update-room-info', (roomData)=> {        
         // if (roomData.room_id == this.props.room._id)
-        {this.props.fetchRoom(this.props.match.params.roomId)
+        this.props.fetchRoom(this.props.match.params.roomId)
         .then(()=>
         { 
           const users = {user_ids: this.props.room.users}
@@ -85,9 +82,7 @@ class Room extends React.Component {
           return this.props.fetchUsers(users)
           })
         .then(()=>this.setState({admin:this.props.curr_user.id === this.props.room.users[0]}))
-        }
       })
-
 
       this.socket.on('push', (msg) => {
             this.setState((state) => ({
@@ -95,12 +90,10 @@ class Room extends React.Component {
             }), this.scrollToBottom)
       });
       this.socket.on('modeon', gamemode => {
-          console.log('gamemode toggle')
-          
+          console.log('gamemode toggle')         
           if (gamemode.mode)
           {
-            if(gamemode.roles){
-              
+            if(gamemode.roles){              
               this.props.receiveRoles(gamemode.roles)
               this.setState({roles: gamemode.roles, chat:[]}) 
               
@@ -118,36 +111,29 @@ class Room extends React.Component {
           }
           else {
             this.props.deleteRoles()
-
               this.setState({roles: {}, chat:[]})
               const gameroom = document.getElementsByClassName('game-room')[0]
               gameroom.classList.remove('game-mode')
-
           }
       })
 
     })
-
   }
 
-  // Save the message the user is typing in the input field.
   handleContent(event) {
     this.setState({
       content: event.target.value,
     });
   }
-
-  handleRolePlay(e) {
-    
-    this.setState(
-      // {game: this.state.game? null : <Theme room={this.props.room} 
-      // socket={this.socket} startRoleDistribution={this.props.startRoleDistribution}
-      // unMountMe={this.handleThemeUnmount}/>}
-      {game: this.state.game? null : <Modal modal='theme' socket={this.socket}
-      unMountMe={this.handleThemeUnmount}/>}
-    )
-  }
-
+  // handleRolePlay(e) {    
+  //   this.setState(
+  //     // {game: this.state.game? null : <Theme room={this.props.room} 
+  //     // socket={this.socket} startRoleDistribution={this.props.startRoleDistribution}
+  //     // unMountMe={this.handleThemeUnmount}/>}
+  //     {game: this.state.game? null : <Modal modal='theme' socket={this.socket}
+  //     unMountMe={this.handleThemeUnmount}/>}
+  //   )
+  // }
   handleExit(e) {
     this.socket.emit('exit-room', 
     {room_id: this.props.room._id,
@@ -180,7 +166,6 @@ class Room extends React.Component {
     }, this.scrollToBottom);
   }
 
-  // Always make sure the window is scrolled down to the last message.
   scrollToBottom() {
     const chat = document.getElementById('chat');
     chat.scrollTop = chat.scrollHeight;
@@ -191,7 +176,6 @@ class Room extends React.Component {
     const mgsClass = this.props.curr_user.id === el.user_id ? 'self-message' : 'other-users-message'
     const imgsrc = this.props.roles[el.user_id] ? `ThemeAvatars/${this.props.roles[el.user_id].theme_id||'self'}/${this.props.roles[el.user_id].role_avator_id}.png` :
     this.props.users[el.user_id]? `/avatar${this.props.users[el.user_id].avatarId}.png`: null
-
 
     return (<div key={index} className={mgsClass}>
         <div><img src={imgsrc} /></div>
@@ -209,7 +193,6 @@ class Room extends React.Component {
   }
 
   userDisplay() {
-
     const userList = Object.keys(this.props.users).map(userId=> {
       return(<li>
         <img src={`/avatar${this.props.users[userId].avatarId}.png`} />
@@ -219,12 +202,12 @@ class Room extends React.Component {
     this.state.userShow? this.setState({userShow: null}): this.setState({userShow: userList})
   }
 
-  handleThemeUnmount() {
-    this.setState({game:null,
-    chat:[]})
-    const gameroom = document.getElementsByClassName('game-room')[0]
-    gameroom.classList.add('game-mode')
-  }
+  // handleThemeUnmount() {
+  //   this.setState({game:null,
+  //   chat:[]})
+  //   const gameroom = document.getElementsByClassName('game-room')[0]
+  //   gameroom.classList.add('game-mode')
+  // }
 
   handleExitGame() {
     this.props.deleteRoleDistribution(this.props.room._id).then(

@@ -37,7 +37,6 @@ export default class Theme extends Component {
     }
 
     handleCreate(e) {
-
         e.preventDefault()
         this.setState({createtheme: <ThemeForm closeModal={this.props.closeModal} room={this.props.room} socket={this.socket}/>})
     }
