@@ -48,7 +48,6 @@ class Room extends React.Component {
       { const users = {user_ids: this.props.room.users}       
         return this.props.fetchUsers(users)})
         .then(()=>{
-
       // this.socket = io(config[process.env.NODE_ENV].endpoint);
       this.socket = this.props.socket
       
@@ -74,14 +73,16 @@ class Room extends React.Component {
 
       this.socket.on('update-room-info', (roomData)=> {        
         // if (roomData.room_id == this.props.room._id)
-        this.props.fetchRoom(this.props.match.params.roomId)
+        this.props.fetchRoom(this.props.room._id)
         .then(()=>
         { 
           const users = {user_ids: this.props.room.users}
-          
           return this.props.fetchUsers(users)
           })
-        .then(()=>this.setState({admin:this.props.curr_user.id === this.props.room.users[0]}))
+        .then(()=>{
+          console.log(this.props.room)
+          return this.setState({admin:this.props.curr_user.id === this.props.room.users[0]})
+        })       
       })
 
       this.socket.on('push', (msg) => {

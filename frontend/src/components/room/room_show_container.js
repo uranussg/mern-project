@@ -9,7 +9,7 @@ import Room from './room_show';
 const mapStateToProps = (state, ownProps) => {
 return {
   curr_user: state.session.user,
-  room: state.rooms.user||{},
+  room: state.rooms.user || {},
   users: state.users,
   roles:state.roles || {},
   socket: ownProps.socket
