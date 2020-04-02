@@ -1,7 +1,7 @@
-import React from "react"
-import "./footer.css"
+import React from "react";
+import "./footer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faGithub, faLinkedin} from "@fortawesome/free-brands-svg-icons"
+import {faGithub, faLinkedin} from "@fortawesome/free-brands-svg-icons";
 
 class Footer extends React.Component {
 
@@ -19,9 +19,8 @@ class Footer extends React.Component {
               </div>
               <div className="default-game-column">
                 <h2>Pre-made Themes</h2>
-                <div>Avalon</div>
                 <div>Game of Thrones</div>
-                <div>Mafia</div>
+                <div>DC Heros</div>
                 <div>Harry Potter</div>
               </div>
               <div className="dev-column">
@@ -80,4 +79,4 @@ class Footer extends React.Component {
 }
 
 
-export default Footer
+export default Footer;
