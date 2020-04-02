@@ -1,8 +1,8 @@
 import React from 'react';
 import "./main_page.css";
-import backgroundImage from "../../images/gameroom3.jpg";
-import Footer from "../footer/footer"
+import Footer from "../footer/footer";
 import UserInfoContainer from './user_info/user_info_container';
+import Themes from "./themes";
 
 class MainPage extends React.Component {
 
@@ -13,8 +13,8 @@ class MainPage extends React.Component {
           <UserInfoContainer />
         </div>
         <div className="main-page-background"></div>
-        {/* <img className="main-page-image" src='/background.jpg' /> */}
         <div className="testcontent"></div>
+        <Themes />
         <Footer />
       </div>
     );
