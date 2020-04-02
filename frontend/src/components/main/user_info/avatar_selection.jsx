@@ -24,7 +24,7 @@ class AvatarSelection extends React.Component {
 
   render() {
     const avatarIds = [];
-    for (let i = 1; i <= 8; i ++){
+    for (let i = 1; i <= 10; i ++){
         avatarIds.push(i)
     }
 

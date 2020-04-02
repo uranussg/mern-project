@@ -23,6 +23,11 @@ const UserSchema = new Schema({
     avatarId: {
         type: Number,
         default: 0
+    },
+    
+    whatsUp: {
+        type: String,
+        default: ""
     }
 })
 

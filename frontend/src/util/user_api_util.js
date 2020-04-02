@@ -15,5 +15,5 @@ export const updateUser = user => {
   // 
   return axios.post(`/api/users/${user._id}`, user)
 }
-//double check ._id or .id
+
 
