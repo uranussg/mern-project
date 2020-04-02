@@ -123,7 +123,9 @@ router.post(`/:id`,(req,res) => {
   // console.log(req.body)
   // User.updateOne({_id:req.params.id}, {"avatarId": req.body.avatarId})
   User.findById(req.params.id)
-  .then(user => {user.avatarId = req.body.avatarId
+  .then(user => {
+    user.avatarId = req.body.avatarId
+    user.whatsUp = req.body.whatsUp
     user.save()
     .then(user => res.json(user))
   })

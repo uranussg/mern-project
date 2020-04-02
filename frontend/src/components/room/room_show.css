@@ -269,7 +269,7 @@ chat-section-container
     }
 }
 
-@media only screen 
+@media screen 
   and (min-height: 800px) 
   and (max-height: 1000px) {
     .chat-box {
@@ -281,7 +281,7 @@ chat-section-container
     }
   }
 
-  @media only screen 
+  @media screen 
   and (min-height: 1000px) {
     .chat-box {
         height: 70vh;
@@ -291,3 +291,7 @@ chat-section-container
         height: 5vh;
     }
   }
+
+  /* .chat-section-container{
+      display: flex;
+  } */
