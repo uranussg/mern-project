@@ -1,6 +1,8 @@
 import React from "react";
-
-
+import GOT from "../../images/got.jpg";
+import DC from "../../images/dcheros.jpg";
+import HP from "../../images/harrypotter.jpg";
+import "./themes.css"
 
 class Themes extends React.Component {
     render () {
@@ -9,16 +11,16 @@ class Themes extends React.Component {
         <div className="choose-theme-cont">
           <h2>Choose Your Theme</h2>
           <div>
-            <a href=""></a>
-            <p></p>
+            <img src={GOT} alt="Game of Thrones"/>
+            <p>Game of Thrones</p>
           </div>
           <div>
-            <a href=""></a>
-            <p></p>
+            <img src={DC} alt="DC Heros"/>
+            <p>DC Heroes</p>
           </div>
           <div>
-            <a href=""></a>
-            <p></p>
+            <img src={HP} alt="Harry Potter"/>
+            <p>Harry Potter</p>
           </div>
         </div>
         )
