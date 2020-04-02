@@ -13,19 +13,19 @@ const App = () => {
   return(
   <div>
     <Modal />
-    <Switch>
-        <ProtectedRoute exact path='/rooms/:roomId' component={RoomShowContainer}/>
+    {/* <Switch> */}
         <NavBarContainer />
 
-    </Switch>
+    {/* </Switch> */}
     <Switch>
           <Route exact path="/" component={MainPage} />
           {/* <AuthRoute exact path="/login" component={LoginFormContainer} />
           <AuthRoute exact path="/signup" component={SignupFormContainer} /> */}
           <ProtectedRoute exact path="/profile" component={ProfilePageContainer} />
-          <ProtectedRoute exact exact path="/rooms" component={RoomIndexContainer} />
+          <ProtectedRoute exact path="/rooms" component={RoomIndexContainer} />
+          <ProtectedRoute exact path='/rooms/:roomId' component={RoomShowContainer}/>
           {/* <Route exact path="/rooms/new" component={CreateRoomContainer} /> */}     
-        </Switch>
+      </Switch>
 
     {/* <Footer/> */}
   </div>

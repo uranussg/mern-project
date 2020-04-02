@@ -23,24 +23,7 @@ class Room extends React.Component {
     this.userDisplay = this.userDisplay.bind(this)
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.room.users) {
-      
-      
-  //     if (this.props.room.users.length !== Object.keys(this.props.users).length )
-  //     {
-  //       this.props.fetchUsers({user_ids: this.props.room.users})}
-  //     }
-    
-
-  //   if (this.props.match.params.roomId !== prevProps.room._id ) {
-  //     this.props.fetchRoom(this.props.match.params.roomId, {user_id: this.props.curr_user.id})
-  //   }
-
-  // }
-
   componentDidMount() {
-      console.log(this.props.match.params.roomId)
       this.props.fetchRoom(this.props.match.params.roomId, {user_id: this.props.curr_user.id})
       .then(()=>
       {       
@@ -48,8 +31,10 @@ class Room extends React.Component {
         return this.props.fetchUsers(users)})
 
         .then(()=>{
-      this.socket = socket
-      this.socket.connect()
+          console.log(`mount${this.props.curr_user.id === this.props.room.users[0]}`)
+          this.setState({admin:this.props.curr_user.id === this.props.room.users[0]})
+          this.socket = socket
+          this.socket.connect()
       
       // if(!this.state.chat.length)
       // {  
@@ -67,20 +52,20 @@ class Room extends React.Component {
                       user_id: this.props.curr_user.id}
       this.socket.emit('join-room', roomData)
       this.socket.on('disconnect', ()=> {
-          this.socket.emit('exit-room', roomData)
+          return this.socket.emit('exit-room', roomData)
       })
 
-      this.socket.on('update-room-info', ()=> {        
-        // if (roomData.room_id == this.props.room._id)
-        this.props.fetchRoom(this.props.room._id)
-        .then(()=>
-        { 
-          const users = {user_ids: this.props.room.users}
-          return this.props.fetchUsers(users)
+      this.socket.on('update-room-info', (roomData)=> {        
+        console.log(`updateroom${this.props.match.params.roomId}`)
+        // debugger
+        this.props.fetchRoom(this.props.match.params.roomId)
+        .then((room)=>
+        {   
+          console.log(`updatedroomuser${room.data.users}`)
+          return this.props.fetchUsers({user_ids: room.data.users})
           })
         .then(()=>{
-          console.log(this.props.room)
-          return this.setState({admin:this.props.curr_user.id === this.props.room.users[0]})
+
         })       
       })
 
@@ -122,6 +107,17 @@ class Room extends React.Component {
     })
   }
 
+  componentDidUpdate(prevProps) {
+        console.log(`component update${this.props.room.users && this.props.room.users.length }`)
+        if(this.props.room.users && this.props.room.users.length && (this.props.room.users !== prevProps.room.users))
+        {
+          console.log(`updatestate${this.props.room.users[0]}`)
+          this.setState({admin:this.props.curr_user.id === this.props.room.users[0]})
+        }
+        
+
+  }
+
   handleContent(event) {
     this.setState({
       content: event.target.value,
@@ -144,7 +140,6 @@ class Room extends React.Component {
     {      
       this.props.history.push('/rooms')})
   }
-
   // When the user is posting a new message.
   handleSubmit(event) {
     event.preventDefault();
@@ -169,8 +164,8 @@ class Room extends React.Component {
   }
 
   scrollToBottom() {
-    const chat = document.getElementById('chat');
-    chat.scrollTop = chat.scrollHeight;
+    let chat = document.getElementsByClassName('chat-box')[0];
+    chat.scrollTop = chat.scrollHeight
   }
 
 
@@ -196,7 +191,7 @@ class Room extends React.Component {
 
   userDisplay() {
     const userList = Object.keys(this.props.users).map(userId=> {
-      return(<li>
+      return(<li key={userId}>
         <img src={`/avatar${this.props.users[userId].avatarId}.png`} />
         <div>{this.props.users[userId].username}</div>
         </li>)
@@ -222,7 +217,7 @@ class Room extends React.Component {
   }
 
   render() {
-  
+
     return (
       <div className="game-room">
          {/* <img className="main-page-image" src='/gameroom3.jpg' /> */}
@@ -260,12 +255,12 @@ class Room extends React.Component {
                     <button onClick={this.handleExitGame} className="exit-gamemode-button">Exit Game</button>
                   ): null }
                   </div>
-                  <div className='chat-box'>
-                <Paper id="chat" elevation={3} >
-                  {this.state.chat.map((el, index) => {
-                    return this.messageDisplay(el, index)
-                  })}
-                </Paper>
+                <div className='chat-box'>
+                  <div id="chat" >
+                    {this.state.chat.map((el, index) => {
+                      return this.messageDisplay(el, index)
+                    })}
+                  </div>
                 </div>
                 <form onSubmit={this.handleSubmit} className='submit-message-box'>
                 <div className='name'>{this.props.roles[this.props.curr_user.id]? this.props.roles[this.props.curr_user.id].name:

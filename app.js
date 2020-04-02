@@ -48,20 +48,25 @@ const port = process.env.PORT || 5000;
 io.on('connection', (socket) => {
   console.log('a user connect')
   socket.on('join-room', roomData => {
-      
-      // console.log(roomData.room_id)
-    socket.join(roomData.room_id)
-    Room.findById(roomData.room_id)
-    .then(room => {
+    socket.join(roomData.room_id, () => {
+
+      console.log(`a user join ${Object.keys(socket.rooms)}`)
+      Room.findById(roomData.room_id)
+      .then(room => {
         if (roomData.user_id) {
             if (!(room.users.includes(roomData.user_id)) ) 
             {
                 room.users.push(roomData.user_id)
+                
             }
-            }
+        }
+        room.save()
+        .then(()=>socket.to(roomData.room_id).emit('update-room-info', roomData))
  
-    room.save().then(() => io.to(roomData.room_id).emit('update-room-info', roomData))
     })
+    })
+      // console.log(roomData.room_id)
+    
     // Message.find({room_id:roomData.room_id}).sort({date: -1}).limit(20).exec((err, messages) => {
     // if (err) return console.error(err);    
     // // Send the last messages to the user.
@@ -71,14 +76,15 @@ io.on('connection', (socket) => {
   })
   socket.on('disconnect', ()=> {
     console.log('user disconnect')
+    // console.log(socket.rooms)
   })
 
   socket.on('exit-room', (roomData) => {
-    socket.leave(roomData.room_id)
-    Room.findById(roomData.room_id)
-    .then(room => {
+    socket.leave(roomData.room_id, () => {
 
-      // if (roomData.user_id) {
+      console.log(`a user left ${roomData.room_id}`)
+      Room.findById(roomData.room_id)
+      .then(room => {
         if (room.users.includes(roomData.user_id) ) 
         {
           const idx = room.users.indexOf(roomData.user_id)
@@ -87,14 +93,13 @@ io.on('connection', (socket) => {
         //       Room.deleteOne({_id:room._id})
         //   }
          }
-         
-      //  }
-      room.save().then(() => io.to(roomData.room_id).emit('update-room-info', roomData))
+      room.save().then(() => socket.to(roomData.room_id).emit('update-room-info', roomData))
     })
+    })
+
   })
 
 
-  // Listen to connected users for a new message.
   socket.on('message', (msg) => {
     // console.log(msg)
     // Create a message with the content and the name of the user.

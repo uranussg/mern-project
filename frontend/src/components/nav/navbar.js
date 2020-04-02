@@ -37,8 +37,9 @@ class NavBar extends React.Component {
   }
 
   render() {
-      return (
-        <div className="navbar-div">
+        return (
+          this.props.location.pathname.includes('/rooms/') ? null : 
+          <div className="navbar-div">
           <div className="scroll-cont">
             <img src={scroll} alt="scroll" className="nav-scroll">
             </img>
@@ -47,8 +48,9 @@ class NavBar extends React.Component {
             </Link>
             {this.getLinks()}
           </div>
-        </div>
-      );
+        </div>)
+        
+ 
   }
 }
 

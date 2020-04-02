@@ -114,6 +114,7 @@ router.get('/:id', (req, res) => {
         .then(user => {
           // console.log(user)
           return res.json(user)})
+        .catch(err => console.log(err))
 });
 
 

@@ -46,8 +46,8 @@ export const fetchRoom = (room_id, userData) => dispatch => {
   
  return enterRoom(room_id, userData)
   .then(room=>{
-    
-    return dispatch(receiveRoom(room))})
+    dispatch(receiveRoom(room))
+    return room})
   .catch(err => console.log(err))
 }
 

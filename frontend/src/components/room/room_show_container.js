@@ -7,6 +7,7 @@ import { openModal } from '../../actions/modal_actions';
 import Room from './room_show';
 
 const mapStateToProps = (state, ownProps) => {
+  console.log(`container${ownProps.match.params.roomId}`)
 return {
   curr_user: state.session.user,
   room: state.rooms.user || {},

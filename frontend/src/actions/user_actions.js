@@ -27,7 +27,7 @@ export const receiveErrors = errors => ({
 });
 
 export const fetchUsers = userData => dispatch => {
-    
+    console.log(`action${userData.user_ids}`)
     APIUtil.getUsers(userData).then((users) => {
         
         dispatch(receiveUsers(users)

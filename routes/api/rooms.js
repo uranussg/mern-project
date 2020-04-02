@@ -48,7 +48,7 @@ router.post('/:room_id', (req, res) => {
   .then(room => {
     if (!room.users.includes(req.body.user_id) && req.body.user_id) room.users.push(req.body.user_id)
     room.save().then(room => res.json(room))
-  })
+  }).catch(err => res.status(404).json({ notRoomsfound: 'No rooms found' }));
 })
 
 
@@ -63,7 +63,7 @@ router.patch('/:room_id', (req, res) => {
       }
     } 
    room.save().then(room => res.json(room))
- })
+ }).catch(err => res.status(404).json({ notRoomsfound: 'No rooms found' }));
 // .then(room => res.json(room))
 })
 
@@ -80,7 +80,7 @@ router.patch('/:room_id/exit', (req, res) => {
   //     }
   //   room.save().then(room => res.json(room))
   // })
-  .then(room => res.json(room))
+  .then(room => res.json(room)).catch(err => res.status(404).json({ notRoomsfound: 'No rooms found' }));
 })
 
 router.pos
