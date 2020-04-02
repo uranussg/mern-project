@@ -142,7 +142,7 @@ io.on('connection', (socket) => {
  
               const idx =  Math.floor(Math.random() * (Object.keys(roles.length).length ))
               roleDis[user_id] = {name:roles[idx],
-                role_avator_id :Math.floor(Math.random() * 6)}
+                role_avator_id :Math.floor(Math.random() * 10)}
               roles = roles.slice(0, idx).concat(roles.slice(idx+1))
       }) 
       let gamemode = {
