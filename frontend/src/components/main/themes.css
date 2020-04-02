@@ -29,12 +29,22 @@
     position: relative;
     height: 170px;
     width: 170px;
+    border-radius: 5px;
+}
+
+.choose-theme-cont > div > img:hover {
+   position: relative;
+   transform: scale(1.2);
+   -webkit-transform: scale(1.2);
+   -moz-transform: scale(1.2);
+   z-index: 0;
 }
 
 .choose-theme-cont > div {
     position: relative;
     text-align: center;
-
+    border-radius: 1px solid black;
+    overflow: hidden;
 
 }
 
