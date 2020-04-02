@@ -8,8 +8,9 @@ class Themes extends React.Component {
     render () {
 
         return (
+        <div className="themes-cont">
+          <h2>Choose Game Room Theme</h2>
         <div className="choose-theme-cont">
-          <h2>Choose Your Theme</h2>
           <div>
             <img src={GOT} alt="Game of Thrones"/>
             <p>Game of Thrones</p>
@@ -22,6 +23,7 @@ class Themes extends React.Component {
             <img src={HP} alt="Harry Potter"/>
             <p>Harry Potter</p>
           </div>
+        </div>
         </div>
         )
     }
