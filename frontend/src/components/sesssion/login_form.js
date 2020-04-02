@@ -60,8 +60,35 @@ class LoginForm extends React.Component {
 
   handleDemo(e) {
     e.preventDefault();
-    this.props.login(this.demoUser);
-    this.props.closeModal();
+    // this.props.login(this.demoUser);
+    // this.props.closeModal();
+
+    let c = 0;
+    let p = 0;
+
+    const userInt = setInterval(() => {
+      if (c > this.demoUser.email.length) {
+        const passInt = setInterval(() => {
+          if (p > this.demoUser.password.length) {
+            const user = Object.assign({}, this.state);
+            this.props.login(user).then(this.props.closeModal);
+            clearInterval(passInt);
+          } else {
+            this.setState({
+              password: this.demoUser.password.slice(0, p)
+            });
+          }
+          p++;
+        }, 50);
+        clearInterval(userInt);
+      } else {
+        this.setState({
+          email: this.demoUser.email.slice(0, c)
+        });
+      }
+      c++;
+    }, 50);
+    
   }
 
   // Render the session errors if there are any
