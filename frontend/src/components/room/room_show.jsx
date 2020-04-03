@@ -190,13 +190,23 @@ class Room extends React.Component {
   }
 
   userDisplay() {
-    const userList = Object.keys(this.props.users).map(userId=> {
-      return(<li key={userId}>
-        <img src={`/avatar${this.props.users[userId].avatarId}.png`} />
-        <div>{this.props.users[userId].username}</div>
-        </li>)
-    });
-    this.state.userShow? this.setState({userShow: null}): this.setState({userShow: userList})
+    const userList = <div className="user-list-section">
+      <ul className='user-list'> 
+      {
+      Object.keys(this.props.users).map(userId=> {
+        return(<li key={userId}>
+          <img src={`/avatar${this.props.users[userId].avatarId}.png`} />
+          <div className="user-info">
+            <p>{this.props.users[userId].username}</p>
+            <p>What's Up:  {this.props.users[userId].whatsUp}</p>
+          </div>
+          </li>)
+      })
+      }
+      </ul>
+    </div>
+    this.state.userShow? this.setState({userShow: null}): this.setState({userShow: 
+    userList})
   }
 
   // handleThemeUnmount() {
@@ -239,11 +249,6 @@ class Room extends React.Component {
                 </div>
             </div>
             <div className="chat-section-container">
-              <div className='user-list-container'>
-                <ul className='user-list'>
-                  {this.state.userShow}
-                </ul>
-              </div>
 
               <div className="chat-section">
                     <div className='gameroom-title-bar'>
@@ -253,14 +258,17 @@ class Room extends React.Component {
 
                   {Object.keys(this.props.roles).length && this.state.admin ?(
                     <button onClick={this.handleExitGame} className="exit-gamemode-button">Exit Game</button>
-                  ): null }
+                    ): null }
                   </div>
-                <div className='chat-box'>
-                  <div id="chat" >
-                    {this.state.chat.map((el, index) => {
+                  <div className="test">
+                    {this.state.userShow}
+                    <div className='chat-box'>
+                      <div id="chat" >
+                       {this.state.chat.map((el, index) => {
                       return this.messageDisplay(el, index)
-                    })}
-                  </div>
+                     })}
+                     </div>
+                </div>
                 </div>
                 <form onSubmit={this.handleSubmit} className='submit-message-box'>
                 <div className='name'>{this.props.roles[this.props.curr_user.id]? this.props.roles[this.props.curr_user.id].name:
