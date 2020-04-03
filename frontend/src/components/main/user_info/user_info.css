@@ -5,27 +5,36 @@
 }
 
 .user-info-container {
-  background-color: rgb(21, 114, 63);
-  margin-left: 20px;
-  padding: 10px;
-  width: 300px;
+  /* background-color: rgb(21, 114, 63); */
+  /* margin: 20px; */
+  padding: 20px;
+  width: 280px;
+  height: 280px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 5px solid rgb(25, 153, 83);
+  /* border: 5px solid rgb(25, 153, 83); */
   position: relative;
+  border: 50px solid transparent;
+  border-image: url(../../../images/frame1.png) 130 round;
+  background-image: url(../../../images/old-brown-paper-texture.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 2px 2px 16px rgb(165, 101, 42);
+  box-sizing: border-box;
 }
 
 .user-info-avatar {
-  height: 150px;
+  height: auto;
   width: 150px;
   object-fit: cover;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .user-info-name-container {
-  margin-top: 10px;
+  /* margin-top: 10px; */
   width: 200px;
   height: 40px;
   background-color: tan;
@@ -33,7 +42,8 @@
 }
 
 .user-info-name {
-  color: black;
+  font-family: 'Neucha', cursive;
+  color: rgb(122, 75, 13);
   font-weight: 600;
   border: 20px solid transparent;
   border-image: url(../../../images/border0-2.png) 60 round; 
@@ -65,16 +75,22 @@
 }
 
 .avatar-header {
-  background-color: rgb(25, 153, 83);
-  color: white;
+
+  font-family: 'Neucha', cursive;
+  font-weight: 700;
+  font-size: 24px;
+  background-size: cover;
+  color: rgb(250, 219, 183);
   text-align: center;
   padding: 5px;
-  width: 150px;
-  margin-bottom: 20px;
+  width: auto;
+  /* margin-bottom: 20px; */
   border-radius: 5px;
   box-sizing: border-box;
   position: absolute;
-  top: -15px;
+  top: -45px;
+  text-shadow: 0 1px 1px rgb(247, 231, 211), 0 -1px 1px rgba(58, 42, 42, 0.7);
+
 
   /* border: 10px solid transparent; */
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
@@ -115,13 +131,15 @@
   top: 50%;
   transform: translate(-50%, -50%);
   font-size: 30px;
-  background-color: green;
-  padding: 8px;
-  border-radius: 1em;
+  /* background-color: green; */
+  background-image: url(../../../images/leaf.png);
+  background-size: 160%;
+  background-position: center;
+  padding: 16px;
+  /* border-radius: 1em; */
   color: rgb(51, 41, 9);
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
   /* background-image: linear-gradient(to bottom, rgb(5, 151, 5),  rgb(17, 90, 17)); */
-  background-image: radial-gradient(rgba(255, 255, 255, 0.521), rgba(133, 86, 0, 0.568));
 
 }
 
@@ -135,18 +153,18 @@
 
 .option-text {
   font-family: 'Neucha', cursive;;
-  margin-left: 50px;
+  margin-left: 60px;
   font-size: 30px;
   font-weight: 600;
-  color: rgb(233, 200, 124);
-  text-shadow: 0 1px 0px rgb(247, 231, 211), 0-1px 0px rgb(0, 0, 0, 0.7);
+  color: rgb(180, 129, 34);
+  text-shadow: 0 1px 0px rgb(247, 231, 211), 0-1px 0px rgba(58, 42, 42, 0.7);
 }
 
 .change-avatar-icon {
   position: absolute;
   color: black;
   font-size: 20px;
-  opacity: 0.4;
-  top: 30px;
-  right: 80px;
+  opacity: 40%;
+  top: 10px;
+  right: 40px;
 }
