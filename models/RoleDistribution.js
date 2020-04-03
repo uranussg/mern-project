@@ -15,6 +15,9 @@ const RoleDistributionSchema = new Schema({
     date: {
         type: Date, 
         default: Date.now
+    },
+    theme:{
+        type: String
     }
 })
 

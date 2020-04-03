@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { getRoles, getThemes, createTheme} from '../../util/game_api_util'
-// import { startRoleDistribution } from '../../actions/game_actions'
+import { startRoleDistribution } from '../../actions/game_actions'
 import ThemeForm from './theme_form'
 import "./theme.css"
 import {socket} from '../socket'
@@ -26,13 +26,14 @@ export default class Theme extends Component {
     }
 
     handleChoose(e) {
-
+        this.socket.connect()
         e.preventDefault()
         const gamemode = e.target.innerText
         // this.props.startRoleDistribution(e.target.getAttribute("value"), {room_id: this.props.room._id})
-        getRoles(e.target.getAttribute("value"), {room_id: this.props.room._id})
+        this.props.startRoleDistribution(e.target.getAttribute("value"), {room_id: this.props.room._id})
         .then((roles)=>{
             
+            this.socket.connect()
             this.socket.emit('gamemode', {room_id: this.props.room._id, mode: gamemode})
             // this.props.unMountMe()
             this.props.closeModal()

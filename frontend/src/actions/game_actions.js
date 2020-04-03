@@ -29,12 +29,14 @@ export const startRoleDistribution = (theme_id, roomData) => dispatch => {
   return APIUtil.getRoles(theme_id, roomData)
   .then(roles => {
       
-    dispatch(receiveRoles(roles))}, err => console.log(err))   
+    return dispatch(receiveRoles(roles))}, err => console.log(err))   
 }
 
 export const deleteRoleDistribution = (room_id) => dispatch => {
+  
   return APIUtil.deleteDistribution(room_id)
     .then(() => {
+      
       dispatch(deleteRoles())
     })
     .catch(err => console.log(err))

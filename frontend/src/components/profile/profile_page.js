@@ -22,7 +22,7 @@ class ProfilePage extends React.Component {
     }
 
     setEdit(){
-        // debugger
+        // 
         if (!this.state.edit){
             this.setState({edit: true})
         } else {

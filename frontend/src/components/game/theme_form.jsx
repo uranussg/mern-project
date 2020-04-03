@@ -67,7 +67,7 @@ export default class ThemeForm extends Component {
                          :
                          (   
                         <form  onSubmit={this.roleForm}>
-                         <label for="rolesnumber">Number of Roles:</label>
+                         <label className="rolesnumber">Number of Roles:</label>
                          <input type="number" id='rolesnumber' min={this.props.room.users.length}/>
                          <button type='submit' >Yep!</button>
                          </form>

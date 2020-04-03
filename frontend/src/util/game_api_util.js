@@ -21,6 +21,7 @@ export const getDistribution = (room_id) => {
 
 
 export const deleteDistribution = (room_id) => {
+  
   return axios.delete(`api/games/roleplay/${room_id}`)
 }
 
