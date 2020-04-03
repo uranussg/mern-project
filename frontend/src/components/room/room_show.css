@@ -89,7 +89,7 @@
     flex-grow: 99;
 }
 
-  .submit-message-box {
+.submit-message-box {
     border-top: 2px solid rgb(230, 206, 72);
     background-color: rgb(238, 216, 159, 0.9);
     border-radius: 0px 0px 5px 5px;
@@ -98,21 +98,21 @@
     justify-content: space-between;
     margin-bottom: 20px;
     flex-grow: 1;
-  }
+}
 
-  .submit-message-box button{
-      margin-left: 20px;
-      margin-top: -3px;
-  }
+.submit-message-box button{
+    margin-left: 20px;
+    margin-top: -3px;
+}
 
-  .submit-message-box .name{
-      min-width: 80px;
-      text-align: end;
-      margin-right: 10px;
-      font-size: 20px;
-      height: 0 auto;
-      margin-top: 3px;
-  }
+.submit-message-box .name{
+    min-width: 80px;
+    text-align: end;
+    margin-right: 10px;
+    font-size: 20px;
+    height: 0 auto;
+    margin-top: 3px;
+}
 
 .show-page-background {
     background-image: url(../../images/gameroom3.png); 
@@ -124,86 +124,84 @@
     opacity: 0.6;
     z-index: -1;
     background-size: cover;
-  }
+}
 
-  .show-page-buttons {
-      display: flex;
-      margin-left: 2%;
-      /* min-height: 15vh; */
-  }
+.show-page-buttons {
+    display: flex;
+    margin-left: 2%;
+    /* min-height: 15vh; */
+}
 
-  .game-room input {
-      padding: 2px;
-      /* width: 70%; */
-      flex-grow: 99;
-      border-radius: 3px;
-  }
+.game-room input {
+    padding: 2px;
+    /* width: 70%; */
+    flex-grow: 99;
+    border-radius: 3px;
+}
 
-  .role-play-dropdown {
-    position: relative;
-    display: inline-block;
-  }
+.role-play-dropdown {
+position: relative;
+display: inline-block;
+}
 
-  .theme-list {
-      background-color: rgb(255, 255, 240);
-      border-radius: 5px;
-      overflow: hidden;
-      width: 200px;
-      line-height: 25px;
-      padding: 20px;
-      text-align: center;
+.theme-list {
+    background-color: rgb(255, 255, 240);
+    border-radius: 5px;
+    overflow: hidden;
+    width: 200px;
+    line-height: 25px;
+    padding: 20px;
+    text-align: center;
 
-  }
+}
 
-  .theme-list li:hover {
-      background-color: rgb(238, 216, 159);
-      transform: scale(1.1);
-  }
+.theme-list li:hover {
+    background-color: rgb(238, 216, 159);
+    transform: scale(1.1);
+}
 
-  .theme-list li:active {
-    background-color: rgb(241, 200, 94);
-  }
+.theme-list li:active {
+background-color: rgb(241, 200, 94);
+}
 
-  .exit-gamemode button {
-      position: absolute;
-     
-  }
+.exit-gamemode button {
+    position: absolute;
+    
+}
 
-  .exit-gamemode-button {
-      width: 150px;
-      height: 23px;
-  }
+.exit-gamemode-button {
+    width: 150px;
+    height: 23px;
+}
 
-  .self-message .content {
-      background-color:  rgb(245, 208, 139);
-      border-radius: 15px 15px 0 15px;
-      margin: 10px;
-      padding: 10px;
-      font-size: 14px;
-      overflow-wrap: anywhere;
-  }
+.self-message .content {
+    background-color:  rgb(245, 208, 139);
+    border-radius: 15px 15px 0 15px;
+    margin: 10px;
+    padding: 10px;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
 
-  .other-users-message .content {
-      background-color:rgb(200, 229, 155);
-      margin: 10px;
-      padding: 10px;
-      border-radius: 15px 15px 15px 0;
-      font-size: 14px;
+.other-users-message .content {
+    background-color:rgb(200, 229, 155);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 15px 15px 15px 0;
+    font-size: 14px;
 
-      overflow-wrap: anywhere;
-  }
+    overflow-wrap: anywhere;
+}
 
-  
-  .other-users-message span:first-child, .self-message span:first-child {
-      font-size: 16px;
-      margin-right: 8px;
-  }
 
-  .other-users-message span:nth-child(2), .self-message span:nth-child(2) {
+.other-users-message span:first-child, .self-message span:first-child {
+    font-size: 16px;
+    margin-right: 8px;
+}
+
+.other-users-message span:nth-child(2), .self-message span:nth-child(2) {
     font-size: 16px;
     width: 100px;
-   /* question */
-
 }
 
 .other-users-message img, .self-message img {
@@ -232,7 +230,7 @@
 }
 
 .user-list-section {
-    background-color: rgba(44, 44, 44, 0.9);
+    background-color: rgba(238, 222, 181, 0.9);
 }
 
 .game-mode .chat-box {
@@ -280,6 +278,10 @@
     color: rgb(235, 235, 235);
 }
 
+.game-mode .user-list-section {
+    background-color: rgba(44, 44, 44, 0.9);
+}
+
 @media screen and (max-height: 800px) {
     .chat-box {
         height: 50vh;
@@ -313,6 +315,3 @@
     }
   }
 
-  /* .chat-section-container{
-      display: flex;
-  } */
