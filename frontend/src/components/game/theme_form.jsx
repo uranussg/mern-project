@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import "./theme.css"
 
 export default class ThemeForm extends Component {
     constructor(props){
@@ -26,7 +27,7 @@ export default class ThemeForm extends Component {
             </li>)
             
         }
-        roleList.push(<button type='submit' onClick={this.handleSubmit}>submit</button>)
+        roleList.push(<button type='submit' onClick={this.handleSubmit}>Submit</button>)
         this.setState({rolesInput: roleList})
     }
 
@@ -51,20 +52,26 @@ export default class ThemeForm extends Component {
     render() {
 
         return (
-            <div>
-                    <div className='themename'>
-                    <input type="text" onChange={this.handleChange('theme')} value={this.state.theme}/>
+            <div className="create-theme-form">
+                    <div className='theme-name'>
+                        <lable> Theme Name
+                           <input type="text" onChange={this.handleChange('theme')} value={this.state.theme}/>
+                        </lable>
                     </div>
                     <div>
                         {this.state.rolesInput?
-                         this.state.rolesInput
+                        <div className="character-form">
+                            <p>Chatacter Names</p>
+                         {this.state.rolesInput}
+                         </div>
                          :
-                         (
-                        <form onSubmit={this.roleForm}>
-                         <label for="rolesnumber">Number of Roles?</label>
+                         (   
+                        <form  onSubmit={this.roleForm}>
+                         <label for="rolesnumber">Number of Roles:</label>
                          <input type="number" id='rolesnumber' min={this.props.room.users.length}/>
-                         <button type='submit' >yep!</button>
-                         </form>)}
+                         <button type='submit' >Yep!</button>
+                         </form>
+                         )}
                     
                     </div>
             </div>
