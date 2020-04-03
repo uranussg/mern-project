@@ -115,7 +115,7 @@
 }
 
 .show-page-background {
-    background-image: url(../../images/gameroom3.png); 
+    background-image: url(../../images/gameroom3.jpg); 
     height: 100vh;
     width: 100vw;
     position: fixed;
@@ -280,6 +280,7 @@ background-color: rgb(241, 200, 94);
 
 .game-mode .user-list-section {
     background-color: rgba(44, 44, 44, 0.9);
+    color: white;
 }
 
 @media screen and (max-height: 800px) {
