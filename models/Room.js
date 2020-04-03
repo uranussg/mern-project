@@ -15,8 +15,7 @@ const RoomSchema = new Schema({
         default: Date.now
     },
     game: {
-        type:String,
-        default:''
+        type:String
     }
 })
 

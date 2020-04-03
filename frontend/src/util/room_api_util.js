@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-export const getRooms = () => {
-  return axios.get('/api/rooms')
+export const getRooms = (option) => {
+  console.log(option)
+  return axios.get(`/api/rooms/${option}`)
 };
 
 

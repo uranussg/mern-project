@@ -4,6 +4,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: 'Lobster', cursive;;
+
 }
 
 
@@ -27,16 +29,17 @@
 }
 
 .room-info-container p {
-  font-family: Arial, sans-serif;
-  font-weight: 300;
+  font-family: 'Neucha', cursive;
+  font-weight: 600;
+  color: rgb(155, 88, 12);
 }
 
-.room-owner {
+.room-date {
   margin-top: 15px;
 }
 
 .room-index-main h1{
-  font-family: Arial, sans-serif;
+  font-family: 'Satisfy', cursive;
   font-size: 40px;
   font-weight: bold;
   text-align: center;
@@ -55,7 +58,7 @@
   font-size: 20px;
 }
 
-.room-owner {
+.room-date {
   font-size: 15px;
 }
 
@@ -77,6 +80,12 @@
   position: relative;
   top:3px;
   box-shadow: 0 3px 0 rgb(207, 158, 34), 0 3px 6px rgba(0, 0, 0, 0.7);
+}
+
+.in-game .room-join-button {
+  background-color: rgb(168, 168, 168);
+  color: rgb(233, 233, 233);
+  box-shadow: none;
 }
 
 .room-index-main {
