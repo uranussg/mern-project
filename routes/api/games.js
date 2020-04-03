@@ -67,7 +67,7 @@ router.post('/roleplay/:theme_id', (req, res) => {
         const roleDisRes = new RoleDistribution({
             distribution:roleDis,
             room_id: room._id,
-            theme:'',
+            theme:req.params.theme_id,
         })
         roleDisRes.save().then(roles => res.json(roles))
     
@@ -97,7 +97,7 @@ router.get('/roleplay/:room_id',(req, res) => {
 })
 
 router.delete('/roleplay/:room_id',(req, res) => {
-
+  console.log(`deletedistribution in ${req.params.room_id}`)
   RoleDistribution.deleteMany({room_id: req.params.room_id})
   .then(distribution => {
     // console.log(distribution)

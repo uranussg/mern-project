@@ -25,12 +25,12 @@ class WhatsUpEditor extends React.Component {
 
     
     handleInput(e){
-        // debugger
+        // 
         this.setState({whatsUp: e.target.value})
     }
     
     handleSubmit(e){
-        // debugger
+        // 
         if(typeof this.props.user === "undefined")
         {this.props.fetchUser(this.props.currentUser.id)}
         const updatedUser = this.props.user

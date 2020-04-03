@@ -121,14 +121,14 @@ io.on('connection', (socket) => {
 
 
   socket.on('gamemode', (gm) => {
-    console.log(gm)
+    console.log(`gamemode${gm}`)
     // Room.findOneAndUpdate({_id: gm.room_id}, {game: gm.mode})     
     Room.findById(gm.room_id)
     .then((room) => {
       
       room.game = gm.mode
       room.save()
-      console.log(room)
+      console.log(`found room in gamemode${room}`)
     })
 
     const gamemode = {
@@ -139,10 +139,10 @@ io.on('connection', (socket) => {
   })
 
   socket.on('createtheme', (themeData) => {
-    console.log(themeData)
+    console.log(`createtheme${themeData}`)
     Room.findById(themeData.room_id).then(room =>
       {
-        console.log(room)
+        console.log(`self defined theme in ${room}`)
       let roleDis = {}
       let roles = Object.values(themeData.roles)
 
@@ -153,13 +153,27 @@ io.on('connection', (socket) => {
                 role_avator_id :Math.floor(Math.random() * 10)}
               roles = roles.slice(0, idx).concat(roles.slice(idx+1))
       }) 
-      let gamemode = {
+      const roleDisRes = new RoleDistribution({
+        distribution:roleDis,
+        room_id: room._id,
+        theme:themeData.theme,
+      })
+      roleDisRes.save()
+      .then(()=>{
+        room.game = themeData.theme
+        return room.save()
+      })
+      .then((room)=>{
+  
+        let gamemode = {
         room_id: themeData.room_id,
-        roles: roleDis,
+        // roles: roleDis,
         mode: themeData.theme
       }
       console.log(gamemode)
       io.in(themeData.room_id).emit('modeon', gamemode)
+      })
+      
     })
   })
 });

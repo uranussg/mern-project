@@ -12,7 +12,7 @@ class Room extends React.Component {
       content: '',
       roles:{},
       userShow: null,
-      game:false
+      game:''
     };
     this.handleContent = this.handleContent.bind(this)
     this.handleSubmit =this.handleSubmit.bind(this)
@@ -27,7 +27,15 @@ class Room extends React.Component {
       this.props.fetchRoom(this.props.match.params.roomId, {user_id: this.props.curr_user.id})
       .then(()=>
       {       
-        const users = {user_ids: this.props.room.users}       
+        const users = {user_ids: this.props.room.users}
+        if(this.props.room.game){
+          this.props.fetchDistribution(this.props.match.params.roomId)
+                .then(()=> {
+                this.setState({roles: this.props.roles, chat:[], game: this.props.room.game})
+                const gameroom = document.getElementsByClassName('game-room')[0]
+                gameroom.classList.add('game-mode')
+                })
+        }       
         return this.props.fetchUsers(users)})
 
         .then(()=>{
@@ -57,7 +65,7 @@ class Room extends React.Component {
 
       this.socket.on('update-room-info', (roomData)=> {        
         console.log(`updateroom${this.props.match.params.roomId}`)
-        // debugger
+        // 
         this.props.fetchRoom(this.props.match.params.roomId)
         .then((room)=>
         {   
@@ -87,7 +95,7 @@ class Room extends React.Component {
             }
             else{
 
-                this.props.fetchDistribution(this.props.room._id)
+                this.props.fetchDistribution(this.props.match.params.roomId)
                 .then(()=> {
                 this.setState({roles: this.props.roles, chat:[], game: gamemode.mode})
                 const gameroom = document.getElementsByClassName('game-room')[0]
@@ -132,13 +140,32 @@ class Room extends React.Component {
   //     unMountMe={this.handleThemeUnmount}/>}
   //   )
   // }
-  handleExit(e) {
-    this.socket.emit('exit-room', 
-    {room_id: this.props.room._id,
-      user_id:this.props.curr_user.id})
-    this.props.exitRoom(this.props.room._id, {user_id: this.props.curr_user.id}).then(()=>
-    {      
-      this.props.history.push('/rooms')})
+  handleExit(e) {    
+    
+    const roomId = this.props.room._id
+    if(this.state.game && this.state.admin) {
+      console.log(`exit room & exit game`)          
+        this.props.deleteRoleDistribution(roomId).then(()=> 
+        { this.socket.emit('gamemode', {room_id: roomId, mode:''})
+          // this.socket.emit('exit-room', 
+          // {room_id: this.props.room._id,
+          // user_id:this.props.curr_user.id})
+
+          // this.props.exitRoom(this.props.room._id, {user_id: this.props.curr_user.id}).then(()=>
+          // {      
+          // this.props.history.push('/rooms')})
+          })
+    }
+    // else {
+        this.socket.emit('exit-room', 
+        {room_id: roomId,
+        user_id:this.props.curr_user.id})
+
+        this.props.exitRoom(this.props.room._id, {user_id: this.props.curr_user.id}).then(()=>
+        {      
+        this.props.history.push('/rooms')})
+      // }
+   
   }
   // When the user is posting a new message.
   handleSubmit(event) {
