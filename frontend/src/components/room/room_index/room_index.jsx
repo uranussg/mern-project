@@ -24,12 +24,14 @@ class RoomIndex extends Component {
   render() {
     return (
       <div className='room-index-main'>
-        {/* <img className="main-page-image" src='/gameroom3.jpg' /> */}
         <div className="main-page-background"></div>
         <h1>All Rooms</h1>
         <div className='toggle-rooms'>
-          <label> Show Room in Game</label>
-          <input type="checkbox" onChange={this.handleChange}/>
+          <span className="toggle-switch-text"> Show Rooms in Game</span>
+          <label className="switch">
+            <input type="checkbox" onChange={this.handleChange}/>
+            <span className="slider round"></span>
+          </label>
         </div>
         <ul className="rooms-container">         
           {this.props.rooms.map((room) => {

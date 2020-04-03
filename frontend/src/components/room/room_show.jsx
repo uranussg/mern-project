@@ -257,7 +257,6 @@ class Room extends React.Component {
 
     return (
       <div className="game-room">
-         {/* <img className="main-page-image" src='/gameroom3.jpg' /> */}
          <div className="game-room-container">
          <div className="show-page-background"></div>
        
