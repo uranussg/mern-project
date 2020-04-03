@@ -11,7 +11,7 @@
 
 .room-info-container {
   background-color: rgba(255,255,255,0.85);
-  padding: 20px;
+  padding: 6px 20px;
   width: 80%;
   margin-bottom: 20px;
   display: flex;
@@ -19,9 +19,11 @@
   position: relative;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-image: url(../../../images/border0-2.png); 
-  background-repeat: no-repeat;
-  background-size: 100% 100%; 
+  border: 20px solid transparent;
+  border-image: url(../../../images/border0-2.png) 60 round; 
+  box-sizing: border-box;
+  /* background-repeat: no-repeat; */
+  /* background-size: cover;  */
 }
 
 .inner-box {
@@ -65,13 +67,16 @@
 .room-join-button {
   position: relative;
   border: none;
-  border-radius: 3px;
+  border-radius: 5px;
   right: 10px;
   bottom: 10px;
   font-size: 20px;
-  padding: 10px;
+  padding: 10px 20px;
   top: 1px;
   display: inline-block;
+  font-family: 'Neucha', cursive;
+  color: rgb(145, 81, 8);
+  margin-left: 10px;
   background-color: rgb(231, 181, 54);
   box-shadow: 0 6px 0 rgb(207, 158, 34), 0 6px 15px rgba(0, 0, 0, 0.5)
 }
@@ -142,19 +147,18 @@
   width: 22px;
   left: 3px;
   bottom: 3px;
-  background-color: rgb(207, 153, 90);;
-  /* background-color: rgba(255, 255, 255, 0.8); */
+  background-color: rgb(207, 158, 34);
+  /* background-color: rgb(219, 164, 25); */
   -webkit-transition: .4s;
   transition: .4s;
-  /* background: radial-gradient(white, rgb(197, 197, 197)) */
 }
 
 input:checked + .slider {
-  background-color:  rgba(181, 252, 124, 0.8);
+  background-color:  rgba(171, 238, 117, 0.8);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px rgba(181, 252, 124, 0.8);
+  box-shadow: 0 0 1px rgba(171, 238, 117, 0.8);
 }
 
 input:checked + .slider:before {
