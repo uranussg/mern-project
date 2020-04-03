@@ -11,8 +11,11 @@ router.get("/test", (req,res) => {
     res.json({msg: "this is the room router"})
 })
 
-router.get('/', (req, res) => {
-  Room.find()
+router.get('/:option', (req, res) => {
+  console.log(req.params.option )
+  const filter = req.params.option === 'all'? {} : {game:''}
+  // console.log(filter)
+  Room.find(filter)
     .sort({ date: -1 })
     .then(rooms => {
       const roomsRes = {};

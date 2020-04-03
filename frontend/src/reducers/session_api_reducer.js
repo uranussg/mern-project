@@ -4,7 +4,7 @@ import { RECEIVE_CURRENT_USER,
 
 const initialState = {
 isAuthenticated: false,
-user: {}
+user: undefined
 };
 
 export default function(state = initialState, action) {

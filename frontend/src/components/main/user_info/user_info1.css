@@ -1,0 +1,143 @@
+.user-controls-container {
+    display: flex;
+    margin: auto;
+    margin: 50px auto;
+  }
+  
+  .user-info-container {
+    background-color: rgb(21, 114, 63);
+    margin-left: 20px;
+    padding: 10px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid rgb(25, 153, 83);
+    position: relative;
+  }
+  
+  .user-info-avatar {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    margin-top: 10px;
+  }
+  
+  .user-info-name-container {
+    margin-top: 10px;
+    width: 200px;
+    height: 40px;
+    background-color: tan;
+    position: relative;
+  }
+  
+  .user-info-name {
+    color: black;
+    font-weight: 600;
+    border: 20px solid transparent;
+    border-image: url(../../../images/border0-2.png) 60 round; 
+    border-radius: 2px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* text-shadow: -1px 1px 0 rgb(25, 153, 83),
+                    1px 1px 0 rgb(25, 153, 83),
+                   1px -1px 0 rgb(25, 153, 83),
+                  -1px -1px 0 rgb(25, 153, 83); */
+  }
+  
+  .name-background {
+    position: absolute;
+    bottom: 10px;
+    height: 35px;
+    width: 70px;
+    background-color: white; 
+  }
+  
+  .avatar-header {
+    background-color: rgb(25, 153, 83);
+    color: white;
+    text-align: center;
+    padding: 5px;
+    width: 150px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    position: absolute;
+    top: -15px;
+  
+    /* border: 10px solid transparent; */
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    /* border-image: url(../../../images/border0.png) 60 round;  */
+    /* background-repeat: no-repeat;
+    background-size: 100% 100%;  */
+  }
+  
+  .user-options-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 60px;
+  }
+  
+  .user-option {
+    background-color: rgb(21, 114, 63);
+    position: relative;
+    height: 70px;
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .user-option:hover .redirect-icon {
+    margin-right: 15px;
+  }
+  
+  .option-icon {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    background-color: rgb(25, 153, 83);
+    padding: 8px;
+    border-radius: 3px;
+    color: rgb(9, 51, 28);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* background-image: url('../../../images/dirt-textures-png-1-transparent.png'); */
+  }
+  
+  
+  .redirect-icon {
+    margin-right: 20px;
+    font-size: 30px;
+    /* color: rgb(9, 51, 28); */
+    color: white;
+    transition: all .5s;
+  }
+  
+  .option-text {
+    margin-left: 40px;
+    font-size: 30px;
+    font-weight: 600;
+    color: white;
+  }
+  
+  .change-avatar-icon {
+    position: absolute;
+    color: black;
+    font-size: 20px;
+    opacity: 40%;
+    top: 30px;
+    right: 80px;
+  }

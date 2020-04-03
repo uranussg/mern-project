@@ -36,8 +36,8 @@ export const exitRoom = (room_id, userData) =>dispatch=> {
     .catch(err => console.log(err))
 }
 
-export const fetchRooms = () => dispatch => (
-  getRooms()
+export const fetchRooms = (option) => dispatch => (
+  getRooms(option)
     .then(rooms => dispatch(receiveRooms(rooms)))
     .catch(err => console.log(err))
 );

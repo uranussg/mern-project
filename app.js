@@ -121,7 +121,15 @@ io.on('connection', (socket) => {
 
 
   socket.on('gamemode', (gm) => {
-    Room.findByIdAndUpdate(gm.room_id, {game: gm.mode})     
+    console.log(gm)
+    // Room.findOneAndUpdate({_id: gm.room_id}, {game: gm.mode})     
+    Room.findById(gm.room_id)
+    .then((room) => {
+      
+      room.game = gm.mode
+      room.save()
+      console.log(room)
+    })
 
     const gamemode = {
       room_id: gm.room_id,

@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchRooms: () => dispatch(fetchRooms()),
+    fetchRooms: (option) => dispatch(fetchRooms(option)),
     enterRoom: (room_id) => dispatch(enterRoom(room_id))
   };
 };

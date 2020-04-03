@@ -209,7 +209,7 @@ class Room extends React.Component {
   handleExitGame() {
     this.props.deleteRoleDistribution(this.props.room._id).then(
       ()=> {
-        this.socket.emit('gamemode', {room_id: this.props.room._id, mode:false})
+        this.socket.emit('gamemode', {room_id: this.props.room._id, mode:''})
         const gameroom = document.getElementsByClassName('game-room')[0]
         gameroom.classList.remove('game-mode')
       this.setState({roles: {}, chat:[], game:''})}
