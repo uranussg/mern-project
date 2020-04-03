@@ -146,7 +146,7 @@
   position: absolute;
   color: black;
   font-size: 20px;
-  opacity: 40%;
+  opacity: 0.4;
   top: 30px;
   right: 80px;
 }

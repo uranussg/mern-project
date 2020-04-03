@@ -99,7 +99,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  opacity: 60%;
+  opacity: 0.6;
   z-index: 0;
   background-size: cover;
 }
