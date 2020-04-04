@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import RoomIndexItem from './room_index_item';
-import backgroundImage from "../../../images/gameroom3.jpg";
 
 class RoomIndex extends Component {
   componentDidMount() {
