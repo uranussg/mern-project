@@ -14,6 +14,10 @@ class UserInfo extends React.Component {
     this.props.openModal("avatars");
   }
 
+  openTutorialModal() {
+    this.props.openModal("tutorial")
+  }
+
   componentDidMount() {
     if (this.props.sessionUser) {
       console.log(this.props.sessionUser)
@@ -62,7 +66,7 @@ class UserInfo extends React.Component {
                 icon={faAngleDoubleRight}
               />
             </Link>
-            <Link to="/" className="tutorial-game-option user-option">
+            <Link onClick={this.openTutorialModal.bind(this)} className="tutorial-game-option user-option">
               <FontAwesomeIcon className="option-icon" icon={faQuestionCircle} />
               <p className="option-text">Tutorial</p>
               <FontAwesomeIcon

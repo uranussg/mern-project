@@ -4,7 +4,7 @@ import DC from "../../images/dcheros.jpg";
 import HP from "../../images/harrypotter.jpg";
 import "./themes.css"
 
-class Themes extends React.Component {
+class Tutorial extends React.Component {
     render () {
 
         return (
@@ -30,4 +30,4 @@ class Themes extends React.Component {
 }
 
 
-export default Themes;
+export default Tutorial;
