@@ -2,7 +2,7 @@ import React from 'react';
 import "./main_page.css";
 
 import UserInfoContainer from './user_info/user_info_container';
-
+import Footer from "../footer/footer";
 
 class MainPage extends React.Component {
 
@@ -15,7 +15,7 @@ class MainPage extends React.Component {
         <div className="main-page-background"></div>
         {/* <div className="testcontent"></div> */}
         {/* <Themes /> */}
-        {/* <Footer /> */}
+        <Footer />
       </div>
     );
   }
