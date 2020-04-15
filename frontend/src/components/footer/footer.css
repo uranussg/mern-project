@@ -5,8 +5,6 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     z-index: 2;
     width: 100vw;
-    position: absolute;
-    bottom: 0;
 }
 
 .footer * {
