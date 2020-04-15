@@ -5,7 +5,8 @@ import HP from "../../images/harrypotter.jpg";
 import "./tutorial.css";
 import T1 from "../../images/login.jpg";
 import S1 from "../../images/signup.jpg";
-import JG from "../../images/joinGame.jpg";
+import JG from "../../images/joinOrCreate.jpg";
+import RP from "../../images/rolePlayRow.png";
 
 class Tutorial extends React.Component {
   render () {
@@ -23,7 +24,10 @@ class Tutorial extends React.Component {
                 
             </li>
             <li>Join an existing room or start a new room to become the game admin</li>
+            <img src={JG} className="join-create-img"/> 
             <li>The admin can activate a role-playing theme</li>
+            <img src={RP}  className="role-play-img"/> 
+
           </ol>
         </div>
         <div className="themes-cont">

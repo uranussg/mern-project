@@ -48,6 +48,13 @@
     width: 40px;
 }
 
+.join-create-img {
+    height: 100px;
+    width: 400px;
+    text-align: left;
+    margin: 10px 0 10px 0;
+}
+
 .choose-theme-cont {
     display: flex;
     justify-content: space-around;
