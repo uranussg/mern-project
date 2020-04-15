@@ -13,6 +13,9 @@ class Tutorial extends React.Component {
 
     return (
       <div className="tutorial-div">
+        <div onClick={this.props.closeModal} className="close-x">
+          ×
+        </div>
           <h1>Theme Room Tutorial</h1>
         <div className="tutorial-headline">
           <p>The Theme Room is a chat app that allows users to pick a room theme</p>

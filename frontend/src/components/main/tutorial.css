@@ -6,6 +6,13 @@
     text-align: center;
 }
 
+.close-x {
+  float: right;
+  font-size: 30px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
 .tutorial-div > h1{
     font-family: 'Satisfy', cursive;
     font-size: 35px;
