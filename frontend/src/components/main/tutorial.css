@@ -1,26 +1,53 @@
 
 .tutorial-div {
     background-color: rgb(107, 49, 49);
-    margin-bottom: 20px;
-    padding-bottom: 35px
+    margin-bottom: 0px;
+    padding-bottom: 15px;
+    text-align: center;
 }
 
-.themes-cont > h2{
-    font-size: 40px;
-    font-family: bebas-neue, sans-serif, "Helvetica Neue", Helvetica;
+.tutorial-div > h1{
+    font-family: 'Satisfy', cursive;
+    font-size: 30px;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 10px;
-    padding-top: 30px;
-    padding-bottom: 10px;
-    color: rgb(56, 24, 24);
+    padding-top: 10px;
+    /* padding-bottom: 5px; */
+    color: rgb(32, 14, 14);
+}
+
+.tutorial-headline > p {
+    font-size: 16px;
+    font-family: 'Neucha', cursive;
+
+}
+
+.tutorial-div > div > h2{
+    font-family: 'Satisfy', cursive;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 0 10px 0;
+    /* padding-bottom: 5px; */
+    color: rgb(32, 14, 14);
+}
+
+.tutorial-steps ol {
+    margin: 0 30px 0 30px;
+    padding: 0px
+} 
+
+.tutorial-steps li {
+    font-size: 16px;
+    font-family: 'Neucha', cursive;
+    text-align: left;
 }
 
 .choose-theme-cont {
     display: flex;
     justify-content: space-around;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 
