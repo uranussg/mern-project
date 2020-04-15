@@ -44,7 +44,7 @@ class NavBar extends React.Component {
             <img src={scroll} alt="scroll" className="nav-scroll">
             </img>
             <Link to={"/"} className="header-link">
-              <h1 className="logo-link">The Game Room</h1>
+              <h1 className="logo-link">Theme Chat Room</h1>
             </Link>
             {this.getLinks()}
           </div>

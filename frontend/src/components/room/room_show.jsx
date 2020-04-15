@@ -220,7 +220,7 @@ class Room extends React.Component {
     const userList = <div className="user-list-section">
       <ul className='user-list'> 
       {
-      Object.keys(this.props.users).map(userId=> {
+      Object.keys(this.props.users).reverse().map(userId=> {
         return(<li key={userId}>
           <img src={`/avatar${this.props.users[userId].avatarId}.png`} />
           <div className="user-info">
@@ -299,7 +299,7 @@ class Room extends React.Component {
                 <form onSubmit={this.handleSubmit} className='submit-message-box'>
                 <div className='name'>{this.props.roles[this.props.curr_user.id]? this.props.roles[this.props.curr_user.id].name:
                     this.props.users[this.props.curr_user.id]? this.props.users[this.props.curr_user.id].username: this.props.curr_user.id}</div>
-                <input
+                <input minLength='1'
                   value={this.state.content}
                   onChange={this.handleContent}
                 />

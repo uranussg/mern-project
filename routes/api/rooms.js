@@ -38,7 +38,8 @@ router.post('/',
 
     const newRoom = new Room({
       title: req.body.title,
-      users: [req.body.user_id]
+      users: [req.body.user_id],
+      game: ""
     });
 
 
