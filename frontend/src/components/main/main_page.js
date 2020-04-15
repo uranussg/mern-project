@@ -1,6 +1,6 @@
 import React from 'react';
 import "./main_page.css";
-import Footer from "../footer/footer";
+
 import UserInfoContainer from './user_info/user_info_container';
 
 
@@ -15,7 +15,7 @@ class MainPage extends React.Component {
         <div className="main-page-background"></div>
         {/* <div className="testcontent"></div> */}
         {/* <Themes /> */}
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }

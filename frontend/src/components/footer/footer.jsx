@@ -2,8 +2,12 @@ import React from "react";
 import "./footer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faGithub, faLinkedin} from "@fortawesome/free-brands-svg-icons";
+import { Link } from 'react-router-dom'
+import { openModal } from '../../actions/modal_actions'
 
 class Footer extends React.Component {
+
+
 
     render() {
 
@@ -13,8 +17,8 @@ class Footer extends React.Component {
             <div className="columns-cont">
               <div className="nav-column">
                 <h2>Navigate</h2>
-                <div>Home</div>
-                <div>How to Play</div>
+                <div><Link to='/'>Home</Link></div>
+                <div ><Link to='rooms'>Join a Room</Link></div>
                 <div></div>
               </div>
               <div className="default-game-column">
