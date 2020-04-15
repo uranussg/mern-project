@@ -44,18 +44,18 @@ class Room extends React.Component {
           this.socket = socket
           this.socket.connect()
       
-      // if(!this.state.chat.length)
-      // {  
-      // this.socket.on('init', (msgs) => {     
-      //     const chatmsgsId = this.state.chat.map(msg => msg._id)
-      //     const filteredmsgs = msgs.filter(message=> message.room_id === this.props.room._id && !chatmsgsId.includes(message._id))
+      if(!this.state.chat.length)
+      {  
+      this.socket.on('init', (msgs) => {     
+          const chatmsgsId = this.state.chat.map(msg => msg._id)
+          const filteredmsgs = msgs.filter(message=> message.room_id === this.props.room._id && !chatmsgsId.includes(message._id))
           
-      //     this.setState((state) => ({
-      //       chat: [...state.chat, ...filteredmsgs.reverse()],
-      //       admin: this.props.room.users[0] === this.props.curr_user.id
-      //     }), this.scrollToBottom);
-      //   });   
-      // }
+          this.setState((state) => ({
+            chat: [...state.chat, ...filteredmsgs.reverse()],
+            admin: this.props.room.users[0] === this.props.curr_user.id
+          }), this.scrollToBottom);
+        });   
+      }
       const roomData={room_id: this.props.room._id,
                       user_id: this.props.curr_user.id}
       this.socket.emit('join-room', roomData)
