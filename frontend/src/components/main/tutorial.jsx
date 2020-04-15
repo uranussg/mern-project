@@ -2,7 +2,10 @@ import React from "react";
 import GOT from "../../images/got.jpg";
 import DC from "../../images/dcheros.jpg";
 import HP from "../../images/harrypotter.jpg";
-import "./tutorial.css"
+import "./tutorial.css";
+import T1 from "../../images/login.jpg";
+import S1 from "../../images/signup.jpg";
+import JG from "../../images/joinGame.jpg";
 
 class Tutorial extends React.Component {
   render () {
@@ -16,8 +19,10 @@ class Tutorial extends React.Component {
         <div className="tutorial-steps">
           <h2>Instructions</h2>
           <ol>
-            <li>Singup or Login to access chat rooms</li>
-            <li>Join an existing game or start a new room to become the game admin</li>
+            <li><img src={S1} /> or <img src={T1} /> to access chat rooms
+                
+            </li>
+            <li>Join an existing room or start a new room to become the game admin</li>
             <li>The admin can activate a role-playing theme</li>
           </ol>
         </div>

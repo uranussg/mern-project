@@ -43,6 +43,11 @@
     text-align: left;
 }
 
+.tutorial-steps li > img {
+    height: 20px;
+    width: 40px;
+}
+
 .choose-theme-cont {
     display: flex;
     justify-content: space-around;
