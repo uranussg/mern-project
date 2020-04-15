@@ -45,8 +45,8 @@ class WhatsUpEditor extends React.Component {
         
         const display = this.state.editing? (
             <div className="whats-up-editor">               
-               <input value={this.state.whatsUp} onChange={this.handleInput}/>
-               <button value={this.state.whatsUp} onClick={(e) => this.handleSubmit(e)}>Submit</button> 
+               <input value={this.state.whatsUp} placeholder="Say something here" onChange={this.handleInput}/>
+               <button value={this.state.whatsUp} onClick={(e) => this.handleSubmit(e)}>Save</button> 
             </div>
         ) : null
         return( <div className="whats-up-editor-container">    

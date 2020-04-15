@@ -225,7 +225,9 @@ class Room extends React.Component {
           <img src={`/avatar${this.props.users[userId].avatarId}.png`} />
           <div className="user-info">
             <p>{this.props.users[userId].username}</p>
-            <p>What's Up:  {this.props.users[userId].whatsUp}</p>
+            <div class="marquee">
+                <span>What's Up:  {this.props.users[userId].whatsUp}</span>
+            </div>
           </div>
           </li>)
       })
