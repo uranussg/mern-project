@@ -67,12 +67,12 @@ io.on('connection', (socket) => {
     })
       // console.log(roomData.room_id)
     
-    // Message.find({room_id:roomData.room_id}).sort({date: -1}).limit(20).exec((err, messages) => {
-    // if (err) return console.error(err);    
-    // // Send the last messages to the user.
-    // socket.emit('init', messages);
+    Message.find({room_id:roomData.room_id}).sort({date: -1}).limit(20).exec((err, messages) => {
+    if (err) return console.error(err);    
+    // Send the last messages to the user.
+    socket.emit('init', messages);
 
-    // });
+    });
   })
   socket.on('disconnect', ()=> {
     console.log('user disconnect')
@@ -102,17 +102,17 @@ io.on('connection', (socket) => {
 
   socket.on('message', (msg) => {
     // console.log(msg)
-    // Create a message with the content and the name of the user.
-    // const message = new Message({
-    //   content: msg.content,
-    //   user_id: msg.user_id,
-    //   room_id: msg.room_id
-    // });
-    // console.log(message)
-    // // Save the message to the database.
-    // message.save((err) => {
-    //   if (err) return console.error(err);
-    // });
+    //Create a message with the content and the name of the user.
+    const message = new Message({
+      content: msg.content,
+      user_id: msg.user_id,
+      room_id: msg.room_id
+    });
+    console.log(message)
+    // Save the message to the database.
+    message.save((err) => {
+      if (err) return console.error(err);
+    });
     // Notify all other users about a new message.
     socket.to(msg.room_id).emit('push', msg);
 
