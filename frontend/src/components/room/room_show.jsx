@@ -278,9 +278,9 @@ class Room extends React.Component {
 
               <div className="chat-section">
                     <div className='gameroom-title-bar'>
-                      {this.props.room.title}
+                        <p>{this.props.room.title}</p>
   
-                    <p>{this.state.game}</p>
+                       <p>{this.state.game}</p>
 
                   {Object.keys(this.props.roles).length && this.state.admin ?(
                     <button onClick={this.handleExitGame} className="exit-gamemode-button">Exit Game</button>
