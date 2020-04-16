@@ -267,7 +267,6 @@ class Room extends React.Component {
   }
 
   render() {
-
     return (
       <div className="game-room">
          <div className="game-room-container">
