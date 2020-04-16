@@ -31,9 +31,9 @@ class Room extends React.Component {
         if(this.props.room.game){
           this.props.fetchDistribution(this.props.match.params.roomId)
                 .then(()=> {
-                this.setState({roles: this.props.roles, chat:[], game: this.props.room.game})
-                const gameroom = document.getElementsByClassName('game-room')[0]
-                gameroom.classList.add('game-mode')
+                  const gameroom = document.getElementsByClassName('game-room')[0]
+                this.setState({roles: this.props.roles, chat:[], game: this.props.room.game}, ()=>gameroom.classList.add('game-mode', `${this.state.game}`.split(' ').join("")))
+                
                 })
         }       
         return this.props.fetchUsers(users)})
@@ -88,27 +88,29 @@ class Room extends React.Component {
           {
             if(gamemode.roles){              
               this.props.receiveRoles(gamemode.roles)
-              this.setState({roles: gamemode.roles, chat:[], game: gamemode.mode}) 
-              
               const gameroom = document.getElementsByClassName('game-room')[0]
-              gameroom.classList.add('game-mode')
+              this.setState({roles: gamemode.roles, chat:[], game: gamemode.mode},()=> gameroom.classList.add('game-mode', `${this.state.game}`.split(' ').join(""))) 
+              
+
             }
             else{
 
                 this.props.fetchDistribution(this.props.match.params.roomId)
                 .then(()=> {
-                this.setState({roles: this.props.roles, chat:[], game: gamemode.mode})
-                const gameroom = document.getElementsByClassName('game-room')[0]
-                gameroom.classList.add('game-mode')
+                  const gameroom = document.getElementsByClassName('game-room')[0]
+                this.setState({roles: this.props.roles, chat:[], game: gamemode.mode}, () => gameroom.classList.add('game-mode', `${this.state.game}`.split(' ').join("")))
+
                 })
             }
           }
           else {
 
             this.props.deleteRoles()
-              this.setState({roles: {}, chat:[],game: gamemode.mode})
-              const gameroom = document.getElementsByClassName('game-room')[0]
-              gameroom.classList.remove('game-mode')
+            const gameroom = document.getElementsByClassName('game-room')[0]
+            gameroom.classList.remove('game-mode')
+            if (this.state.game) gameroom.classList.remove(`${this.state.game}`.split(' ').join(""))
+            this.setState({roles: {}, chat:[],game: gamemode.mode})
+             
           }
       })
 
@@ -243,15 +245,16 @@ class Room extends React.Component {
   //   this.setState({game:null,
   //   chat:[]})
   //   const gameroom = document.getElementsByClassName('game-room')[0]
-  //   gameroom.classList.add('game-mode')
+  //   gameroom.classList.add('game-mode', `${this.state.game}`.split(' ').join(""))
   // }
 
   handleExitGame() {
     this.props.deleteRoleDistribution(this.props.room._id).then(
       ()=> {
-        this.socket.emit('gamemode', {room_id: this.props.room._id, mode:''})
         const gameroom = document.getElementsByClassName('game-room')[0]
+        this.socket.emit('gamemode', {room_id: this.props.room._id, mode:''})
         gameroom.classList.remove('game-mode')
+        if (this.state.game)  gameroom.classList.remove(`${this.state.game}`.split(' ').join(""))
       this.setState({roles: {}, chat:[], game:''})}
     )
   }
