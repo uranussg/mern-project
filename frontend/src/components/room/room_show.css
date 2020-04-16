@@ -311,7 +311,7 @@ background-color: rgb(241, 200, 94);
   
 
 .game-mode .chat-box {
-    background-color: rgba(15, 15, 15, 0.7);
+    background-color: rgba(15, 15, 15, 0.8);
 }
 
 .game-mode .submit-message-box, .game-mode .gameroom-title-bar {
@@ -366,6 +366,21 @@ background-color: rgb(241, 200, 94);
 .game-mode .user-list-section {
     background-color: rgba(44, 44, 44, 0.9);
     color: white;
+}
+
+.HarryPotter .show-page-background{
+    background-image: url(../../images/harrypotter.jpg);
+    opacity: 1;
+}
+
+.GameofThrones .show-page-background{
+    background-image: url(../../images/got.jpg);
+    opacity: 1;
+}
+
+.DC .show-page-background {
+    background-image: url(../../images/dcheros.jpg);
+    opacity: 1;
 }
 
 @media screen and (max-height: 800px) {

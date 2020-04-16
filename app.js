@@ -50,7 +50,7 @@ io.on('connection', (socket) => {
   socket.on('join-room', roomData => {
     socket.join(roomData.room_id, () => {
 
-      console.log(`a user join ${Object.keys(socket.rooms)}`)
+      // console.log(`a user join ${Object.keys(socket.rooms)}`)
       Room.findById(roomData.room_id)
       .then(room => {
         if (roomData.user_id) {
@@ -123,14 +123,14 @@ io.on('connection', (socket) => {
 
 
   socket.on('gamemode', (gm) => {
-    console.log(`gamemode${gm}`)
+    // console.log(`gamemode${gm}`)
     // Room.findOneAndUpdate({_id: gm.room_id}, {game: gm.mode})     
     Room.findById(gm.room_id)
     .then((room) => {
       
       room.game = gm.mode
       room.save()
-      console.log(`found room in gamemode${room}`)
+      // console.log(`found room in gamemode${room}`)
     })
 
     const gamemode = {
@@ -172,7 +172,7 @@ io.on('connection', (socket) => {
         // roles: roleDis,
         mode: themeData.theme
       }
-      console.log(gamemode)
+      // console.log(gamemode)
       io.in(themeData.room_id).emit('modeon', gamemode)
       })
       
