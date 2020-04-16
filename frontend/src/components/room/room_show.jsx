@@ -222,7 +222,7 @@ class Room extends React.Component {
   userDisplay() {
     const adminSymbol = 
      ( <div className='admin-info'>
-        <img src='/star.png' class='admin-symbol'/>
+        <img src='/star.png' className='admin-symbol'/>
         <span className='admin-instruction'>←Admin</span>
       </div>
     ) 
@@ -235,7 +235,7 @@ class Room extends React.Component {
           <div className="user-info">
             <span className="username">{this.props.users[userId].username}</span>
           {idx === 0 ? adminSymbol : null}
-            <div class="marquee">
+            <div className="marquee">
                 <span>What's Up:  {this.props.users[userId].whatsUp}</span>
             </div>
           </div>
