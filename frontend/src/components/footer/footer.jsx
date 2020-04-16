@@ -18,7 +18,10 @@ class Footer extends React.Component {
                 <h2>Navigate</h2>
                 <div><Link to='/'>Home</Link></div>
                 <div ><Link to='rooms'>Join a Room</Link></div>
-                <div onClick={() => this.props.openModal('tutorial')}>Tutorial</div>
+                <div 
+                  onClick={() => this.props.openModal('tutorial')}
+                  className="nav-tutorial"
+                  >Tutorial</div>
               </div>
               <div className="default-game-column">
                 <h2>Pre-made Themes</h2>
@@ -69,10 +72,9 @@ class Footer extends React.Component {
             <div className="bottom-row">
               <div className="underline"></div>
               <div className="bottom-box">
-                <div className="footer-logo">The Game Room</div>
+                <div className="footer-logo">Theme Chat Room</div>
                 <div className="footer-detail-cont">
-                  <div className="footer-detail">© 2020 The Game Room</div>
-                  <div>Terms and Conditions | Cookie Policy | Consent</div>
+                  <div className="footer-detail">© 2020 Theme Chat Room</div>
                 </div>
               </div>
             </div>
