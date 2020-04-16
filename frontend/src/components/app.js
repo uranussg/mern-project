@@ -9,7 +9,7 @@ import Modal from './modal/modal'
 import ProfilePageContainer from '../components/profile/profile_container';
 import RoomIndexContainer from './room/room_index/room_index_container';
 import RoomShowContainer from './room/room_show_container'
-
+import FooterContainer from "./footer/footer_container";
 const App = () => {
   return(
   <div>
@@ -28,7 +28,7 @@ const App = () => {
           {/* <Route exact path="/rooms/new" component={CreateRoomContainer} /> */}     
       </Switch>
 
-    {/* <Footer/> */}
+    <FooterContainer/>
   </div>
 );
 }

@@ -3,7 +3,6 @@ import "./footer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faGithub, faLinkedin} from "@fortawesome/free-brands-svg-icons";
 import { Link } from 'react-router-dom'
-import { openModal } from '../../actions/modal_actions'
 
 class Footer extends React.Component {
 
@@ -19,7 +18,7 @@ class Footer extends React.Component {
                 <h2>Navigate</h2>
                 <div><Link to='/'>Home</Link></div>
                 <div ><Link to='rooms'>Join a Room</Link></div>
-                <div></div>
+                <div onClick={() => this.props.openModal('tutorial')}>Tutorial</div>
               </div>
               <div className="default-game-column">
                 <h2>Pre-made Themes</h2>

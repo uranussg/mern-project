@@ -7,7 +7,7 @@ import "./modal.css"
 import CreateRoomContainer from '../room/room_forms/create_room_container';
 import AvatarSelectionContainer from '../main/user_info/avatar_selection_container';
 import ThemeContainer from '../game/theme_container'
-import Tutorial from '../main/tutorial'
+import TutorialContainer from '../main/tutorial_container';
 
 function Modal({ modal, closeModal}) {
 
@@ -32,7 +32,7 @@ function Modal({ modal, closeModal}) {
             component = <ThemeContainer />;
             break;
         case 'tutorial':
-            component = <Tutorial /> ;
+            component = <TutorialContainer /> ;
             break;
         default:
             return null;
