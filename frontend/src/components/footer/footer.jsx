@@ -18,7 +18,10 @@ class Footer extends React.Component {
                 <h2>Navigate</h2>
                 <div><Link to='/'>Home</Link></div>
                 <div ><Link to='rooms'>Join a Room</Link></div>
-                <div onClick={() => this.props.openModal('tutorial')}>Tutorial</div>
+                <div 
+                  onClick={() => this.props.openModal('tutorial')}
+                  className="nav-tutorial"
+                  >Tutorial</div>
               </div>
               <div className="default-game-column">
                 <h2>Pre-made Themes</h2>
