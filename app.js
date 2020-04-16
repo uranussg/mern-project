@@ -85,6 +85,8 @@ io.on('connection', (socket) => {
       console.log(`a user left ${roomData.room_id}`)
       Room.findById(roomData.room_id)
       .then(room => {
+        if (room.id === '5e973d51f2632f0ada4f6860' && roomData.user_id === '5e725fb8952bd9184885a349') return 
+
         if (room.users.includes(roomData.user_id) ) 
         {
           const idx = room.users.indexOf(roomData.user_id)
