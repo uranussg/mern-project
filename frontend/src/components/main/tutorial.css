@@ -106,6 +106,10 @@
 
 }
 
+.create-other-themes {
+    opacity: 0.6;
+}
+
 .choose-theme-cont > div > p {
     color: white;
     position: absolute;

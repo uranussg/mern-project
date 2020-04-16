@@ -7,6 +7,7 @@ import T1 from "../../images/login.jpg";
 import S1 from "../../images/signup.jpg";
 import JG from "../../images/joinOrCreate.jpg";
 import RP from "../../images/rolePlayRow.png";
+import CO from "../../images/createOwnRoom.png";
 
 class Tutorial extends React.Component {
   render () {
@@ -28,6 +29,7 @@ class Tutorial extends React.Component {
             </li>
             <li>Join an existing room or start a new room to become the game admin</li>
             <img src={JG} className="join-create-img"/> 
+            <li>You can send your friends the url of your chat room so that they can join</li>
             <li>The admin can activate a role-playing theme</li>
             <img src={RP}  className="role-play-img"/> 
 
@@ -47,6 +49,10 @@ class Tutorial extends React.Component {
             <div>
               <img src={HP} alt="Harry Potter"/>
               <p>Harry Potter</p>
+            </div>
+            <div>
+              <img src={CO} className="create-other-themes"/>
+              <p>Create Other Themes</p>
             </div>
           </div>
         </div>
