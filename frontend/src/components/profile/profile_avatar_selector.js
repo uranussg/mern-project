@@ -6,7 +6,8 @@ class ProfileAvatarSelector extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: null
+            user: null,
+            selected: this.props.currentUser.avatarId 
         }
         this.handleClick = this.handleClick.bind(this)
     }
@@ -15,9 +16,10 @@ class ProfileAvatarSelector extends React.Component {
         if(typeof this.props.user === "undefined")
         {this.props.fetchUser(this.props.currentUser.id)}
         const updatedUser = this.props.user
-        const avatarId = this.props.user.avatarId
+        // const avatarId = this.props.user.avatarId
         updatedUser["avatarId"] = e.target.getAttribute("value")
         this.props.updateUser(updatedUser)
+        this.props.closeModal();
     }
 
     
