@@ -220,21 +220,21 @@ class Room extends React.Component {
   }
 
   userDisplay() {
-    // const adminSymbol = this.state.admin?  (
-    //   <div className='admin-info'>
-    //     <img src='/star.png' class='admin-symbol'/>
-    //     <span className='admin-instruction'>←Admin</span>
-    //   </div>
-    // ) : null
+    const adminSymbol = 
+     ( <div className='admin-info'>
+        <img src='/star.png' class='admin-symbol'/>
+        <span className='admin-instruction'>←Admin</span>
+      </div>
+    ) 
     const userList = <div className="user-list-section">
       <ul className='user-list'> 
       {
-      this.props.room.users.map(userId=> {
+      this.props.room.users.map((userId, idx)=> {
         return(<li key={userId}>
           <img className="user-avatar" src={`/avatar${this.props.users[userId].avatarId}.png`} />
-          
           <div className="user-info">
             <span className="username">{this.props.users[userId].username}</span>
+          {idx === 0 ? adminSymbol : null}
             <div class="marquee">
                 <span>What's Up:  {this.props.users[userId].whatsUp}</span>
             </div>
