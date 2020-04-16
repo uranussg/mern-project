@@ -17,8 +17,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchUser: (userId) => dispatch(fetchUser(userId)),
-    updateUser: (user) => dispatch(updateUser(user))
+    updateUser: (user) => dispatch(updateUser(user)),
   };
 };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileAvatarSelector);

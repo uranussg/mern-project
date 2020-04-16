@@ -5,8 +5,6 @@
 }
 
 .user-info-container {
-  /* background-color: rgb(21, 114, 63); */
-  /* margin: 20px; */
   padding: 10px;
   width: 280px;
   height: 280px;
@@ -92,19 +90,11 @@
   text-align: center;
   padding: 5px;
   width: auto;
-  /* margin-bottom: 20px; */
   border-radius: 5px;
   box-sizing: border-box;
   position: absolute;
   top: -45px;
   text-shadow: 0 1px 1px rgb(247, 231, 211), 0 -1px 1px rgba(58, 42, 42, 0.7);
-
-
-  /* border: 10px solid transparent; */
-  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
-  /* border-image: url(../../../images/border0.png) 60 round;  */
-  /* background-repeat: no-repeat;
-  background-size: 100% 100%;  */
 }
 
 .user-options-container {
@@ -115,7 +105,6 @@
 }
 
 .user-option {
-  /* background-color: rgb(114, 74, 21); */
   position: relative;
   height: 90px;
   width: 400px;
@@ -123,11 +112,9 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 1em;
-  /* background-image: linear-gradient(to bottom, rgb(253, 204, 113),  rgb(114, 74, 21)); */
   background-image: url(../../../images/wood1.png);
   background-size: cover;
   text-align: center;
-  /* box-shadow: inset 0 1px rgb(114, 74, 21), 0 1px 1px rgb(114, 74, 21), 0 0 8px rgb(114, 74, 21); */
 }
 
 .user-option:hover .redirect-icon {
@@ -139,7 +126,6 @@
   top: 50%;
   transform: translate(-50%, -50%);
   font-size: 30px;
-  /* background-color: green; */
   background-image: url(../../../images/badge1.png);
   background-size: 160%;
   background-position: center;
@@ -149,14 +135,12 @@
   border-radius: 1em;
   color: rgb(51, 41, 9);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  /* background-image: linear-gradient(to bottom, rgb(5, 151, 5),  rgb(17, 90, 17)); */
 
 }
 
 .redirect-icon {
   margin-right: 20px;
   font-size: 30px;
-  /* color: rgb(9, 51, 28); */
   color: white;
   transition: all .5s;
 }

@@ -52,12 +52,15 @@
     transform: translate(0, -10%);
 }
 
-.user-list-section .user-info p {
+
+
+.user-info .username {
     margin-bottom: 5px;
-    font-size: 20px;
+    font-size: 22px;
+    font-family: 'Neucha', cursive;
 }
 
-.user-list-section img {
+.user-list-section .user-avatar {
     height: 60px;
     width: 60px;
 }
@@ -253,6 +256,30 @@ background-color: rgb(241, 200, 94);
     background-color: rgba(238, 222, 181, 0.9);
     min-width: 200px;
     color: rgb(145, 81, 8);
+}
+
+.admin-symbol{
+    position:absolute;
+    width:15px;
+    height:15px;
+    margin-left: 3px;
+}
+
+.admin-info{
+    position: absolute;
+    display: inline-block;
+   
+}
+
+.admin-instruction {
+    font-size: 14px;
+    margin-left:19px;
+    opacity: 0;
+}
+
+.admin-symbol:hover + .admin-instruction{
+    opacity: 1;
+    transition: all 0.2s ease-in-out;
 }
 
 .marquee {
