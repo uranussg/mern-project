@@ -262,7 +262,7 @@ background-color: rgb(241, 200, 94);
     position:absolute;
     width:15px;
     height:15px;
-    margin-left: 2px;
+    margin-left: 3px;
 }
 
 .admin-info{
@@ -273,13 +273,13 @@ background-color: rgb(241, 200, 94);
 
 .admin-instruction {
     font-size: 14px;
-    margin-left:18px;
-    display: none
+    margin-left:19px;
+    opacity: 0;
 }
 
 .admin-symbol:hover + .admin-instruction{
-    display: inline-block;
-    transition: all 0.5s ease-in-out;
+    opacity: 1;
+    transition: all 0.2s ease-in-out;
 }
 
 .marquee {

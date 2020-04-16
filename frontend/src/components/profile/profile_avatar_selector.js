@@ -19,7 +19,6 @@ class ProfileAvatarSelector extends React.Component {
         // const avatarId = this.props.user.avatarId
         updatedUser["avatarId"] = e.target.getAttribute("value")
         this.props.updateUser(updatedUser)
-        this.props.closeModal();
     }
 
     
