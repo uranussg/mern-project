@@ -3,12 +3,14 @@
     color: white;
     font-size: 14px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    z-index: 2;
+    z-index: 10;
     width: 100vw;
+    position: absolute;
+    bottom: 0;
 }
 
 .footer * {
-    z-index: 3;
+    z-index: 10;
 }
 
 .columns-cont {
