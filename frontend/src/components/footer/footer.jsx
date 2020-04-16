@@ -69,10 +69,9 @@ class Footer extends React.Component {
             <div className="bottom-row">
               <div className="underline"></div>
               <div className="bottom-box">
-                <div className="footer-logo">The Game Room</div>
+                <div className="footer-logo">Theme Chat Room</div>
                 <div className="footer-detail-cont">
-                  <div className="footer-detail">© 2020 The Game Room</div>
-                  <div>Terms and Conditions | Cookie Policy | Consent</div>
+                  <div className="footer-detail">© 2020 Theme Chat Room</div>
                 </div>
               </div>
             </div>
