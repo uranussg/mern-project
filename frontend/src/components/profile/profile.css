@@ -29,6 +29,7 @@
     border-radius: 3px;
     border: 20px solid transparent;
     border-image: url(../../images/border0-2.png) 60 round; 
+    margin-bottom: 5%;
 }
 
 .profile-page-container h2 {
@@ -122,4 +123,31 @@
 
 .whats-up-container .edit-button:hover {
     transform: scale(1.2);
+}
+
+.whats-up-editor {
+    position: absolute;
+    padding: 5px;
+   ;
+}
+
+.whats-up-editor input {
+    padding: 5px 10px;
+    background-color: rgba(255,255,255,0.7);
+    margin-left: 20px;
+    margin-right: 5px;  
+    border-radius: 3px;
+    font-size: 15px;
+    text-align: left;
+}
+
+.whats-up-editor button {
+    padding: 5px 10px;
+    border-radius: 3px;
+    background-color: rgba(221, 174, 55, 0.8);
+    color: white;
+}
+
+.whats-up-editor button:hover {
+    background-color: rgba(238, 204, 117, 0.8)
 }
