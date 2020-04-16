@@ -93,6 +93,10 @@
   box-shadow: none;
 }
 
+.in-game .room-join-button:hover {
+  cursor: default;
+}
+
 .room-index-main {
   background-attachment: fixed;
   margin-top: 10px;
