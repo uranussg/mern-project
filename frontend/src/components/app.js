@@ -28,7 +28,7 @@ const App = () => {
           {/* <Route exact path="/rooms/new" component={CreateRoomContainer} /> */}     
       </Switch>
 
-    <FooterContainer/>
+    {/* <FooterContainer/> */}
   </div>
 );
 }

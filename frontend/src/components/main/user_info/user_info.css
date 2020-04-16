@@ -179,3 +179,6 @@
   right: 10px;
 }
 
+svg {
+  cursor: pointer;
+}

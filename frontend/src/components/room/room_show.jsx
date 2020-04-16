@@ -170,6 +170,7 @@ class Room extends React.Component {
   // When the user is posting a new message.
   handleSubmit(event) {
     event.preventDefault();
+    if (this.state.content){
     this.setState((state) => {
 
       const message = {
@@ -187,7 +188,7 @@ class Room extends React.Component {
         }],
         content: '',
       };
-    }, this.scrollToBottom);
+    }, this.scrollToBottom);}
   }
 
   scrollToBottom() {
@@ -301,7 +302,7 @@ class Room extends React.Component {
                 <form onSubmit={this.handleSubmit} className='submit-message-box'>
                 <div className='name'>{this.props.roles[this.props.curr_user.id]? this.props.roles[this.props.curr_user.id].name:
                     this.props.users[this.props.curr_user.id]? this.props.users[this.props.curr_user.id].username: this.props.curr_user.id}</div>
-                <input minLength='1'
+                <input minLength='2'
                   value={this.state.content}
                   onChange={this.handleContent}
                 />
