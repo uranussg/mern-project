@@ -24,7 +24,7 @@ class UserInfo extends React.Component {
       this.props.fetchUser(this.props.sessionUser.id)
     }
   }
-  
+
 
   render() {
     const { currentUser } = this.props;
@@ -52,7 +52,7 @@ class UserInfo extends React.Component {
           <div className="user-options-container">
             <Link to="/rooms" className="join-game-option user-option">
               <FontAwesomeIcon className="option-icon" icon={faUsers} />
-              <p className="option-text">Join a Game</p>
+              <p className="option-text">Join a Room</p>
               <FontAwesomeIcon
                 className="redirect-icon"
                 icon={faAngleDoubleRight}
@@ -60,7 +60,7 @@ class UserInfo extends React.Component {
             </Link>
             <Link onClick={this.openNewRoomModal.bind(this)} className="start-game-option user-option">
               <FontAwesomeIcon className="option-icon" icon={faDice} />
-              <p className="option-text">Start a Game</p>
+              <p className="option-text">Start a Room</p>
               <FontAwesomeIcon
                 className="redirect-icon"
                 icon={faAngleDoubleRight}
