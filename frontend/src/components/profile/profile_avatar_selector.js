@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./profile.css"
 
 class ProfileAvatarSelector extends React.Component { 
@@ -30,6 +32,7 @@ class ProfileAvatarSelector extends React.Component {
         return (
         <div className="pofile-avatars-container">
             <div className="avatar_selector">               
+                <FontAwesomeIcon icon={faTimes} className="avatar-close" />
                 {images}              
             </div>
         </div>
