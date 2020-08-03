@@ -21,7 +21,7 @@ class UserInfo extends React.Component {
 
   componentDidMount() {
     if (this.props.sessionUser) {
-      console.log(this.props.sessionUser)
+      // console.log(this.props.sessionUser)
       this.props.fetchUser(this.props.sessionUser.id)
     }
   }

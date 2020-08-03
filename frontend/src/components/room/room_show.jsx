@@ -39,7 +39,7 @@ class Room extends React.Component {
         return this.props.fetchUsers(users)})
 
         .then(()=>{
-          console.log(`mount${this.props.curr_user.id === this.props.room.users[0]}`)
+          // console.log(`mount${this.props.curr_user.id === this.props.room.users[0]}`)
           this.setState({admin:this.props.curr_user.id === this.props.room.users[0]})
           this.socket = socket
           this.socket.connect()
@@ -64,12 +64,12 @@ class Room extends React.Component {
       })
 
       this.socket.on('update-room-info', (roomData)=> {        
-        console.log(`updateroom${this.props.match.params.roomId}`)
+        // console.log(`updateroom${this.props.match.params.roomId}`)
         // 
         this.props.fetchRoom(this.props.match.params.roomId)
         .then((room)=>
         {   
-          console.log(`updatedroomuser${room.data.users}`)
+          // console.log(`updatedroomuser${room.data.users}`)
           return this.props.fetchUsers({user_ids: room.data.users})
           })
         .then(()=>{
@@ -83,7 +83,7 @@ class Room extends React.Component {
             }), this.scrollToBottom)
       });
       this.socket.on('modeon', gamemode => {
-          console.log(gamemode)  
+          // console.log(gamemode)  
           if (gamemode.mode)
           {
             if(gamemode.roles){              
@@ -118,10 +118,10 @@ class Room extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-        console.log(`component update${this.props.room.users && this.props.room.users.length }`)
+        // console.log(`component update${this.props.room.users && this.props.room.users.length }`)
         if(this.props.room.users && this.props.room.users.length && (this.props.room.users !== prevProps.room.users))
         {
-          console.log(`updatestate${this.props.room.users[0]}`)
+          // console.log(`updatestate${this.props.room.users[0]}`)
           this.setState({admin:this.props.curr_user.id === this.props.room.users[0]})
         }
         
@@ -146,7 +146,7 @@ class Room extends React.Component {
     
     const roomId = this.props.room._id
     if(this.state.game && this.state.admin) {
-      console.log(`exit room & exit game`)          
+      // console.log(`exit room & exit game`)          
         this.props.deleteRoleDistribution(roomId).then(()=> 
         { this.socket.emit('gamemode', {room_id: roomId, mode:''})
           // this.socket.emit('exit-room', 
