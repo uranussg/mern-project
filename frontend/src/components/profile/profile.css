@@ -9,6 +9,10 @@
     margin: 5px;
 }
 
+.avatar_selector img {
+    cursor: pointer;
+}
+
 .avatar_selector img:hover {
     transform: scale(1.2);
 }
