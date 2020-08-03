@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 export const getUsers = users => {
-  console.log(`axio${users.user_ids}`)
+  // console.log(`axio${users.user_ids}`)
   return axios.get(`/api/users/${users.user_ids}`);
 };
 
