@@ -1,4 +1,5 @@
 import React from 'react';
+import About from '../about';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUsers, faDice, faPortrait, faQuestionCircle, faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
@@ -78,7 +79,9 @@ class UserInfo extends React.Component {
         </div>
       );
     } else {
-      return null;
+      return (
+        <About />
+      );
     }
   }
 }
