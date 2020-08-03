@@ -63,8 +63,6 @@
     cursor: pointer;
 }
 
-
-
 .avatar_selector {
     display: flex;
     align-content: flex-start;
@@ -84,6 +82,12 @@
     border-image: url(../../images/border0-2.png) 60 round; 
     box-sizing: border-box;
     z-index: 4;
+}
+
+.avatar-close {
+    position: absolute;
+    top: 0px;
+    right: 0px;
 }
 
 .profile-page-background {
