@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require('mongoose');
+const cleverbot = require("cleverbot-free");
 const db = require('./config/keys').mongoURI;
 const bodyParser = require('body-parser');
 const users = require('./routes/api/users')
