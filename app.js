@@ -102,8 +102,11 @@ io.on('connection', (socket) => {
 
   })
 
-  socket.on('botResponse', (message, room_id) => {
+  socket.on('botResponse', (data) => {
     const botId = "5f4cc6034a733d238096d446";
+    const message = data.message
+    const room_id = data.room_id
+
     cleverbot(message)
       .then(response => {
         const message = new Message({
@@ -122,7 +125,26 @@ io.on('connection', (socket) => {
           user_id: botId,
           room_id: room_id
         }
-        socket.to(room_id).emit('push', msg);
+        console.log("emitting bot response")
+        io.in(room_id).emit('push', msg);
+      });
+
+  });
+
+  socket.on('storeBotResponse', (data) => {
+    const botId = "5f4cc6034a733d238096d446";
+    const response = data.response
+    const room_id = data.room_id
+
+      const message = new Message({
+        content: response,
+        user_id: botId,
+        room_id: room_id
+      });
+      console.log(message)
+      // Save the message to the database.
+      message.save((err) => {
+        if (err) return console.error(err);
       });
 
   });

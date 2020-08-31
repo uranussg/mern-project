@@ -2,6 +2,7 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import "./room_show.css"
 import {socket} from '../socket'
+import cleverbotFree from 'cleverbot-free';
 
 class Room extends React.Component {
   constructor(props) {
@@ -49,6 +50,17 @@ class Room extends React.Component {
       this.socket.on('init', (msgs) => {     
           const chatmsgsId = this.state.chat.map(msg => msg._id)
           const filteredmsgs = msgs.filter(message=> message.room_id === this.props.room._id && !chatmsgsId.includes(message._id))
+
+          // get list of unique user ids from messages and fetch from database
+          const usersSet = {}
+          for (let m of filteredmsgs) {
+            usersSet[m.user_id] = true;
+          }
+          for (let id of Object.keys(usersSet)) {
+            if (this.props.users[id] === undefined) this.props.fetchUser(id)
+          }
+          const botId = "5f4cc6034a733d238096d446";
+          if (this.props.users[botId] === undefined) this.props.fetchUser(botId)
           
           this.setState((state) => ({
             chat: [...state.chat, ...filteredmsgs.reverse()],
@@ -78,6 +90,7 @@ class Room extends React.Component {
       })
 
       this.socket.on('push', (msg) => {
+            // console.log(msg, this.state);
             this.setState((state) => ({
               chat: [...state.chat, msg],
             }), this.scrollToBottom)
@@ -182,6 +195,9 @@ class Room extends React.Component {
       }
       
       this.socket.emit('message', message);
+      if (this.props.room.users.length == 1){
+        this.socket.emit('botResponse', {message: state.content, room_id: this.props.room._id})
+      } 
       return {
         chat: [...state.chat, {
             user_id: this.props.curr_user.id,
