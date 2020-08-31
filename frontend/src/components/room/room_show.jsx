@@ -2,7 +2,6 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import "./room_show.css"
 import {socket} from '../socket'
-import cleverbotFree from 'cleverbot-free';
 
 class Room extends React.Component {
   constructor(props) {

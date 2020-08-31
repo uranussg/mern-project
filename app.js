@@ -136,16 +136,16 @@ io.on('connection', (socket) => {
     const response = data.response
     const room_id = data.room_id
 
-      const message = new Message({
-        content: response,
-        user_id: botId,
-        room_id: room_id
-      });
-      console.log(message)
-      // Save the message to the database.
-      message.save((err) => {
-        if (err) return console.error(err);
-      });
+    const message = new Message({
+      content: response,
+      user_id: botId,
+      room_id: room_id
+    });
+    console.log(message)
+    // Save the message to the database.
+    message.save((err) => {
+      if (err) return console.error(err);
+    });
 
   });
 
