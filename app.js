@@ -102,6 +102,30 @@ io.on('connection', (socket) => {
 
   })
 
+  socket.on('botResponse', (message, room_id) => {
+    const botId = "5f4cc6034a733d238096d446";
+    cleverbot(message)
+      .then(response => {
+        const message = new Message({
+          content: response,
+          user_id: botId,
+          room_id: room_id
+        });
+        console.log(message)
+        // Save the message to the database.
+        message.save((err) => {
+          if (err) return console.error(err);
+        });
+        // Notify all other users about a new message.
+        const msg = {
+          content: response,
+          user_id: botId,
+          room_id: room_id
+        }
+        socket.to(room_id).emit('push', msg);
+      });
+
+  });
 
   socket.on('message', (msg) => {
     // console.log(msg)
