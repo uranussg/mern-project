@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require('mongoose');
+const cleverbot = require("cleverbot-free");
 const db = require('./config/keys').mongoURI;
 const bodyParser = require('body-parser');
 const users = require('./routes/api/users')
@@ -101,6 +102,52 @@ io.on('connection', (socket) => {
 
   })
 
+  socket.on('botResponse', (data) => {
+    const botId = "5f4cc6034a733d238096d446";
+    const message = data.message
+    const room_id = data.room_id
+
+    cleverbot(message)
+      .then(response => {
+        const message = new Message({
+          content: response,
+          user_id: botId,
+          room_id: room_id
+        });
+        console.log(message)
+        // Save the message to the database.
+        message.save((err) => {
+          if (err) return console.error(err);
+        });
+        // Notify all other users about a new message.
+        const msg = {
+          content: response,
+          user_id: botId,
+          room_id: room_id
+        }
+        console.log("emitting bot response")
+        io.in(room_id).emit('push', msg);
+      });
+
+  });
+
+  socket.on('storeBotResponse', (data) => {
+    const botId = "5f4cc6034a733d238096d446";
+    const response = data.response
+    const room_id = data.room_id
+
+    const message = new Message({
+      content: response,
+      user_id: botId,
+      room_id: room_id
+    });
+    console.log(message)
+    // Save the message to the database.
+    message.save((err) => {
+      if (err) return console.error(err);
+    });
+
+  });
 
   socket.on('message', (msg) => {
     // console.log(msg)
