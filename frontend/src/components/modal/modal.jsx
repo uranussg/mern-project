@@ -8,6 +8,7 @@ import CreateRoomContainer from '../room/room_forms/create_room_container';
 import AvatarSelectionContainer from '../main/user_info/avatar_selection_container';
 import ThemeContainer from '../game/theme_container'
 import TutorialContainer from '../main/tutorial_container';
+import Invite from '../room/room_forms/invite';
 
 function Modal({ modal, closeModal}) {
 
@@ -33,6 +34,9 @@ function Modal({ modal, closeModal}) {
             break;
         case 'tutorial':
             component = <TutorialContainer /> ;
+            break;
+        case 'invite':
+            component = <Invite /> ;
             break;
         default:
             return null;
