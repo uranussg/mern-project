@@ -300,6 +300,9 @@ class Room extends React.Component {
                 <div className='show-users'>
                   <button onClick={this.userDisplay}>Users</button>
                 </div>
+                <div className='show-users'>
+                  <button onClick={() => this.props.openModal('invite')}>Invite Link</button>
+                </div>
             </div>
             <div className="chat-section-container">
 

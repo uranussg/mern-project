@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require('passport')
+const axios = require('axios')
 
 
 const Room = require('../../models/Room');
@@ -10,6 +11,32 @@ const validateRoomInput = require('../../validation/room');
 router.get("/test", (req,res) => {
     res.json({msg: "this is the room router"})
 })
+
+router.post('/invite', (req, res) => {
+  axios({
+    method: 'post',
+    url: 'https://api.shorten.rest/aliases?aliasName=6a0e/@rnd',
+    data: {
+      "destinations": [
+        {
+          "url": req.body.url,
+          "country": null,
+          "os": null
+        }
+      ]
+    },
+    headers: {
+      'x-api-key': 'ab46e3c0-eb8c-11ea-848b-bd68a368ea0b',
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => {
+      return res.json({inviteLink: response.data.shortUrl});
+    })
+    .catch(error => {
+      console.log(error);
+    });
+});
 
 router.get('/:option', (req, res) => {
   console.log(req.params.option )
