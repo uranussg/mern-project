@@ -86,10 +86,46 @@ socket.on('exit-room', (roomData) => {
 ### Backend: Node, Express, MongoDB
 The backend will be responsible for keeping track of and storing game rooms, users, roles. Technical challenges include managing admin privileges in rooms, when to save and fetch the role-distribution information, and when to update the state of a room(in game or not in game)
 
-
-
 ### Frontend: React/Node.js 
 The frontend will need to update the page every time a new message is typed into chat. It will also need to display all relevant information to the user and update that data in real time. Such as when another user leaves the room, the room state changes, or when the game starts/ends.
+
+Initialization of room to show previous messages in CompoenentDidMount
+```js
+this.socket.on('init', (msgs) => {     
+    const chatmsgsId = this.state.chat.map(msg => msg._id)
+    const filteredmsgs = msgs.filter(message=> message.room_id === this.props.room._id && !chatmsgsId.includes(message._id))
+
+    // get list of unique user ids from messages and fetch from database
+    const usersSet = {}
+    for (let m of filteredmsgs) {
+      usersSet[m.user_id] = true;
+    }
+    for (let id of Object.keys(usersSet)) {
+      if (this.props.users[id] === undefined) this.props.fetchUser(id)
+    }
+    const botId = "5f4cc6034a733d238096d446";
+    if (this.props.users[botId] === undefined) this.props.fetchUser(botId)
+
+    this.setState((state) => ({
+      chat: [...state.chat, ...filteredmsgs.reverse()],
+      admin: this.props.room.users[0] === this.props.curr_user.id
+    }), this.scrollToBottom);
+  });  
+```
+
+Method to handle submission of a message from the frontend
+```js
+if (this.state.content){
+this.setState((state) => {
+
+const message = {
+  user_id: this.props.curr_user.id,
+  content: state.content,
+  room_id: this.props.room._id
+}
+
+this.socket.emit('message', message);
+```
 
 ### Livechat
 The application used socket.io to implement livechat. Challenges include figuring out how to incorporate socket.io with the mongo db backend.
@@ -114,6 +150,10 @@ socket.on('message', (msg) => {
 
 ### UI/UX
 The user interface will need to fit all data pertaining to the room a user belongs to: including their role, the admin, what state the game is in, and a list of other users in the room along with their messages. The challenge will be to find ways to fit all this information on the page and still have it be easily readable and intuitive for the user viewing the page.
+
+Home page view when a user is logged in uses custom images, textures, and readable fonts to create a more unique user experience.
+![home-png](frontend/public/readme_images/home_page.png)
+
 
 # Group Members 
 **Jonathan Odom, Rakin Rouf, Skylar Zhu, Songge Sun**
