@@ -84,7 +84,44 @@ socket.on('exit-room', (roomData) => {
 ```
 
 ### Backend: Node, Express, MongoDB
-The backend will be responsible for keeping track of and storing game rooms, users, roles. Technical challenges include managing admin privileges in rooms, when to save and fetch the role-distribution information, and when to update the state of a room(in game or not in game)
+The backend will be responsible for keeping track of and storing game rooms, users, roles. Technical challenges include managing admin privileges in rooms, when to save and fetch the role-distribution information, and when to update the state of a room(in game or not in game).
+
+Backend solution to generating a theme and distributing roles appropriately.
+
+```js
+socket.on('createtheme', (themeData) => {
+  Room.findById(themeData.room_id).then(room =>
+    {
+    let roleDis = {}
+    let roles = Object.values(themeData.roles)
+
+    room.users.forEach(user_id => {
+      const idx =  Math.floor(Math.random() * (Object.keys(roles.length).length ))
+      roleDis[user_id] = {name:roles[idx],
+        role_avator_id :Math.floor(Math.random() * 10)}
+      roles = roles.slice(0, idx).concat(roles.slice(idx+1))
+    }) 
+    const roleDisRes = new RoleDistribution({
+      distribution:roleDis,
+      room_id: room._id,
+      theme:themeData.theme,
+    })
+    roleDisRes.save()
+    .then(()=>{
+      room.game = themeData.theme
+      return room.save()
+    })
+    .then((room)=>{
+      let gamemode = {
+      room_id: themeData.room_id,
+      mode: themeData.theme
+    }
+    io.in(themeData.room_id).emit('modeon', gamemode)
+    })
+
+  })
+})
+```
 
 ### Frontend: React/Node.js 
 The frontend will need to update the page every time a new message is typed into chat. It will also need to display all relevant information to the user and update that data in real time. Such as when another user leaves the room, the room state changes, or when the game starts/ends.
