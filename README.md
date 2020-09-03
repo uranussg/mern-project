@@ -10,6 +10,8 @@ During the COVID-19 quarantine it is important to have the ability to play board
 
 OurApp is primarily built with the MERN stack, a combination of following four technologies: MongoDB, Express, React, and Node.
 
+[Theme Chat Room live](frontend/public/readme_images/theme_example.png)
+
 # Functionality & MVP
 
 * User authorization: 
