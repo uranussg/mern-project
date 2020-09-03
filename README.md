@@ -43,6 +43,24 @@ The frontend will need to update the page every time a new message is typed into
 ### Livechat
 The application uesed socket.io to implement livechat. Challenges include figuring out how to incorporate socket.io with the mongo db backend.
 
+Backend code to handle messaging:
+```js
+socket.on('message', (msg) => {
+  //Create a message with the content and the name of the user.
+  const message = new Message({
+    content: msg.content,
+    user_id: msg.user_id,
+    room_id: msg.room_id
+  });
+  // Save the message to the database.
+  message.save((err) => {
+    if (err) return console.error(err);
+  });
+  // Notify all other users about a new message.
+  socket.to(msg.room_id).emit('push', msg);
+});
+```
+
 ### UI/UX
 The user interface will need to fit all data pertaining to the room a user belongs to: including their role, the admin, what state the game is in, and a list of other users in the room along with their messages. The challenge will be to find ways to fit all this information on the page and still have it be easily readable and intuitive for the user viewing the page.
 
