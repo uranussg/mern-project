@@ -1,4 +1,6 @@
-# mern-project
+# Theme Chat Room
+
+[Theme Chat Room live](https://thegameroom100.herokuapp.com/#/)
 
 During the COVID-19 quarantine it is important to have the ability to play board/card games remotely. OurApp provides channels/game rooms for users to play their favorite role playing games with live chat. OurApp is a minimal viable product that tackles the following challenges:
 
